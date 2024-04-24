@@ -208,7 +208,7 @@ class EventDistributor<EVENT> {
         activeEmitters.clear();
     }
 
-    private class EmitterHolder {
+    private final class EmitterHolder {
 
         private final String id;
         private final Emitter<EVENT> emitter;
@@ -253,7 +253,7 @@ class EventDistributor<EVENT> {
         }
     }
 
-    private class EngineHolder {
+    private final class EngineHolder {
 
         private final ReconciliationEngine<EVENT> engine;
         private final Subscription subscription;

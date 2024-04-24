@@ -61,11 +61,11 @@ import static java.util.Arrays.asList;
  */
 public abstract class DataGenerator<A> {
 
-    public static abstract class BuilderDataGenerator<BUILDER> extends DataGenerator<BUILDER> {
+    public abstract static class BuilderDataGenerator<BUILDER> extends DataGenerator<BUILDER> {
         public abstract <B> BuilderDataGenerator<BUILDER> bind(DataGenerator<B> codomain, BiConsumer<BUILDER, B> builderSetter);
     }
 
-    public static abstract class BuilderDataGenerator2<BUILDER> extends DataGenerator<BUILDER> {
+    public abstract static class BuilderDataGenerator2<BUILDER> extends DataGenerator<BUILDER> {
         public abstract <B> BuilderDataGenerator2<BUILDER> combine(DataGenerator<B> codomain, BiConsumer<BUILDER, B> builderSetter);
     }
 

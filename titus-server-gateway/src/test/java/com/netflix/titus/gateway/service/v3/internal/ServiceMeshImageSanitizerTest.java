@@ -132,10 +132,9 @@ public class ServiceMeshImageSanitizerTest {
                 .thenReturn(Mono.error(TitusRegistryException.internalError(repo, tag, HttpStatus.INTERNAL_SERVER_ERROR)));
 
         StepVerifier.create(sanitizer.sanitizeAndApply(jobDescriptorWithTag))
-                .assertNext(jd -> {
+                .assertNext(jd ->
                     assertThat(((JobDescriptor<?>) jd).getContainer().getAttributes())
-                            .containsEntry(JobAttributes.JOB_ATTRIBUTES_SANITIZATION_SKIPPED_SERVICEMESH_IMAGE, "true");
-                })
+                            .containsEntry(JobAttributes.JOB_ATTRIBUTES_SANITIZATION_SKIPPED_SERVICEMESH_IMAGE, "true"))
                 .verifyComplete();
     }
 
@@ -146,9 +145,8 @@ public class ServiceMeshImageSanitizerTest {
                     .thenThrow(new IllegalStateException("should not call registryClient"));
 
             StepVerifier.create(sanitizer.sanitize(jobDescriptorBadImageName))
-                    .expectErrorSatisfies(throwable -> {
-                        assertThat(throwable).isInstanceOf(IllegalArgumentException.class);
-                    })
+                    .expectErrorSatisfies(throwable ->
+                        assertThat(throwable).isInstanceOf(IllegalArgumentException.class))
                     .verify();
         } catch (Throwable t) {
             fail(t.getMessage());

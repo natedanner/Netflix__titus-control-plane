@@ -34,8 +34,12 @@ public class ContainerHealthUpdateEvent extends ContainerHealthEvent {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         ContainerHealthUpdateEvent that = (ContainerHealthUpdateEvent) o;
         return Objects.equals(containerHealthStatus, that.containerHealthStatus);
     }

@@ -22,7 +22,7 @@ package com.netflix.titus.common.util.code;
  */
 public abstract class CodePointTracker {
 
-    private static volatile CodePointTracker INSTANCE;
+    private static volatile CodePointTracker instance;
 
     public void markReachable() {
         markReachable(getCodePointFromStackFrame(Thread.currentThread().getStackTrace()[2], "<no_context>"));
@@ -43,14 +43,14 @@ public abstract class CodePointTracker {
     }
 
     public static void setDefault(CodePointTracker codePointTracker) {
-        INSTANCE = codePointTracker;
+        instance = codePointTracker;
     }
 
     private static CodePointTracker getDefaultInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new LoggingCodePointTracker();
+        if (instance == null) {
+            instance = new LoggingCodePointTracker();
         }
-        return INSTANCE;
+        return instance;
     }
 
     private static CodePoint getCodePointFromStackFrame(StackTraceElement callerFrame, String context) {

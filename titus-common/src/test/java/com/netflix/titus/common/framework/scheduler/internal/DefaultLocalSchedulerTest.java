@@ -174,7 +174,7 @@ public class DefaultLocalSchedulerTest {
 
     private void expectScheduleRemoved(ScheduleReference reference) throws InterruptedException {
         assertThat(reference.isClosed()).isTrue();
-        LocalSchedulerEvent removedEvent = eventSubscriber.takeUntil(e -> e instanceof ScheduleRemovedEvent, Duration.ofSeconds(5));
+        LocalSchedulerEvent removedEvent = eventSubscriber.takeUntil(ScheduleRemovedEvent.class::isInstance, Duration.ofSeconds(5));
 
         Schedule schedule = removedEvent.getSchedule();
         assertThat(schedule.getCurrentAction().getStatus().getState().isFinal()).isTrue();

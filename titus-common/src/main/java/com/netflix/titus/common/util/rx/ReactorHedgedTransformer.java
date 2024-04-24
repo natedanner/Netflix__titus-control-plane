@@ -41,7 +41,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Scheduler;
 
-class ReactorHedgedTransformer<T> implements Function<Mono<T>, Mono<T>> {
+final class ReactorHedgedTransformer<T> implements Function<Mono<T>, Mono<T>> {
 
     private static final Logger logger = LoggerFactory.getLogger(ReactorHedgedTransformer.class);
 

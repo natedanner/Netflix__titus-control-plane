@@ -30,7 +30,7 @@ import com.netflix.titus.testkit.embedded.kube.EmbeddedKubeCluster;
 /**
  * Represents complete Titus stack, which includes master, gateway and agents.
  */
-public class EmbeddedTitusCell {
+public final class EmbeddedTitusCell {
 
     private final EmbeddedTitusMaster master;
     private final EmbeddedTitusGateway gateway;

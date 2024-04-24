@@ -45,8 +45,7 @@ class DefaultGroup<GROUP_KEY, PRIMARY_KEY, INPUT, OUTPUT> implements Group<GROUP
 
     @Override
     public Map<GROUP_KEY, Map<PRIMARY_KEY, OUTPUT>> get() {
-        Map raw = indexedValues;
-        return raw;
+        return indexedValues;
     }
 
     DefaultGroup<GROUP_KEY, PRIMARY_KEY, INPUT, OUTPUT> add(Collection<INPUT> values) {

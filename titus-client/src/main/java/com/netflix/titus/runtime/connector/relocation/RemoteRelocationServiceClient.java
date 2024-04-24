@@ -84,7 +84,7 @@ public class RemoteRelocationServiceClient implements RelocationServiceClient {
     @Override
     public Flux<TaskRelocationEvent> events(TaskRelocationQuery query) {
         return transportRelocationClient.observeRelocationEvents(query)
-                .map(grpcEvent -> RelocationGrpcModelConverters.toCoreRelocationEvent(grpcEvent))
+                .map(RelocationGrpcModelConverters::toCoreRelocationEvent)
                 .filter(Optional::isPresent)
                 .map(Optional::get);
     }

@@ -34,7 +34,9 @@ public class EmbeddedPostgresService {
 
     private static final String DB_NAME = "integration";
 
-    private static final String POSTGRES_DB_NAME = "postgres", POSTGRES_USER = "postgres", POSTGRES_PW = "postgres";
+    private static final String POSTGRES_DB_NAME = "postgres";
+    private static final String POSTGRES_USER = "postgres";
+    private static final String POSTGRES_PW = "postgres";
 
     private final EmbeddedPostgres embeddedPostgres;
     private final DataSource dataSource;

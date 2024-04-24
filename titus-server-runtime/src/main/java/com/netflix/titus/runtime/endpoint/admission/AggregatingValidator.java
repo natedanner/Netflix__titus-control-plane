@@ -104,12 +104,11 @@ public class AggregatingValidator implements AdmissionValidator<JobDescriptor> {
     private void registerMetrics(Collection<ValidationError> validationErrors,
                                  Throwable throwable) {
         if (null == throwable) {
-            validationErrors.forEach(validationError -> {
+            validationErrors.forEach(validationError ->
                 validatorMetrics.incrementValidationError(
                         validationError.getField(),
                         validationError.getDescription(),
-                        Collections.singletonMap("type", validationError.getType().name()));
-            });
+                        Collections.singletonMap("type", validationError.getType().name())));
         } else {
             validatorMetrics.incrementValidationError(this.getClass().getSimpleName(), throwable.getClass().getSimpleName());
         }

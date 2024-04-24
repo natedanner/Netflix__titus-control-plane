@@ -47,7 +47,7 @@ public class ContinuousSubscriptionMetrics {
     private final AtomicLong latencyStart;
     private final AtomicLong lastCompleteTimestamp;
     private final Id timeSinceLastCompleteId;
-    private CompletableTransformer asCompletable;
+    private final CompletableTransformer asCompletable;
 
     ContinuousSubscriptionMetrics(String root, List<Tag> commonTags, Registry registry) {
         this.registry = registry;

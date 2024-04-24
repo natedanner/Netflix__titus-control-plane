@@ -61,7 +61,7 @@ public class KubeClusterMembershipConnectorTest {
 
     private KubeClusterMembershipConnector connector;
 
-    private TitusRxSubscriber<ClusterMembershipEvent> connectorEvents = new TitusRxSubscriber<>();
+    private final TitusRxSubscriber<ClusterMembershipEvent> connectorEvents = new TitusRxSubscriber<>();
 
     @Before
     public void setUp() {
@@ -234,7 +234,7 @@ public class KubeClusterMembershipConnectorTest {
 
         assertThat(connector.getClusterMemberSiblings()).containsKey("sibling1");
 
-        await().until(() -> kubeExecutors.getMemberById("staleSibling").map(r -> "staleSibling").onErrorReturn("null").block().equals("null"));
+        await().until(() -> "null".equals(kubeExecutors.getMemberById("staleSibling").map(r -> "staleSibling").onErrorReturn("null").block()));
     }
 
     private ClusterMembershipRevision<ClusterMember> doRegister() throws InterruptedException {

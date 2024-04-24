@@ -16,7 +16,7 @@
 
 package com.netflix.titus.api.clustermembership.service;
 
-public class ClusterMembershipServiceException extends RuntimeException {
+public final class ClusterMembershipServiceException extends RuntimeException {
 
     public enum ErrorCode {
         BadSelfUpdate,

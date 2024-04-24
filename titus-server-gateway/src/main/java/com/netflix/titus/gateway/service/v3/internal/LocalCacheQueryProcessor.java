@@ -173,7 +173,7 @@ public class LocalCacheQueryProcessor {
             if ("true".equalsIgnoreCase(queryParameters.getOrDefault(PARAMETER_USE_CACHE, "false"))) {
                 allow = true;
                 reason = "requestedDirectly";
-            } else if (callerId.equals("unknown")) {
+            } else if ("unknown".equals(callerId)) {
                 allow = false;
                 reason = "callerNotSet";
             } else {

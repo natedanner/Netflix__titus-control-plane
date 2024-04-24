@@ -87,7 +87,9 @@ task stopDb {
             // Alternatively, grep the process list (ps) for the word "embedded-pg" to get the postgresql command line arguments.
             // You will need to manually terminate the postgresql instances running locally.
             println 'Stopping embedded Postgresql DB running on port ' + jdbcPort
-            if (pg != null) pg.close()
+            if (pg != null) {
+                pg.close()
+            }
         }
     }
 }

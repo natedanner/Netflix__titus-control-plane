@@ -24,7 +24,7 @@ import com.netflix.titus.common.model.sanitizer.ClassFieldsNotNull;
  *
  */
 @ClassFieldsNotNull
-public class TwoLevelResource {
+public final class TwoLevelResource {
 
     private final String name;
 
@@ -102,8 +102,7 @@ public class TwoLevelResource {
         }
 
         public TwoLevelResource build() {
-            TwoLevelResource twoLevelResource = new TwoLevelResource(name, value, index);
-            return twoLevelResource;
+            return new TwoLevelResource(name, value, index);
         }
     }
 }

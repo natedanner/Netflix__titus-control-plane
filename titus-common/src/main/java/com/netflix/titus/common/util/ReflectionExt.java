@@ -92,10 +92,7 @@ public final class ReflectionExt {
         if (Number.class.isAssignableFrom(type)) {
             return true;
         }
-        if (Integer.TYPE == type || Long.TYPE == type || Float.TYPE == type || Double.TYPE == type) {
-            return true;
-        }
-        return false;
+        return Integer.TYPE == type || Long.TYPE == type || Float.TYPE == type || Double.TYPE == type;
     }
 
     public static boolean isObjectMethod(Method method) {

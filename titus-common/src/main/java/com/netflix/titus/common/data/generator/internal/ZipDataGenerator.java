@@ -21,7 +21,7 @@ import java.util.Optional;
 import com.netflix.titus.common.data.generator.DataGenerator;
 import com.netflix.titus.common.util.tuple.Pair;
 
-public class ZipDataGenerator<A, B> extends DataGenerator<Pair<A, B>> {
+public final class ZipDataGenerator<A, B> extends DataGenerator<Pair<A, B>> {
     private final DataGenerator<A> first;
     private final DataGenerator<B> second;
     private final Optional<Pair<A, B>> current;

@@ -20,6 +20,7 @@ import com.google.protobuf.Empty;
 import com.netflix.titus.cli.CliCommand;
 import com.netflix.titus.cli.CommandContext;
 import com.netflix.titus.cli.GrpcClientErrorUtils;
+import com.netflix.titus.grpc.protogen.SupervisorEvent;
 import com.netflix.titus.grpc.protogen.SupervisorServiceGrpc;
 import com.netflix.titus.grpc.protogen.SupervisorServiceGrpc.SupervisorServiceBlockingStub;
 import com.netflix.titus.master.supervisor.endpoint.grpc.SupervisorGrpcModelConverters;
@@ -46,8 +47,7 @@ public class SupervisorObserveEventsCommand implements CliCommand {
 
     @Override
     public Options getOptions() {
-        Options options = new Options();
-        return options;
+        return new Options();
     }
 
     @Override
@@ -55,14 +55,11 @@ public class SupervisorObserveEventsCommand implements CliCommand {
         SupervisorServiceBlockingStub stub = GrpcClientErrorUtils.attachCallHeaders(SupervisorServiceGrpc.newBlockingStub(context.createChannel()));
         stub.observeEvents(Empty.getDefaultInstance())
                 .forEachRemaining(event -> {
-                            switch (event.getEventCase()) {
-                                case MASTERINSTANCEUPDATE:
-                                    logger.info("Add/updated: {}", SupervisorGrpcModelConverters.toCoreMasterInstance(event.getMasterInstanceUpdate().getInstance()));
-                                    break;
-                                case MASTERINSTANCEREMOVED:
-                                    logger.info("Removed: {}", event.getMasterInstanceRemoved().getInstanceId());
-                                    break;
-                            }
+                    if (event.getEventCase() == SupervisorEvent.EventCase.MASTERINSTANCEUPDATE) {
+                        logger.info("Add/updated: {}", SupervisorGrpcModelConverters.toCoreMasterInstance(event.getMasterInstanceUpdate().getInstance()));
+                    } else if (event.getEventCase() == SupervisorEvent.EventCase.MASTERINSTANCEREMOVED) {
+                        logger.info("Removed: {}", event.getMasterInstanceRemoved().getInstanceId());
+                    }
                         }
                 );
     }

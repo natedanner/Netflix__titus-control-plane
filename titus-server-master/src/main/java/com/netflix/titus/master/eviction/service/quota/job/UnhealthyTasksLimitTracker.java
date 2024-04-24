@@ -40,7 +40,7 @@ import com.netflix.titus.master.eviction.service.quota.QuotaTracker;
 
 import static com.netflix.titus.common.util.StringExt.startWithLowercase;
 
-public class UnhealthyTasksLimitTracker implements QuotaTracker {
+public final class UnhealthyTasksLimitTracker implements QuotaTracker {
 
     /**
      * Do not track health status of small jobs with size below the threshold.

@@ -42,7 +42,7 @@ public final class SampleTitusChangeActions {
         return new FailingChangeAction(V3JobOperations.Trigger.API, "jobId", failureCount);
     }
 
-    private static class SuccessfulChangeAction extends TitusChangeAction {
+    private static final class SuccessfulChangeAction extends TitusChangeAction {
 
         private SuccessfulChangeAction(Trigger trigger, String id) {
             super(trigger, id, null, "simulatedChangeAction", "Simulated successful action", TEST_CALLMETADATA);

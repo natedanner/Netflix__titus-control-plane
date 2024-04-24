@@ -223,7 +223,7 @@ class EventDistributor<DATA> {
         }
     }
 
-    private class EmitterHolder {
+    private final class EmitterHolder {
 
         private final String id;
         private final FluxSink<List<SimpleReconcilerEvent<DATA>>> emitter;

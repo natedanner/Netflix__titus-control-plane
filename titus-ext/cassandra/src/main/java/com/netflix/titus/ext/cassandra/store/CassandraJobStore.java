@@ -248,7 +248,7 @@ public class CassandraJobStore implements JobStore {
 
     @Override
     public Observable<Pair<List<Job<?>>, Integer>> retrieveJobs() {
-        Observable result = Observable.fromCallable(() -> {
+        return Observable.fromCallable(() -> {
             List<String> jobIds = activeJobIdsBucketManager.getItems();
             return jobIds.stream().map(retrieveActiveJobStatement::bind).map(this::execute).collect(Collectors.toList());
         }).flatMap(observables -> Observable.merge(observables, getConcurrencyLimit()).flatMapIterable(resultSet -> {
@@ -307,8 +307,6 @@ public class CassandraJobStore implements JobStore {
             int errors = everything.size() - goodJobs.size();
             return Pair.of(goodJobs, errors);
         });
-
-        return result;
     }
 
     @Override

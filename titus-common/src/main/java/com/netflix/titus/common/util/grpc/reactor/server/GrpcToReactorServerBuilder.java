@@ -24,7 +24,7 @@ import io.grpc.ServiceDescriptor;
 import static io.grpc.stub.ServerCalls.asyncServerStreamingCall;
 import static io.grpc.stub.ServerCalls.asyncUnaryCall;
 
-class GrpcToReactorServerBuilder<REACT_SERVICE, CONTEXT> {
+final class GrpcToReactorServerBuilder<REACT_SERVICE, CONTEXT> {
 
     private final ServiceDescriptor serviceDescriptor;
     private final REACT_SERVICE reactorService;
@@ -58,12 +58,10 @@ class GrpcToReactorServerBuilder<REACT_SERVICE, CONTEXT> {
         MethodHandlersBuilder<CONTEXT, REACT_SERVICE> handlersBuilder = new MethodHandlersBuilder<>(reactorService, serviceDescriptor, contextType, contextResolver, reactorDetailedFallbackClass);
 
         ServerServiceDefinition.Builder builder = ServerServiceDefinition.builder(serviceDescriptor);
-        handlersBuilder.getUnaryMethodHandlers().forEach(handler -> {
-            builder.addMethod(handler.getMethodDescriptor(), asyncUnaryCall(handler));
-        });
-        handlersBuilder.getServerStreamingMethodHandlers().forEach(handler -> {
-            builder.addMethod(handler.getMethodDescriptor(), asyncServerStreamingCall(handler));
-        });
+        handlersBuilder.getUnaryMethodHandlers().forEach(handler ->
+            builder.addMethod(handler.getMethodDescriptor(), asyncUnaryCall(handler)));
+        handlersBuilder.getServerStreamingMethodHandlers().forEach(handler ->
+            builder.addMethod(handler.getMethodDescriptor(), asyncServerStreamingCall(handler)));
         return builder.build();
     }
 }

@@ -81,7 +81,7 @@ public class LoadBalancerTests {
 
     private static final long TIMEOUT_MS = 30_000;
 
-    static public LoadBalancerService getMockLoadBalancerService() {
+    public static LoadBalancerService getMockLoadBalancerService() {
         final TitusRuntime runtime = TitusRuntimes.internal();
         final LoadBalancerConfiguration loadBalancerConfig = mockConfiguration(5_000);
         final LoadBalancerConnector connector = mock(LoadBalancerConnector.class);

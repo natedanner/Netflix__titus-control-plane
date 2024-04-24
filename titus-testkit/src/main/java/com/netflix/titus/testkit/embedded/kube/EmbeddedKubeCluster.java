@@ -270,7 +270,7 @@ public class EmbeddedKubeCluster {
                                     ))
                     ));
 
-            if (!pod.getStatus().getPhase().equals("Running")) {
+            if (!"Running".equals(pod.getStatus().getPhase())) {
                 updatedPod.getStatus()
                         .phase("Failed")
                         .reason(message);

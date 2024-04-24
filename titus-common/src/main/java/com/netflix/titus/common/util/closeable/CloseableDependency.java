@@ -21,7 +21,7 @@ import javax.annotation.PreDestroy;
 /**
  * Dependency injected instrumented wrapper for {@link CloseableReference}.
  */
-public class CloseableDependency<T> {
+public final class CloseableDependency<T> {
 
     private final CloseableReference<T> closeableReference;
 

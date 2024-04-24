@@ -97,14 +97,13 @@ public class Fabric8IOKubeMembershipExecutor implements KubeMembershipExecutor {
 
     @Override
     public Mono<Void> removeMember(String memberId) {
-        return Mono.<Void>fromRunnable(() -> {
-            membershipClient.withName(memberId).delete();
-        }).subscribeOn(scheduler);
+        return Mono.<Void>fromRunnable(() ->
+            membershipClient.withName(memberId).delete()).subscribeOn(scheduler);
     }
 
     @Override
     public Flux<ClusterMembershipEvent> watchMembershipEvents() {
-        return Flux.create(sink -> {
+        return Flux.create(sink ->
             membershipClient.watch(
                     new Watcher<FClusterMembership>() {
                         @Override
@@ -133,8 +132,7 @@ public class Fabric8IOKubeMembershipExecutor implements KubeMembershipExecutor {
                             KubernetesClientException clientException = cause.asClientException();
                             sink.error(new IllegalStateException("Kubernetes watch stream error: " + clientException.toString()));
                         }
-                    });
-        });
+                    }));
     }
 
     private ClusterMembershipRevision<ClusterMember> applyNewRevisionNumber(ClusterMembershipRevision<ClusterMember> localMemberRevision, ObjectMeta metadata) {

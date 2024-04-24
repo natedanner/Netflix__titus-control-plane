@@ -190,10 +190,7 @@ public class DefaultReconciliationFrameworkTest {
         Map<String, List<ModelActionHolder>> holders = new HashMap<>();
         Observable<Void> multiChangeObservable = framework.changeReferenceModel(
                 multiEngineChangeAction,
-                (id, modelUpdates) -> {
-                    ChangeAction changeAction = () -> modelUpdates.doOnNext(next -> holders.put(id, next));
-                    return changeAction;
-                },
+                (id, modelUpdates) -> () -> modelUpdates.doOnNext(next -> holders.put(id, next)),
                 "myRoot1", "myRoot2"
         );
 

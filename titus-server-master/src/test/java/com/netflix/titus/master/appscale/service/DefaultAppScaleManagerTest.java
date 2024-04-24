@@ -61,8 +61,8 @@ import static org.mockito.Mockito.when;
 
 
 public class DefaultAppScaleManagerTest {
-    private static Logger log = LoggerFactory.getLogger(DefaultAppScaleManagerTest.class);
-    private CallMetadata callMetadata = CallMetadata.newBuilder().withCallerId("app scale test").build();
+    private static final Logger log = LoggerFactory.getLogger(DefaultAppScaleManagerTest.class);
+    private final CallMetadata callMetadata = CallMetadata.newBuilder().withCallerId("app scale test").build();
 
     @Test
     public void checkTargetTrackingPolicy() throws Exception {
@@ -252,7 +252,7 @@ public class DefaultAppScaleManagerTest {
                                         new RuntimeException(AutoScalePolicyException.unknownScalingPolicy("policyId", "Not found")))));
         Optional<AutoScalePolicyException> autoScalePolicyException = DefaultAppScaleManager.extractAutoScalePolicyException(exceptionContainingUnknownPolicy);
 
-        AutoScalingPolicyTests.waitForCondition(() -> autoScalePolicyException.isPresent());
+        AutoScalingPolicyTests.waitForCondition(autoScalePolicyException::isPresent);
         Assertions.assertThat(autoScalePolicyException.isPresent()).isTrue();
         AutoScalingPolicyTests.waitForCondition(() -> autoScalePolicyException.get().getErrorCode() == AutoScalePolicyException.ErrorCode.UnknownScalingPolicy);
         Assertions.assertThat(autoScalePolicyException.get().getErrorCode()).isEqualTo(AutoScalePolicyException.ErrorCode.UnknownScalingPolicy);
@@ -348,7 +348,7 @@ public class DefaultAppScaleManagerTest {
         AutoScalingPolicyTests.waitForCondition(() -> savedPolicies.size() == 2);
         Assertions.assertThat(savedPolicies.size()).isEqualTo(2);
 
-        return savedPolicies.stream().map(policy -> policy.getRefId()).collect(Collectors.toList());
+        return savedPolicies.stream().map(AutoScalingPolicy::getRefId).collect(Collectors.toList());
     }
 
     private JobGroupInfo buildMockJobGroupInfo(String jobId) {

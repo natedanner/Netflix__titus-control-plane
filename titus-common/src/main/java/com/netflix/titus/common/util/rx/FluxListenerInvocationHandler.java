@@ -23,7 +23,7 @@ import java.util.function.Consumer;
 
 import reactor.core.publisher.Flux;
 
-class FluxListenerInvocationHandler<T> implements InvocationHandler {
+final class FluxListenerInvocationHandler<T> implements InvocationHandler {
 
     private final Class<?> listenerType;
     private final Consumer<T> delegate;

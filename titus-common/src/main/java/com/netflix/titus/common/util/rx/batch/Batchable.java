@@ -26,7 +26,7 @@ import java.util.Comparator;
  * @param <I> type of the identifier. There will be at most one item for each identifier in a batch
  */
 public interface Batchable<I> {
-    final static Comparator<Batchable<?>> COMPARING_BY_PRIORITY = Comparator.comparing(Batchable::getPriority);
+    static final Comparator<Batchable<?>> COMPARING_BY_PRIORITY = Comparator.comparing(Batchable::getPriority);
 
     static Comparator<Batchable<?>> byPriority() {
         return COMPARING_BY_PRIORITY;

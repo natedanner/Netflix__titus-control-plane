@@ -164,21 +164,19 @@ public final class GrpcEvictionModelConverters {
     }
 
     public static Tier toCoreTier(com.netflix.titus.grpc.protogen.Tier grpcTier) {
-        switch (grpcTier) {
-            case Flex:
-                return Tier.Flex;
-            case Critical:
-                return Tier.Critical;
+        if (grpcTier == com.netflix.titus.grpc.protogen.Tier.Flex) {
+            return Tier.Flex;
+        } else if (grpcTier == com.netflix.titus.grpc.protogen.Tier.Critical) {
+            return Tier.Critical;
         }
         return Tier.Flex; // Default to flex
     }
 
     public static com.netflix.titus.grpc.protogen.Tier toGrpcTier(Tier tier) {
-        switch (tier) {
-            case Critical:
-                return com.netflix.titus.grpc.protogen.Tier.Critical;
-            case Flex:
-                return com.netflix.titus.grpc.protogen.Tier.Flex;
+        if (tier == Tier.Critical) {
+            return com.netflix.titus.grpc.protogen.Tier.Critical;
+        } else if (tier == Tier.Flex) {
+            return com.netflix.titus.grpc.protogen.Tier.Flex;
         }
         throw new IllegalArgumentException("Unrecognized Tier value: " + tier);
     }

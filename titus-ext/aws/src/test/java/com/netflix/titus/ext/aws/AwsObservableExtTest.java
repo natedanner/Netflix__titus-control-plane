@@ -40,7 +40,7 @@ public class AwsObservableExtTest {
                     assertEquals(someRequest, req);
                     assertEquals("some response", resp);
                 },
-                (t) -> {
+                t -> {
                     throw new IllegalStateException("Should never be here");
                 }
         )));
@@ -104,7 +104,7 @@ public class AwsObservableExtTest {
         subscriber.assertError(exception);
     }
 
-    private class MockAsyncClient<REQ extends AmazonWebServiceRequest, RES> {
+    private final class MockAsyncClient<REQ extends AmazonWebServiceRequest, RES> {
         private final REQ request;
         private final RES response;
 
@@ -116,7 +116,7 @@ public class AwsObservableExtTest {
         }
 
         Future<RES> someAsyncOperation(AsyncHandler<? super REQ, RES> handler) {
-            futureTask = new FutureTask<RES>(() -> {
+            futureTask = new FutureTask<>(() -> {
                 handler.onSuccess(request, response);
                 return response;
             });

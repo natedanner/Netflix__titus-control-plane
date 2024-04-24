@@ -126,7 +126,7 @@ public class ZookeeperLeaderElector implements LeaderElector {
     }
 
 
-    private class LeaderElectionProcess {
+    private final class LeaderElectionProcess {
 
         private final LeaderLatch leaderLatch;
 

@@ -49,7 +49,7 @@ public class ReconcilerActionProvider<DATA> {
     }
 
     public Builder<DATA> toBuilder() {
-        return ReconcilerActionProvider.<DATA>newBuilder().withPolicy(policy).withExternal(external).withActionProvider(actionProvider);
+        return ReconcilerActionProvider.newBuilder().withPolicy(policy).withExternal(external).withActionProvider(actionProvider);
     }
 
     public static <DATA> Builder<DATA> newBuilder() {

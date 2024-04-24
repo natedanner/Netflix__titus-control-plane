@@ -75,7 +75,7 @@ public class RetryHandlerBuilderTest {
     @Test
     public void testRetryOnThrowableCondition() throws Exception {
         Func1<Observable<? extends Throwable>, Observable<?>> retryFun = builder
-                .withRetryOnThrowable(ex -> ex instanceof ServiceUnavailableException)
+                .withRetryOnThrowable(ServiceUnavailableException.class::isInstance)
                 .buildExponentialBackoff();
 
         observableOf("A", new ServiceUnavailableException("Retry me"), "B", new IllegalArgumentException("Do not retry"), "C")

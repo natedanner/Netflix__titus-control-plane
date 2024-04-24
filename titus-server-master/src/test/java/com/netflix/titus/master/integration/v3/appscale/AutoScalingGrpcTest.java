@@ -125,10 +125,7 @@ public class AutoScalingGrpcTest extends BaseIntegrationTest {
     }
 
     private static boolean isDeletingState(ScalingPolicyStatus status) {
-        if (status.getState() == Deleted || status.getState() == Deleting) {
-            return true;
-        }
-        return false;
+        return status.getState() == Deleted || status.getState() == Deleting;
     }
 
     /**
@@ -187,9 +184,8 @@ public class AutoScalingGrpcTest extends BaseIntegrationTest {
         client.getAllScalingPolicies(Empty.newBuilder().build(), getResponse);
         GetPolicyResult getPolicyResult = getResponse.takeNext(TIMEOUT_MS, TimeUnit.MILLISECONDS);
         assertThat(getPolicyResult.getItemsCount()).isEqualTo(numJobs);
-        getPolicyResult.getItemsList().forEach(scalingPolicyResult -> {
-            assertThat(policyIDSet.contains(scalingPolicyResult.getId())).isTrue();
-        });
+        getPolicyResult.getItemsList().forEach(scalingPolicyResult ->
+            assertThat(policyIDSet.contains(scalingPolicyResult.getId())).isTrue());
     }
 
     /**

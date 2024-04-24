@@ -16,7 +16,7 @@
 
 package com.netflix.titus.supplementary.relocation.descheduler;
 
-public class DeschedulerException extends RuntimeException {
+public final class DeschedulerException extends RuntimeException {
 
     public enum ErrorCode {
         NoQuotaLeft

@@ -20,7 +20,7 @@ import java.util.Optional;
 
 import com.netflix.titus.common.data.generator.DataGenerator;
 
-public class ConcatDataGenerator<A> extends DataGenerator<A> {
+public final class ConcatDataGenerator<A> extends DataGenerator<A> {
 
     private final DataGenerator<A> first;
     private final DataGenerator<A> second;

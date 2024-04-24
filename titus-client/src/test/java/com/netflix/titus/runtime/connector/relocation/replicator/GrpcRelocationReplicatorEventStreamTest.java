@@ -44,9 +44,8 @@ public class GrpcRelocationReplicatorEventStreamTest {
         relocationConnectorStubs.addPlan(TaskRelocationPlan.newBuilder().withTaskId("task1").build());
 
         newConnectVerifier()
-                .assertNext(snapshotEvent -> {
-                    assertThat(snapshotEvent.getSnapshot().getPlans()).containsKey("task1");
-                })
+                .assertNext(snapshotEvent ->
+                    assertThat(snapshotEvent.getSnapshot().getPlans()).containsKey("task1"))
 
                 .thenCancel()
                 .verify();
@@ -55,18 +54,15 @@ public class GrpcRelocationReplicatorEventStreamTest {
     @Test
     public void testPlanAddAndRemove() {
         newConnectVerifier()
-                .assertNext(snapshotEvent -> {
-                    assertThat(snapshotEvent.getSnapshot().getPlans()).isEmpty();
-                })
+                .assertNext(snapshotEvent ->
+                    assertThat(snapshotEvent.getSnapshot().getPlans()).isEmpty())
                 .then(() ->
                         relocationConnectorStubs.addPlan(TaskRelocationPlan.newBuilder().withTaskId("task1").build())
                 )
-                .assertNext(snapshotEvent -> {
-                    assertThat(snapshotEvent.getSnapshot().getPlans()).containsKey("task1");
-                })
-                .then(() -> {
-                    relocationConnectorStubs.removePlan("task1");
-                })
+                .assertNext(snapshotEvent ->
+                    assertThat(snapshotEvent.getSnapshot().getPlans()).containsKey("task1"))
+                .then(() ->
+                    relocationConnectorStubs.removePlan("task1"))
 
                 .thenCancel()
                 .verify();

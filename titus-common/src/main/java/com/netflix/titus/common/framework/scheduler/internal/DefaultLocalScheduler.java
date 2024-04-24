@@ -212,7 +212,7 @@ public class DefaultLocalScheduler implements LocalScheduler {
         }
     }
 
-    private class ScheduleHolder {
+    private final class ScheduleHolder {
 
         private final Runnable cleanup;
         private final ScheduleReference reference;

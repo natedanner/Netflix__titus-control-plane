@@ -74,14 +74,11 @@ public class MasterBootstrapTest {
 
         jobsScenarioBuilder.scheduleJob(emptyJob, jobScenario -> jobScenario
                 .expectJobEvent()
-                .modifyJobStoreRecord(jobStoreRecord -> {
-                    return changeServiceJobCapacity(jobStoreRecord, Capacity.newBuilder().withMin(-1).withDesired(-1).build());
-                })
+                .modifyJobStoreRecord(jobStoreRecord -> changeServiceJobCapacity(jobStoreRecord, Capacity.newBuilder().withMin(-1).withDesired(-1).build()))
         ).reboot()
                 .inJob(0, jobScenario -> jobScenario
-                        .assertServiceJob(job -> {
-                            assertThat(job.getJobDescriptor().getExtensions().getCapacity().getDesired()).isEqualTo(-1);
-                        })
+                        .assertServiceJob(job ->
+                            assertThat(job.getJobDescriptor().getExtensions().getCapacity().getDesired()).isEqualTo(-1))
                 );
     }
 

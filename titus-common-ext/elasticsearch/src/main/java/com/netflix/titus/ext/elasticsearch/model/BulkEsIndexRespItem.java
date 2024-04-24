@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * https://www.elastic.co/guide/en/elasticsearch/reference/master/rest-apis.html
  */
 public class BulkEsIndexRespItem {
-    private EsIndexResp index;
+    private final EsIndexResp index;
 
     @JsonCreator
     public BulkEsIndexRespItem(@JsonProperty("index") EsIndexResp index) {

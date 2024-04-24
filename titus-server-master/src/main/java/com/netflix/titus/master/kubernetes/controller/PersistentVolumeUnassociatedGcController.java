@@ -95,7 +95,7 @@ public class PersistentVolumeUnassociatedGcController extends BaseGcController<V
                 .collect(Collectors.toSet());
         return kubeApiFacade.getPersistentVolumeInformer().getIndexer().list().stream()
                 // Only consider PVs that are available (i.e., not bound)
-                .filter(pv -> (pv.getStatus() == null ? "" : pv.getStatus().getPhase()).equalsIgnoreCase("Available"))
+                .filter(pv -> "Available".equalsIgnoreCase((pv.getStatus() == null ? "" : pv.getStatus().getPhase())))
                 // Only consider PVs that are not associated with active jobs
                 .filter(pv -> isPersistentVolumeUnassociated(pv, currentEbsVolumes))
                 .collect(Collectors.toList());

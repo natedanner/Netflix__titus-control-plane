@@ -99,7 +99,7 @@ public class JobScenarioBuilder {
 
     private final ExtTestSubscriber<Job> jobEventStream = new ExtTestSubscriber<>();
 
-    private volatile int nextIndex = 0;
+    private volatile int nextIndex;
     private final Multimap<Integer, String> taskSlotIndexes = Multimaps.synchronizedListMultimap(ArrayListMultimap.create());
     private final Map<String, Integer> taskToSlot = new ConcurrentHashMap<>();
     private final Map<String, TaskHolder> taskHolders = new ConcurrentHashMap<>();
@@ -647,7 +647,7 @@ public class JobScenarioBuilder {
         }
     }
 
-    private class TaskHolder {
+    private final class TaskHolder {
         private final ReplaySubject<Task> taskEventStream;
         private final TaskScenarioBuilder taskScenarioBuilder;
 

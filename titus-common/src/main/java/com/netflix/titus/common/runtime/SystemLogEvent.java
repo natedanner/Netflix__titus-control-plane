@@ -26,7 +26,7 @@ import static com.netflix.titus.common.util.Evaluators.getOrDefault;
 /**
  * System logger event (see {@link SystemLogService}).
  */
-public class SystemLogEvent {
+public final class SystemLogEvent {
 
     /**
      * The criticality level of the log event.

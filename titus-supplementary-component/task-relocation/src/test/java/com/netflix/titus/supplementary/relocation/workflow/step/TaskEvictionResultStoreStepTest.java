@@ -42,7 +42,7 @@ public class TaskEvictionResultStoreStepTest extends AbstractTaskRelocationTest 
 
     private final RelocationTransactionLogger transactionLog = new RelocationTransactionLogger(jobOperations);
 
-    private TaskRelocationResultStore store = mock(TaskRelocationResultStore.class);
+    private final TaskRelocationResultStore store = mock(TaskRelocationResultStore.class);
 
     private TaskEvictionResultStoreStep step;
 

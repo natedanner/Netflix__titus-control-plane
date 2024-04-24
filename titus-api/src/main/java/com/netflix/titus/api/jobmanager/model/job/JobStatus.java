@@ -39,7 +39,7 @@ public class JobStatus extends ExecutableStatus<JobState> {
         return new Builder(jobStatus);
     }
 
-    public static class Builder extends AbstractBuilder<JobState, Builder, JobStatus> {
+    public static final class Builder extends AbstractBuilder<JobState, Builder, JobStatus> {
 
         private Builder() {
         }

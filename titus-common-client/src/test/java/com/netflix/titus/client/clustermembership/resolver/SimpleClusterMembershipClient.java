@@ -81,7 +81,7 @@ class SimpleClusterMembershipClient implements ClusterMembershipClient {
 
     @Override
     public Flux<ClusterMembershipEvent> events() {
-        return Flux.create(sink -> {
+        return Flux.create(sink ->
             stub.events(Empty.getDefaultInstance(), new StreamObserver<ClusterMembershipEvent>() {
                 @Override
                 public void onNext(ClusterMembershipEvent value) {
@@ -97,8 +97,7 @@ class SimpleClusterMembershipClient implements ClusterMembershipClient {
                 public void onCompleted() {
                     sink.complete();
                 }
-            });
-        });
+            }));
     }
 
     @Override

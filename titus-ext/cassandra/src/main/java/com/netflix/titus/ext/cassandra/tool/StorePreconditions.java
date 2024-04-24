@@ -26,7 +26,7 @@ import com.netflix.titus.common.util.StringExt;
  */
 public final class StorePreconditions {
 
-    private static Pattern[] DEV_STACK_PATTERNS = new Pattern[]{
+    private static final Pattern[] DEV_STACK_PATTERNS = new Pattern[]{
             Pattern.compile(".*dev.*"),
             Pattern.compile(".*(test|Testing).*"),
             Pattern.compile(".*backup.*"),

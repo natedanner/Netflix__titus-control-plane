@@ -27,7 +27,7 @@ import java.util.Map;
 /**
  * TODO Optimize. This is expensive and inefficient implementation.
  */
-public class IndexSet<T> {
+public final class IndexSet<T> {
 
     private static final IndexSet<?> EMPTY = new IndexSet<>(Collections.emptyMap());
 
@@ -61,7 +61,7 @@ public class IndexSet<T> {
         return new IndexSet<>(indexes);
     }
 
-    static class Index<T> {
+    static final class Index<T> {
 
         private final Comparator<T> comparator;
         private final List<T> ordered;

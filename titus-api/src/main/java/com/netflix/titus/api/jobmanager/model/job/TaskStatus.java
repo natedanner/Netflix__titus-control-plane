@@ -119,7 +119,7 @@ public class TaskStatus extends ExecutableStatus<TaskState> {
 
     public static final String REASON_UNKNOWN = "unknown";
 
-    private static Set<String> SYSTEM_LEVEL_ERRORS = CollectionsExt.asSet(
+    private static Set<String> systemLevelErrors = CollectionsExt.asSet(
             REASON_STUCK_IN_STATE,
             REASON_CRASHED,
             REASON_TRANSIENT_SYSTEM_ERROR,
@@ -145,7 +145,7 @@ public class TaskStatus extends ExecutableStatus<TaskState> {
             return false;
         }
         String reasonCode = status.getReasonCode();
-        return !StringExt.isEmpty(reasonCode) && SYSTEM_LEVEL_ERRORS.contains(reasonCode);
+        return !StringExt.isEmpty(reasonCode) && systemLevelErrors.contains(reasonCode);
     }
 
     public static boolean isEvicted(Task task) {
@@ -200,7 +200,7 @@ public class TaskStatus extends ExecutableStatus<TaskState> {
         return new TaskStatus.Builder(taskStatus);
     }
 
-    public static class Builder extends AbstractBuilder<TaskState, Builder, TaskStatus> {
+    public static final class Builder extends AbstractBuilder<TaskState, Builder, TaskStatus> {
         private Builder() {
         }
 

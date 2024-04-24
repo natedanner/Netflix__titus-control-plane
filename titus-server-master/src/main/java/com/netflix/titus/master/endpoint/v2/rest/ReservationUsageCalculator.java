@@ -117,9 +117,9 @@ public class ReservationUsageCalculator {
     private static class ResourceAccumulator {
 
         private double cpuSum = 0.0;
-        private long memoryMbSum = 0;
-        private long diskMbSum = 0;
-        private long networkMbpsSum = 0;
+        private long memoryMbSum;
+        private long diskMbSum;
+        private long networkMbpsSum;
 
         private void add(int count, ContainerResources containerResources) {
             if (count > 0) {

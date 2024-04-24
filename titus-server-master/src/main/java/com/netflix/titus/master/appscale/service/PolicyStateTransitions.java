@@ -24,27 +24,37 @@ import java.util.Map;
 import com.netflix.titus.api.appscale.model.PolicyStatus;
 
 public class PolicyStateTransitions {
-    private static Map<PolicyStatus, List<PolicyStatus>> allowedTransitions = new HashMap<PolicyStatus, List<PolicyStatus>>() {{
-        put(PolicyStatus.Applied, new ArrayList<PolicyStatus>() {{
-            add(PolicyStatus.Pending);
-            add(PolicyStatus.Deleting);
-        }});
+    private static final Map<PolicyStatus, List<PolicyStatus>> allowedTransitions;
+    static {
+        allowedTransitions = new HashMap<>();
+        allowedTransitions.put(PolicyStatus.Applied, new ArrayList<PolicyStatus>() {
+            {
+                add(PolicyStatus.Pending);
+                add(PolicyStatus.Deleting);
+            }
+        });
 
-        put(PolicyStatus.Pending, new ArrayList<PolicyStatus>() {{
-            add(PolicyStatus.Pending);
-            add(PolicyStatus.Applied);
-            add(PolicyStatus.Error);
-        }});
+        allowedTransitions.put(PolicyStatus.Pending, new ArrayList<PolicyStatus>() {
+            {
+                add(PolicyStatus.Pending);
+                add(PolicyStatus.Applied);
+                add(PolicyStatus.Error);
+            }
+        });
 
-        put(PolicyStatus.Deleting, new ArrayList<PolicyStatus>() {{
-            add(PolicyStatus.Deleted);
-        }});
-        put(PolicyStatus.Deleted, Collections.emptyList());
-        put(PolicyStatus.Error, new ArrayList<PolicyStatus>() {{
-            add(PolicyStatus.Deleting);
-            add(PolicyStatus.Pending);
-        }});
-    }};
+        allowedTransitions.put(PolicyStatus.Deleting, new ArrayList<PolicyStatus>() {
+            {
+                add(PolicyStatus.Deleted);
+            }
+        });
+        allowedTransitions.put(PolicyStatus.Deleted, Collections.emptyList());
+        allowedTransitions.put(PolicyStatus.Error, new ArrayList<PolicyStatus>() {
+            {
+                add(PolicyStatus.Deleting);
+                add(PolicyStatus.Pending);
+            }
+        });
+    }
 
     public static boolean isAllowed(PolicyStatus from, PolicyStatus to) {
         return allowedTransitions.containsKey(from) && allowedTransitions.get(from).contains(to);

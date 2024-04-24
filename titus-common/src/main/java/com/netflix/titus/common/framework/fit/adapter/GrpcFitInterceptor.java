@@ -101,7 +101,7 @@ public class GrpcFitInterceptor implements ServerInterceptor {
                 : original;
     }
 
-    private class LatencyHandler<ReqT, RespT> {
+    private final class LatencyHandler<ReqT, RespT> {
 
         private final ServerCall.Listener<ReqT> latencyListener;
         private final AtomicReference<ServerCall.Listener<ReqT>> nextListenerRef = new AtomicReference<>();

@@ -45,7 +45,7 @@ public class OkHttpClient implements HttpClient {
     private final X509TrustManager trustManager;
     private final List<Interceptor> interceptors;
 
-    private okhttp3.OkHttpClient client;
+    private final okhttp3.OkHttpClient client;
 
     OkHttpClient(Builder builder) {
         this.connectTimeout = builder.connectTimeout;

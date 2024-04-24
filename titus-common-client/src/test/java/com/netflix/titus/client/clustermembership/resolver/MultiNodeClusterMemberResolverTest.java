@@ -180,7 +180,7 @@ public class MultiNodeClusterMemberResolverTest {
         return address.getIpAddress().equals(memberRevision.getCurrent().getClusterMemberAddresses().get(0).getIpAddress());
     }
 
-    private static class TestableDirectClusterMemberResolver implements DirectClusterMemberResolver {
+    private static final class TestableDirectClusterMemberResolver implements DirectClusterMemberResolver {
 
         private final ClusterMembershipRevision<ClusterMember> memberRevision;
 

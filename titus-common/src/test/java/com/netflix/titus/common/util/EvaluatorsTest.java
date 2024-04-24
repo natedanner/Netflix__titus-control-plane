@@ -53,7 +53,7 @@ public class EvaluatorsTest {
     public void testMemoizeLastError() {
         Function<String, String> evaluator = Evaluators.memoizeLast(s -> {
             counter++;
-            if (s.equals("error")) {
+            if ("error".equals(s)) {
                 throw SIMULATED_ERROR;
             }
             return s.toUpperCase();

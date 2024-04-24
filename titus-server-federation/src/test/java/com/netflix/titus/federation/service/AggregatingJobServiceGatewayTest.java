@@ -461,10 +461,10 @@ public class AggregatingJobServiceGatewayTest {
     public void singleJobUpdates() {
         Random random = new Random();
         List<String> cellOneSnapshot = new ArrayList<>(dataGenerator.newServiceJobs(12)).stream()
-                .map(job -> job.getId())
+                .map(com.netflix.titus.api.jobmanager.model.job.Job::getId)
                 .collect(Collectors.toList());
         List<String> cellTwoSnapshot = new ArrayList<>(dataGenerator.newBatchJobs(7)).stream()
-                .map(job -> job.getId())
+                .map(com.netflix.titus.api.jobmanager.model.job.Job::getId)
                 .collect(Collectors.toList());
         CellWithJobIds cellOneService = new CellWithJobIds(cellOneSnapshot);
         CellWithJobIds cellTwoService = new CellWithJobIds(cellTwoSnapshot);
@@ -916,14 +916,13 @@ public class AggregatingJobServiceGatewayTest {
     }
 
     private JobChangeNotification withStackName(JobChangeNotification jobChangeNotification) {
-        switch (jobChangeNotification.getNotificationCase()) {
-            case JOBUPDATE:
-                JobUpdate jobUpdate = jobChangeNotification.getJobUpdate().toBuilder()
-                        .setJob(withStackName(jobChangeNotification.getJobUpdate().getJob()))
-                        .build();
-                return jobChangeNotification.toBuilder().setJobUpdate(jobUpdate).build();
-            default:
-                return jobChangeNotification;
+        if (jobChangeNotification.getNotificationCase() == JobChangeNotification.NotificationCase.JOBUPDATE) {
+            JobUpdate jobUpdate = jobChangeNotification.getJobUpdate().toBuilder()
+                    .setJob(withStackName(jobChangeNotification.getJobUpdate().getJob()))
+                    .build();
+            return jobChangeNotification.toBuilder().setJobUpdate(jobUpdate).build();
+        } else {
+            return jobChangeNotification;
         }
     }
 

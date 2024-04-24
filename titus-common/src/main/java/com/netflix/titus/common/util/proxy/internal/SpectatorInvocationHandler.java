@@ -123,15 +123,14 @@ public class SpectatorInvocationHandler<API, NATIVE> extends InterceptingInvocat
             ).increment();
             reportSubscriptionExecutionTime(method, methodExitTime, subscriptionTime);
 
-            Subscription subscription = result.doOnUnsubscribe(() -> {
+            Subscription subscription = result.doOnUnsubscribe(() ->
                 registry.counter(
                         RESULT_SUBSCRIPTION_COUNT_METRIC_NAME,
                         tags(
                                 "method", method.getName(),
                                 "subscriptionStage", "unsubscribed"
                         )
-                ).increment();
-            }).subscribe(
+                ).increment()).subscribe(
                     next -> {
                         registry.counter(
                                 RESULT_SUBSCRIPTION_EMITS_METRIC_NAME,
@@ -186,15 +185,14 @@ public class SpectatorInvocationHandler<API, NATIVE> extends InterceptingInvocat
             ).increment();
             reportSubscriptionExecutionTime(method, methodExitTime, subscriptionTime);
 
-            Disposable subscription = result.doOnCancel(() -> {
+            Disposable subscription = result.doOnCancel(() ->
                 registry.counter(
                         RESULT_SUBSCRIPTION_COUNT_METRIC_NAME,
                         tags(
                                 "method", method.getName(),
                                 "subscriptionStage", "unsubscribed"
                         )
-                ).increment();
-            }).subscribe(
+                ).increment()).subscribe(
                     next -> {
                         registry.counter(
                                 RESULT_SUBSCRIPTION_EMITS_METRIC_NAME,
@@ -308,15 +306,14 @@ public class SpectatorInvocationHandler<API, NATIVE> extends InterceptingInvocat
 
             AtomicBoolean emittedValue = new AtomicBoolean();
             Disposable subscription = result
-                    .doOnCancel(() -> {
+                    .doOnCancel(() ->
                         registry.counter(
                                 RESULT_SUBSCRIPTION_COUNT_METRIC_NAME,
                                 tags(
                                         "method", method.getName(),
                                         "subscriptionStage", "unsubscribed"
                                 )
-                        ).increment();
-                    }).subscribe(
+                        ).increment()).subscribe(
                             next -> {
                                 emittedValue.set(true);
                                 registry.counter(

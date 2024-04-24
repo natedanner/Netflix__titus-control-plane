@@ -111,8 +111,8 @@ public class GrpcJobQueryModelConverters extends CommonRuntimeGrpcModelConverter
         trimAndApplyIfNonEmpty(criteriaMap.get("jobGroupDetail"), criteriaBuilder::withJobGroupDetail);
         trimAndApplyIfNonEmpty(criteriaMap.get("jobGroupSequence"), criteriaBuilder::withJobGroupSequence);
 
-        criteriaBuilder.withNeedsMigration(criteriaMap.getOrDefault("needsMigration", "false").equalsIgnoreCase("true"));
-        criteriaBuilder.withSkipSystemFailures(criteriaMap.getOrDefault("skipSystemFailures", "false").equalsIgnoreCase("true"));
+        criteriaBuilder.withNeedsMigration("true".equalsIgnoreCase(criteriaMap.getOrDefault("needsMigration", "false")));
+        criteriaBuilder.withSkipSystemFailures("true".equalsIgnoreCase(criteriaMap.getOrDefault("skipSystemFailures", "false")));
 
         // Job state
         String jobStateStr = criteriaMap.get("jobState");
@@ -122,7 +122,7 @@ public class GrpcJobQueryModelConverters extends CommonRuntimeGrpcModelConverter
         String taskStatesStr = criteriaMap.get("taskStates");
         if (taskStatesStr != null) {
             List<TaskStatus.TaskState> taskStates = StringExt.parseEnumListIgnoreCase(taskStatesStr, TaskStatus.TaskState.class, n -> {
-                if (n.equalsIgnoreCase("any")) {
+                if ("any".equalsIgnoreCase(n)) {
                     return ALL_TASK_STATES;
                 }
                 return null;

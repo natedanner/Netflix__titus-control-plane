@@ -36,7 +36,7 @@ public class InstrumentedResourceMethodDispatchProvider implements ResourceMetho
     private final RestServerConfiguration config;
     private final Registry registry;
     private final ResourceMethodDispatchProvider provider;
-    private ClientInvocationMetrics clientInvocationMetrics;
+    private final ClientInvocationMetrics clientInvocationMetrics;
 
     public InstrumentedResourceMethodDispatchProvider(RestServerConfiguration config,
                                                       HostCallerIdResolver hostCallerIdResolver,

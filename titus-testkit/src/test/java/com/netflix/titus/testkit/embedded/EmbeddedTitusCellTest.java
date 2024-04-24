@@ -89,12 +89,11 @@ public class EmbeddedTitusCellTest {
                 .filter(t -> !matches(OK_THREADS, t.getName()))
                 .collect(Collectors.toSet());
 
-        CollectionsExt.copyAndRemove(titusRemainingThreads, threadsBefore).forEach(t -> {
+        CollectionsExt.copyAndRemove(titusRemainingThreads, threadsBefore).forEach(t ->
                     logger.info("Unexpected thread {}:\n{}",
                             t.getName(),
                             String.join("\n", Arrays.stream(t.getStackTrace()).map(e -> "  " + e).collect(Collectors.toList()))
-                    );
-                }
+                    )
         );
         assertThat(titusRemainingThreads).isSubsetOf(threadsBefore);
     }

@@ -18,9 +18,9 @@ package com.netflix.titus.api.jobmanager.model.job;
 
 
 public class ServiceJobProcesses {
-    private boolean disableIncreaseDesired;
+    private final boolean disableIncreaseDesired;
 
-    private boolean disableDecreaseDesired;
+    private final boolean disableDecreaseDesired;
 
     public ServiceJobProcesses(boolean disableIncreaseDesired, boolean disableDecreaseDesired) {
         this.disableIncreaseDesired = disableIncreaseDesired;
@@ -54,7 +54,7 @@ public class ServiceJobProcesses {
 
     @Override
     public int hashCode() {
-        int result = (disableIncreaseDesired ? 1 : 0);
+        int result = disableIncreaseDesired ? 1 : 0;
         result = 31 * result + (disableDecreaseDesired ? 1 : 0);
         return result;
     }

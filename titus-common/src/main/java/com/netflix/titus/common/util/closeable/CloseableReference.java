@@ -40,7 +40,7 @@ public interface CloseableReference<T> extends AutoCloseable {
     }
 
     static <T> CloseableReference<T> referenceOf(T value) {
-        return CloseableReference.<T>newBuilder()
+        return CloseableReference.newBuilder()
                 .withResource(value)
                 .withCloseAction(() -> {
                     // nothing
@@ -49,7 +49,7 @@ public interface CloseableReference<T> extends AutoCloseable {
     }
 
     static <T> CloseableReference<T> referenceOf(T value, Consumer<T> closeAction) {
-        return CloseableReference.<T>newBuilder()
+        return CloseableReference.newBuilder()
                 .withResource(value)
                 .withCloseAction(() -> closeAction.accept(value))
                 .build();

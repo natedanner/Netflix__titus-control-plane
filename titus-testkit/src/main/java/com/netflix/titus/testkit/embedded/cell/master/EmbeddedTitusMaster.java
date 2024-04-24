@@ -91,7 +91,7 @@ import rx.Observable;
 /**
  * Run TitusMaster server with mocked external integrations (Kubernetes, storage).
  */
-public class EmbeddedTitusMaster {
+public final class EmbeddedTitusMaster {
 
     private static final Logger logger = LoggerFactory.getLogger(EmbeddedTitusMaster.class);
 
@@ -99,7 +99,7 @@ public class EmbeddedTitusMaster {
 
     private final Properties properties;
     private final DefaultSettableConfig config;
-    private int apiPort;
+    private final int apiPort;
     private int grpcPort;
     private final boolean enableREST;
     private final boolean enableDisruptionBudget;
@@ -194,11 +194,10 @@ public class EmbeddedTitusMaster {
                                           return jobStore;
                                       }
                                       try {
-                                          JobStore jobStore = EmbeddedCassandraStoreFactory.newBuilder()
+                                          return EmbeddedCassandraStoreFactory.newBuilder()
                                                   .withTitusRuntime(titusRuntime)
                                                   .build()
                                                   .getJobStore();
-                                          return jobStore;
                                       } catch (Throwable e) {
                                           e.printStackTrace();
                                           return null;
@@ -227,11 +226,9 @@ public class EmbeddedTitusMaster {
         if (enableREST) {
             // Since jetty API server is run on a separate thread, it may not be ready yet
             // We do not have better way, but call it until it replies.
-            getClient().findAllApplicationSLA().retryWhen(attempts -> {
-                        return attempts.zipWith(Observable.range(1, 5), (n, i) -> i).flatMap(i -> {
+            getClient().findAllApplicationSLA().retryWhen(attempts -> attempts.zipWith(Observable.range(1, 5), (n, i) -> i).flatMap(i -> {
                             return Observable.timer(i, TimeUnit.SECONDS);
-                        });
-                    }
+                        })
             ).timeout(30, TimeUnit.SECONDS).toBlocking().firstOrDefault(null);
         }
 

@@ -72,6 +72,7 @@ public class ReactorHeadTransformerTest {
         // Wait until hot observable emits directly next item
         int currentTick = emittedTicks.size();
         while (emittedTicks.size() == currentTick && testSubscriber.isOpen()) {
+            continue;
         }
         testSubscriber.failIfClosed();
 
@@ -92,7 +93,7 @@ public class ReactorHeadTransformerTest {
         AtomicInteger errorCounter = new AtomicInteger();
         Disposable subscription = combined.subscribe(
                 next -> {
-                    if (next.equals("T3")) {
+                    if ("T3".equals(next)) {
                         throw new RuntimeException("simulated error");
                     }
                 },
@@ -101,6 +102,7 @@ public class ReactorHeadTransformerTest {
 
         // Wait until hot observable emits error
         while (!terminateFlag.get()) {
+            continue;
         }
 
         await().timeout(5, TimeUnit.SECONDS).until(subscription::isDisposed);

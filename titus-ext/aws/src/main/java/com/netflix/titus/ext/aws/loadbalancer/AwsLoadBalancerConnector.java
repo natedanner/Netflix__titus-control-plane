@@ -97,7 +97,7 @@ public class AwsLoadBalancerConnector implements LoadBalancerConnector {
                     logger.debug("Registered targets {}", resp);
                     connectorMetrics.success(AwsLoadBalancerConnectorMetrics.AwsLoadBalancerMethods.RegisterTargets, startTime);
                 },
-                (t) -> {
+                t -> {
                     logger.error("Error registering targets on " + loadBalancerId, t);
                     connectorMetrics.failure(AwsLoadBalancerConnectorMetrics.AwsLoadBalancerMethods.RegisterTargets, t, startTime);
                 }
@@ -127,7 +127,7 @@ public class AwsLoadBalancerConnector implements LoadBalancerConnector {
                     logger.debug("Deregistered targets {}", resp);
                     connectorMetrics.success(AwsLoadBalancerConnectorMetrics.AwsLoadBalancerMethods.DeregisterTargets, startTime);
                 },
-                (t) -> {
+                t -> {
                     logger.error("Error deregistering targets on " + loadBalancerId, t);
                     connectorMetrics.failure(AwsLoadBalancerConnectorMetrics.AwsLoadBalancerMethods.DeregisterTargets, t, startTime);
                 }
@@ -143,9 +143,8 @@ public class AwsLoadBalancerConnector implements LoadBalancerConnector {
         Single<DescribeTargetGroupsResult> resultSingle = AwsObservableExt.asyncActionSingle(supplier -> getClient(loadBalancerId).describeTargetGroupsAsync(request, supplier.handler()));
         return resultSingle
                 .observeOn(scheduler)
-                .doOnError(throwable -> {
-                    connectorMetrics.failure(AwsLoadBalancerConnectorMetrics.AwsLoadBalancerMethods.DescribeTargetGroups, throwable, startTime);
-                })
+                .doOnError(throwable ->
+                    connectorMetrics.failure(AwsLoadBalancerConnectorMetrics.AwsLoadBalancerMethods.DescribeTargetGroups, throwable, startTime))
                 .flatMapObservable(result -> {
                     connectorMetrics.success(AwsLoadBalancerConnectorMetrics.AwsLoadBalancerMethods.DescribeTargetGroups, startTime);
                     return Observable.from(result.getTargetGroups());

@@ -119,7 +119,7 @@ class DefaultJobManagementServiceGrpcMetrics {
         });
     }
 
-    private class StreamHolder {
+    private final class StreamHolder {
 
         private final String callerId;
         private final Counter eventsCounter;

@@ -221,7 +221,7 @@ public class FallbackJobServiceGateway implements JobServiceGateway {
 
     private <T> Observable<T> getFallbackObservable(String methodName, Observable<T> primary, Observable<T> secondary) {
         if (federationConfiguration.isRemoteFederationEnabled()) {
-            return primary.onErrorResumeNext( (t) -> {
+            return primary.onErrorResumeNext( t -> {
                 incrementFallbackCounter(methodName, t);
                 if (shouldFallback(t)) {
                     return secondary;

@@ -99,7 +99,7 @@ public abstract class TitusModelAction implements ModelAction {
                 .callMetadata(sourceChangeAction.getCallMetadata());
     }
 
-    public static class Builder {
+    public static final class Builder {
 
         private final String name;
         private String id;
@@ -161,7 +161,7 @@ public abstract class TitusModelAction implements ModelAction {
             return new TitusModelAction(name, trigger, id, summary, callMetadata) {
                 @Override
                 public Optional<Pair<EntityHolder, EntityHolder>> apply(EntityHolder rootHolder) {
-                    return taskHolderFun.apply(rootHolder).map(pair -> verify(pair));
+                    return taskHolderFun.apply(rootHolder).map(this::verify);
                 }
             };
         }

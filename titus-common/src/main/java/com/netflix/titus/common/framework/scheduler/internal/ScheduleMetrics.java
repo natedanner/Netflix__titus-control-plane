@@ -43,7 +43,7 @@ class ScheduleMetrics {
     private final Id runningId;
     private final Id cancellingId;
 
-    private FsmMetrics<SchedulingState> currentState;
+    private final FsmMetrics<SchedulingState> currentState;
     private Schedule lastSchedule;
 
     ScheduleMetrics(Schedule schedule, Clock clock, Registry registry) {

@@ -76,7 +76,7 @@ public class ZkLeaderVerificator {
                 .doOnNext(ref::set)
                 .subscribe();
         final AtomicInteger falseCount = new AtomicInteger(0);
-        final int MAX_FALSE_COUNTS = 10;
+        final int maxFalseCounts = 10;
         new ScheduledThreadPoolExecutor(1).scheduleWithFixedDelay(
                 new Runnable() {
                     @Override
@@ -88,7 +88,7 @@ public class ZkLeaderVerificator {
                                 if (ref.get() != null && !myHostname.equals(ref.get().getHostname()) && !myLocalIP.equals(ref.get().getHostname())) {
                                     foundFault = true;
                                     logger.warn("ZK says leader is " + ref.get().getHostname() + ", not us (" + myHostname + ")");
-                                    if (falseCount.incrementAndGet() > MAX_FALSE_COUNTS) {
+                                    if (falseCount.incrementAndGet() > maxFalseCounts) {
                                         logger.error("Too many attempts failed to verify ZK leader status, exiting!");
                                         SystemExt.forcedProcessExit(5);
                                     }

@@ -9,7 +9,7 @@ import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
 
 abstract class RemoteJobManagementService extends JobManagementServiceGrpc.JobManagementServiceImplBase {
-    volatile public AtomicLong createCount = new AtomicLong(0);
+    public volatile AtomicLong createCount = new AtomicLong(0);
     public UUID id = UUID.randomUUID();
 }
 

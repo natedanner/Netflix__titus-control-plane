@@ -122,8 +122,7 @@ public class JobGroupInfo {
         }
 
         public JobGroupInfo build() {
-            JobGroupInfo jobGroupInfo = new JobGroupInfo(stack, detail, sequence);
-            return jobGroupInfo;
+            return new JobGroupInfo(stack, detail, sequence);
         }
     }
 }

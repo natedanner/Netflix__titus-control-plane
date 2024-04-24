@@ -163,7 +163,7 @@ public class TestModel {
         }
     }
 
-    private static ThreadLocal<Boolean> fitStatus = new ThreadLocal<>();
+    private static final ThreadLocal<Boolean> fitStatus = new ThreadLocal<>();
 
     public static void setFit(boolean status) {
         fitStatus.set(status);

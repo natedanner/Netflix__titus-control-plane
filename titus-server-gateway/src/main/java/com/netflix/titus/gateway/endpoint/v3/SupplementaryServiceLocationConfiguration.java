@@ -43,9 +43,8 @@ public class SupplementaryServiceLocationConfiguration {
         Map<String, Map<String, String>> serviceProperties = PropertiesExt.groupByRootName(all, 1);
 
         Map<String, ServiceAddress> serviceMap = new HashMap<>();
-        serviceProperties.forEach((k, v) -> {
-            serviceMap.put(k, new ServiceAddress(v.get("host"), Integer.parseInt(v.get("grpcPort")), Integer.parseInt(v.get("httpPort"))));
-        });
+        serviceProperties.forEach((k, v) ->
+            serviceMap.put(k, new ServiceAddress(v.get("host"), Integer.parseInt(v.get("grpcPort")), Integer.parseInt(v.get("httpPort")))));
 
         this.serviceMap = Collections.unmodifiableMap(serviceMap);
     }
@@ -79,8 +78,12 @@ public class SupplementaryServiceLocationConfiguration {
 
         @Override
         public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
             ServiceAddress that = (ServiceAddress) o;
             return grpcPort == that.grpcPort &&
                     httpPort == that.httpPort &&

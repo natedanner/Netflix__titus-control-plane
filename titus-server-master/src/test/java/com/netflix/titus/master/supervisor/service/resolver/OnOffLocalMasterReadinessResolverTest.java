@@ -39,12 +39,12 @@ public class OnOffLocalMasterReadinessResolverTest {
 
     private static final Duration CHECK_INTERVAL = Duration.ofMillis(1);
 
-    private LocalMasterReadinessResolver delegate = Mockito.mock(LocalMasterReadinessResolver.class);
+    private final LocalMasterReadinessResolver delegate = Mockito.mock(LocalMasterReadinessResolver.class);
 
     private volatile boolean currentIsOn = true;
-    private Supplier<Boolean> isOnSupplier = () -> currentIsOn;
+    private final Supplier<Boolean> isOnSupplier = () -> currentIsOn;
 
-    private Supplier<ReadinessStatus> enforcedStatusSupplier = () -> TURNED_OFF;
+    private final Supplier<ReadinessStatus> enforcedStatusSupplier = () -> TURNED_OFF;
 
     private final EmitterProcessor<ReadinessStatus> delegateUpdatesProcessor = EmitterProcessor.create();
 

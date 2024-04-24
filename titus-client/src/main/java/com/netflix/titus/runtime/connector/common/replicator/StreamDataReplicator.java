@@ -131,9 +131,7 @@ public class StreamDataReplicator<SNAPSHOT extends ReplicatedSnapshot, TRIGGER> 
                     .autoConnect(2, publisherDisposable::set);
             newMonitoringSubscription(metrics, lastReplicatorEventRef, eventStream);
 
-            return eventStream.filter(e -> isFresh(e, titusRuntime)).take(1).map(e -> {
-                        return new StreamDataReplicator<>(eventStream, useCheckpointTimestamp, publisherDisposable.get(), lastReplicatorEventRef, titusRuntime);
-                    }
+            return eventStream.filter(e -> isFresh(e, titusRuntime)).take(1).map(e -> new StreamDataReplicator<>(eventStream, useCheckpointTimestamp, publisherDisposable.get(), lastReplicatorEventRef, titusRuntime)
             );
         });
     }

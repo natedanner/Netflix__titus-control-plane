@@ -142,7 +142,7 @@ public abstract class BindBuilderDataGenerator<BUILDER> extends DataGenerator.Bu
         }
     }
 
-    private static class MultiValueBindBuilderDataGenerator<B, BUILDER> extends BindBuilderDataGenerator<BUILDER> {
+    private static final class MultiValueBindBuilderDataGenerator<B, BUILDER> extends BindBuilderDataGenerator<BUILDER> {
         private final BindBuilderDataGenerator<BUILDER> domain;
         private final DataGenerator<B> codomain;
 

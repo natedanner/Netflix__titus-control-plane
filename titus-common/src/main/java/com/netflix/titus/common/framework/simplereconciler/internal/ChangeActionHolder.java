@@ -34,7 +34,7 @@ public final class ChangeActionHolder<DATA> {
     private final long createTimestamp;
     private final MonoSink<DATA> subscriberSink;
 
-    private AtomicBoolean cancelledRef = new AtomicBoolean();
+    private final AtomicBoolean cancelledRef = new AtomicBoolean();
     private final Queue<Disposable> cancelCallbacks = new ConcurrentLinkedQueue<>();
 
     public ChangeActionHolder(Function<DATA, Mono<Function<DATA, DATA>>> action,

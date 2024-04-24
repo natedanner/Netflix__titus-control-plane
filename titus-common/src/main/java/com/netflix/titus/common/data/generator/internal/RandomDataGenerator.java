@@ -24,7 +24,7 @@ import java.util.Random;
 import com.netflix.titus.common.data.generator.DataGenerator;
 import com.netflix.titus.common.util.tuple.Pair;
 
-public class RandomDataGenerator<A> extends DataGenerator<A> {
+public final class RandomDataGenerator<A> extends DataGenerator<A> {
 
     private static final double DEFAULT_DENSITY = 0.3;
     private static final int DEFAULT_INITIAL_CHUNK_SIZE = 10;

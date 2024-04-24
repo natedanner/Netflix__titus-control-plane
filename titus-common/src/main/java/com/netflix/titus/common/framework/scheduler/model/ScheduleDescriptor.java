@@ -27,7 +27,7 @@ import com.google.common.base.Preconditions;
 import com.netflix.titus.common.util.retry.Retryer;
 import com.netflix.titus.common.util.retry.Retryers;
 
-public class ScheduleDescriptor {
+public final class ScheduleDescriptor {
 
     private final String name;
     private final String description;

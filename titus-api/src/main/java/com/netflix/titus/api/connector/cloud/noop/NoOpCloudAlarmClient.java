@@ -26,7 +26,7 @@ import rx.Completable;
 import rx.Observable;
 
 public class NoOpCloudAlarmClient implements CloudAlarmClient {
-    private static Logger log = LoggerFactory.getLogger(NoOpCloudAlarmClient.class);
+    private static final Logger log = LoggerFactory.getLogger(NoOpCloudAlarmClient.class);
 
     @Override
     public Observable<String> createOrUpdateAlarm(String policyRefId, String jobId,

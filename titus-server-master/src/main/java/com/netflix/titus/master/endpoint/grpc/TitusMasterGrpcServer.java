@@ -202,7 +202,7 @@ public class TitusMasterGrpcServer {
      * Override to add server side interceptors.
      */
     protected List<ServerInterceptor> createInterceptors(ServiceDescriptor serviceDescriptor) {
-        List<ServerInterceptor> interceptors = new ArrayList<ServerInterceptor>();
+        List<ServerInterceptor> interceptors = new ArrayList<>();
         interceptors.add(admissionControllerServerInterceptor);
         interceptors.add(new ErrorCatchingServerInterceptor());
         interceptors.add(leaderServerInterceptor);

@@ -37,45 +37,45 @@ public class ObservableExtTest {
 
     private final ExtTestSubscriber<Object> testSubscriber = new ExtTestSubscriber<>();
 
-    private final Object A = new Object(),
-            B = new Object(),
-            C = new Object(),
-            D = new Object(),
-            E = new Object(),
-            F = new Object();
+    private final Object a = new Object();
+    private final Object b = new Object();
+    private final Object c = new Object();
+    private final Object d = new Object();
+    private final Object e = new Object();
+    private final Object f = new Object();
 
     @Test
     public void testFromWithDelayEmpty() {
         final List<Observable<Object>> chunks = Collections.emptyList();
         Observable<Object> observable = ObservableExt.fromWithDelay(chunks, DELAY_MS, TimeUnit.MILLISECONDS, testScheduler);
-        observable = observable.defaultIfEmpty(B);
+        observable = observable.defaultIfEmpty(b);
 
         observable.subscribe(testSubscriber);
 
-        assertThat(testSubscriber.takeNext()).isSameAs(B);
+        assertThat(testSubscriber.takeNext()).isSameAs(b);
         assertThat(testSubscriber.takeNext()).isNull();
     }
 
     @Test
     public void testFromWithDelaySingle() {
-        final List<Observable<Object>> chunks = Collections.singletonList(Observable.just(A));
+        final List<Observable<Object>> chunks = Collections.singletonList(Observable.just(a));
         Observable<Object> observable = ObservableExt.fromWithDelay(chunks, DELAY_MS, TimeUnit.MILLISECONDS, testScheduler);
-        observable = observable.defaultIfEmpty(B);
+        observable = observable.defaultIfEmpty(b);
 
         observable.subscribe(testSubscriber);
 
-        assertThat(testSubscriber.takeNext()).isSameAs(A);
+        assertThat(testSubscriber.takeNext()).isSameAs(a);
         assertThat(testSubscriber.takeNext()).isNull();
     }
 
     @Test
     public void testFromWithDelayMultiple() {
         final List<Observable<Object>> chunks = Arrays.asList(
-                Observable.just(A).delay(1, TimeUnit.MILLISECONDS, testScheduler),
-                Observable.just(B, C, D),
-                Observable.just(E));
+                Observable.just(a).delay(1, TimeUnit.MILLISECONDS, testScheduler),
+                Observable.just(b, c, d),
+                Observable.just(e));
         Observable<Object> observable = ObservableExt.fromWithDelay(chunks, DELAY_MS, TimeUnit.MILLISECONDS, testScheduler);
-        observable = observable.defaultIfEmpty(B);
+        observable = observable.defaultIfEmpty(b);
 
         observable.subscribe(testSubscriber);
 
@@ -87,25 +87,25 @@ public class ObservableExtTest {
         testScheduler.advanceTimeBy(1, TimeUnit.MILLISECONDS);
         // Now that we've waited the 1 ms delay, A should be available. Note
         // that fromWithDelay() should not delay the first element by DELAY_MS.
-        assertThat(testSubscriber.takeNext()).isSameAs(A);
+        assertThat(testSubscriber.takeNext()).isSameAs(a);
         assertThat(testSubscriber.takeNext()).isNull();
 
         testScheduler.advanceTimeBy(DELAY_MS, TimeUnit.MILLISECONDS);
-        assertThat(testSubscriber.takeNext()).isSameAs(B);
-        assertThat(testSubscriber.takeNext()).isSameAs(C);
-        assertThat(testSubscriber.takeNext()).isSameAs(D);
+        assertThat(testSubscriber.takeNext()).isSameAs(b);
+        assertThat(testSubscriber.takeNext()).isSameAs(c);
+        assertThat(testSubscriber.takeNext()).isSameAs(d);
         assertThat(testSubscriber.takeNext()).isNull();
 
         testScheduler.advanceTimeBy(DELAY_MS, TimeUnit.MILLISECONDS);
-        assertThat(testSubscriber.takeNext()).isSameAs(E);
+        assertThat(testSubscriber.takeNext()).isSameAs(e);
         assertThat(testSubscriber.takeNext()).isNull();
     }
 
     @Test
     public void testFromWithDelayHundreds() {
-        final int NUM_CHUNKS_TO_TEST = 300;
-        final List<Observable<Integer>> chunks = new ArrayList<>(NUM_CHUNKS_TO_TEST);
-        for (int i = 0; i < NUM_CHUNKS_TO_TEST; ++i) {
+        final int numChunksToTest = 300;
+        final List<Observable<Integer>> chunks = new ArrayList<>(numChunksToTest);
+        for (int i = 0; i < numChunksToTest; ++i) {
             chunks.add(Observable.just(i).delay(1000, TimeUnit.MILLISECONDS, testScheduler));
         }
         Observable<Integer> observable = ObservableExt.fromWithDelay(chunks, DELAY_MS, TimeUnit.MILLISECONDS, testScheduler);
@@ -115,8 +115,10 @@ public class ObservableExtTest {
 
         assertThat(testSubscriber.takeNext()).isNull();
 
-        for (int i = 0; i < NUM_CHUNKS_TO_TEST; ++i) {
-            if (i > 0) testScheduler.advanceTimeBy(DELAY_MS, TimeUnit.MILLISECONDS);
+        for (int i = 0; i < numChunksToTest; ++i) {
+            if (i > 0) {
+                testScheduler.advanceTimeBy(DELAY_MS, TimeUnit.MILLISECONDS);
+            }
             testScheduler.advanceTimeBy(1000, TimeUnit.MILLISECONDS);
             assertThat(testSubscriber.takeNext()).isEqualTo(i);
             assertThat(testSubscriber.takeNext()).isNull();

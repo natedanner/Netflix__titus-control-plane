@@ -79,28 +79,27 @@ public class InstrumentedRequestDispatcher implements RequestDispatcher {
         result.append("An error occurred during an HTTP request:\r\n");
         if (request != null) {
             String bodyLengthString = request.getHeaderValue("Content-Length");
-            result.append("Request Path: " + request.getMethod().toUpperCase() + " " + request.getRequestUri().toString() + "\r\n");
-            result.append("Request Content-Length: " + bodyLengthString + "\r\n");
-            result.append("Request Headers:\r\n" + request.getRequestHeaders()
+            result.append("Request Path: ").append(request.getMethod().toUpperCase()).append(" ").append(request.getRequestUri().toString()).append("\r\n");
+            result.append("Request Content-Length: ").append(bodyLengthString).append("\r\n");
+            result.append("Request Headers:\r\n").append(request.getRequestHeaders()
                     .entrySet()
                     .stream()
                     .map(entry -> "\t" + entry.getKey() + ": " + entry.getValue() + "\r\n")
-                    .collect(Collectors.joining())
-            );
+                    .collect(Collectors.joining()));
 
             long bodyLength = Strings.isNullOrEmpty(bodyLengthString) ? 0 : Long.parseLong(bodyLengthString);
             if (bodyLength > 0 && ((ContainerRequest) request).getEntityInputStream().markSupported()) {
                 try {
                     ((ContainerRequest) request).getEntityInputStream().reset();
-                    result.append("Request Body:\r\n" + request.getEntity(String.class) + "\r\n");
+                    result.append("Request Body:\r\n").append(request.getEntity(String.class)).append("\r\n");
                 } catch (Exception ignore) {
                 }
             }
         }
 
-        result.append("Error response http code: " + response.getStatus() + "\r\n");
-        result.append("Error message: " + e.getMessage() + "\r\n");
-        result.append("Error stack trace :\r\n" + Throwables.getStackTraceAsString(e) + "\r\n");
+        result.append("Error response http code: ").append(response.getStatus()).append("\r\n");
+        result.append("Error message: ").append(e.getMessage()).append("\r\n");
+        result.append("Error stack trace :\r\n").append(Throwables.getStackTraceAsString(e)).append("\r\n");
 
         return result.toString();
     }

@@ -90,7 +90,7 @@ class FluxMethodBridge<GRPC_STUB extends AbstractStub<GRPC_STUB>, CONTEXT> imple
         return streamingResponse ? publisher : publisher.timeout(reactorTimeout);
     }
 
-    private class FluxInvocation {
+    private final class FluxInvocation {
 
         private FluxInvocation(FluxSink<Object> sink, Object[] args) {
             StreamObserver<Object> grpcStreamObserver = new ClientResponseObserver<Object, Object>() {

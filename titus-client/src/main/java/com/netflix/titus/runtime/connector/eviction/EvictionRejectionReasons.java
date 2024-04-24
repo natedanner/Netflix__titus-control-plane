@@ -4,7 +4,7 @@ public enum EvictionRejectionReasons {
     LIMIT_EXCEEDED("System eviction quota limit exceeded"),
     SYSTEM_WINDOW_CLOSED("Outside system time window");
 
-    private String reasonMessage;
+    private final String reasonMessage;
 
     EvictionRejectionReasons(String reasonMessage) {
         this.reasonMessage = reasonMessage;

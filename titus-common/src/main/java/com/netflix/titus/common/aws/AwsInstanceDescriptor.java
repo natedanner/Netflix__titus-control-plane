@@ -21,16 +21,16 @@ package com.netflix.titus.common.aws;
  */
 public final class AwsInstanceDescriptor {
 
-    private String id;
-    private int vCPUs;
-    private int vGPUs;
-    private int memoryGB;
+    private final String id;
+    private final int vCPUs;
+    private final int vGPUs;
+    private final int memoryGB;
 
-    private int storageGB;
-    private boolean ebsOnly;
+    private final int storageGB;
+    private final boolean ebsOnly;
 
-    private int networkMbs;
-    private int ebsBandwidthMbs;
+    private final int networkMbs;
+    private final int ebsBandwidthMbs;
 
     AwsInstanceDescriptor(Builder builder) {
         this.id = builder.id;

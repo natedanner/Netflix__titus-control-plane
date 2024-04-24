@@ -124,7 +124,7 @@ class ProtobufCache<E, C> {
         });
     }
 
-    private static class CacheEntry<C, G> {
+    private static final class CacheEntry<C, G> {
 
         private final String id;
         private final C coreEntity;

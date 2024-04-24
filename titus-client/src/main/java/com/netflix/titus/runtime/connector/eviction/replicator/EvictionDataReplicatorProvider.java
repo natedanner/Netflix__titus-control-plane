@@ -92,7 +92,7 @@ public class EvictionDataReplicatorProvider implements Provider<EvictionDataRepl
         }
     }
 
-    private static class EvictionDataReplicatorMetrics extends DataReplicatorMetrics<EvictionDataSnapshot, EvictionEvent> {
+    private static final class EvictionDataReplicatorMetrics extends DataReplicatorMetrics<EvictionDataSnapshot, EvictionEvent> {
 
         private EvictionDataReplicatorMetrics(String source, TitusRuntime titusRuntime) {
             super(source, false, titusRuntime);

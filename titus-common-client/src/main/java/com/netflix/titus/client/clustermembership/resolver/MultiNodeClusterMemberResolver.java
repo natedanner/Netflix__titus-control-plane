@@ -209,7 +209,7 @@ public class MultiNodeClusterMemberResolver implements ClusterMemberResolver {
     }
 
     private ClusterMembershipRevision<ClusterMember> findBestMemberRevision(List<ClusterMembershipRevision<ClusterMember>> singleMemberVersions) {
-        Preconditions.checkArgument(singleMemberVersions.size() > 0);
+        Preconditions.checkArgument(!singleMemberVersions.isEmpty());
 
         Iterator<ClusterMembershipRevision<ClusterMember>> it = singleMemberVersions.iterator();
         ClusterMembershipRevision<ClusterMember> best = it.next();
@@ -311,9 +311,8 @@ public class MultiNodeClusterMemberResolver implements ClusterMemberResolver {
 
     private void report(ClusterMembershipSnapshot newSnapshot) {
         if (lastReportedSnapshot == null) {
-            newSnapshot.getMemberRevisions().forEach((memberId, revision) -> {
-                logger.info("Discovered new cluster member: id={}, addresses={}", memberId, revision.getCurrent().getClusterMemberAddresses());
-            });
+            newSnapshot.getMemberRevisions().forEach((memberId, revision) ->
+                logger.info("Discovered new cluster member: id={}, addresses={}", memberId, revision.getCurrent().getClusterMemberAddresses()));
             if (newSnapshot.getLeaderRevision().isPresent()) {
                 logger.info("Cluster leader is {}", newSnapshot.getLeaderRevision().get().getCurrent().getMemberId());
             } else {

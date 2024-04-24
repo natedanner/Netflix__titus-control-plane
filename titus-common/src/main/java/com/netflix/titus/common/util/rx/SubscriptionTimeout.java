@@ -56,7 +56,7 @@ class SubscriptionTimeout<T> implements Observable.Operator<T, T> {
 
     @Override
     public Subscriber<? super T> call(Subscriber<? super T> downstream) {
-        TimeoutSubscriber<T> upstream = new TimeoutSubscriber<T>(downstream, timeout.get(), unit);
+        TimeoutSubscriber<T> upstream = new TimeoutSubscriber<>(downstream, timeout.get(), unit);
         downstream.add(upstream);
         downstream.setProducer(upstream.arbiter);
 

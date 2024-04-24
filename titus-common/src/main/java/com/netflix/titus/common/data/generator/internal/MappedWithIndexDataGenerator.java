@@ -21,7 +21,7 @@ import java.util.function.BiFunction;
 
 import com.netflix.titus.common.data.generator.DataGenerator;
 
-public class MappedWithIndexDataGenerator<A, B> extends DataGenerator<B> {
+public final class MappedWithIndexDataGenerator<A, B> extends DataGenerator<B> {
 
     private final DataGenerator<A> sourceGenerator;
     private final BiFunction<Long, A, B> transformer;

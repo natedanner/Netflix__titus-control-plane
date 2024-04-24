@@ -260,12 +260,7 @@ public class TaskScenarioBuilder {
     public TaskScenarioBuilder expectAllTasksInKube() {
         Task task = getTask();
         logger.info("[{}] Expecting task {} Kube", discoverActiveTest(), task.getId());
-
-        try {
-            await().timeout(TIMEOUT_MS, TimeUnit.MILLISECONDS).until(() -> kubeCluster.getPods().containsKey(task.getId()));
-        } catch (Exception e) {
-            throw e;
-        }
+        await().timeout(TIMEOUT_MS, TimeUnit.MILLISECONDS).until(() -> kubeCluster.getPods().containsKey(task.getId()));
         return this;
     }
 

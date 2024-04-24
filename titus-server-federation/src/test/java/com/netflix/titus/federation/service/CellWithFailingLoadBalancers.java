@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
 
 class CellWithFailingLoadBalancers extends LoadBalancerServiceGrpc.LoadBalancerServiceImplBase {
     private static final Logger logger = LoggerFactory.getLogger(CellWithFailingLoadBalancers.class);
-    private Status errorStatus;
+    private final Status errorStatus;
 
     CellWithFailingLoadBalancers(Status errorStatus) {
         this.errorStatus = errorStatus;

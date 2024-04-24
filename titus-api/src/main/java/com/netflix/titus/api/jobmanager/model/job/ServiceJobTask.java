@@ -112,7 +112,7 @@ public class ServiceJobTask extends Task {
         return new Builder(serviceJobTask);
     }
 
-    public static class Builder extends TaskBuilder<ServiceJobTask, Builder> {
+    public static final class Builder extends TaskBuilder<ServiceJobTask, Builder> {
 
         private MigrationDetails migrationDetails;
 

@@ -35,7 +35,7 @@ public abstract class AbstractConstraintValidator<A extends Annotation, T> imple
     }
 
     @Override
-    final public boolean isValid(T type, ConstraintValidatorContext context) {
+    public final boolean isValid(T type, ConstraintValidatorContext context) {
         return this.isValid(type, message -> {
             String sanitizedMessage = sanitizeMessage(message);
             return context.buildConstraintViolationWithTemplate(sanitizedMessage);
@@ -51,6 +51,6 @@ public abstract class AbstractConstraintValidator<A extends Annotation, T> imple
      * @param constraintViolationBuilderFunction function to apply with a violation message string
      * @return validation status
      */
-    abstract protected boolean isValid(T type, Function<String, ConstraintValidatorContext.ConstraintViolationBuilder> constraintViolationBuilderFunction);
+    protected abstract boolean isValid(T type, Function<String, ConstraintValidatorContext.ConstraintViolationBuilder> constraintViolationBuilderFunction);
 
 }

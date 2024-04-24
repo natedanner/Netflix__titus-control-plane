@@ -30,7 +30,7 @@ import com.netflix.titus.common.model.sanitizer.internal.DefaultEntitySanitizer;
 /**
  * {@link EntitySanitizer} builder.
  */
-public class EntitySanitizerBuilder {
+public final class EntitySanitizerBuilder {
 
     public interface SanitizationFunction<T> extends Function<T, Optional<Object>> {
     }

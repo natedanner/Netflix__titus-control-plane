@@ -40,7 +40,7 @@ public class EmbeddedKubeUtil {
 
     private static final MutableDataGenerator<String> IP_ADDRESS_GENERATOR = new MutableDataGenerator<>(PrimitiveValueGenerators.ipv4CIDRs("10.0.0.0/24"));
 
-    public synchronized static String nextIpAddress() {
+    public static synchronized String nextIpAddress() {
         return IP_ADDRESS_GENERATOR.getValue();
     }
 

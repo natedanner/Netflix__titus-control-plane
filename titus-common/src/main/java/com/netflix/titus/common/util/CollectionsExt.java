@@ -636,7 +636,7 @@ public final class CollectionsExt {
         return Arrays.asList(items).iterator();
     }
 
-    public static class MapBuilder<K, V> {
+    public static final class MapBuilder<K, V> {
 
         private final Map<K, V> out;
 

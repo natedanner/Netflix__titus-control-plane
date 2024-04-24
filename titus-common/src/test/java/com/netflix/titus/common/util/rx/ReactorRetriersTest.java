@@ -34,7 +34,7 @@ public class ReactorRetriersTest {
         AtomicBoolean retryRef = new AtomicBoolean();
         Iterator<Signal<String>> it = Flux.fromArray(new String[]{"a", "b", "c"})
                 .flatMap(value -> {
-                    if (value.equals("b")) {
+                    if ("b".equals(value)) {
                         return Mono.error(new RuntimeException("simulated error"));
                     }
                     return Mono.just(value);

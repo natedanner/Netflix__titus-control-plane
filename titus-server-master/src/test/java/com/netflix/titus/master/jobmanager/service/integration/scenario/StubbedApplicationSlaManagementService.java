@@ -45,7 +45,7 @@ class StubbedApplicationSlaManagementService implements ApplicationSlaManagement
 
     @Override
     public ApplicationSLA getApplicationSLA(String applicationName) {
-        return applicationName.equals("DEFAULT") ? DEFAULT : null;
+        return "DEFAULT".equals(applicationName) ? DEFAULT : null;
     }
 
     @Override

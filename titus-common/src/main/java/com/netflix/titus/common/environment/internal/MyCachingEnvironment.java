@@ -122,7 +122,7 @@ public class MyCachingEnvironment implements MyEnvironment, Closeable {
         return value == null ? defaultValue : value;
     }
 
-    private static class ValueHolder {
+    private static final class ValueHolder {
 
         private final String value;
 

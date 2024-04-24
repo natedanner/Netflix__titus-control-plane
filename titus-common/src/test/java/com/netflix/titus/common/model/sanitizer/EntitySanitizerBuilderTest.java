@@ -28,7 +28,7 @@ public class EntitySanitizerBuilderTest {
 
     private final EntitySanitizer sanitizer = EntitySanitizerBuilder.stdBuilder()
             .processEntities(type -> !isStandardDataType(type))
-            .addTemplateResolver(path -> path.equals("child.childName") ? Optional.of("GuestChild") : Optional.empty())
+            .addTemplateResolver(path -> "child.childName".equals(path) ? Optional.of("GuestChild") : Optional.empty())
             .registerFunction("fit", TestModel.getFitMethod())
             .registerBean("myObj", new TestModel.SampleValidationMethods("test"))
             .build();

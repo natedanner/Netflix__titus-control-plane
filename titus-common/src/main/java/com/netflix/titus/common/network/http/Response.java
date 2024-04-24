@@ -17,12 +17,12 @@
 package com.netflix.titus.common.network.http;
 
 public class Response {
-    private Request request;
-    private Headers headers;
-    private StatusCode statusCode;
-    private ResponseBody body;
-    private long sentRequestAtMillis;
-    private long receivedResponseAtMillis;
+    private final Request request;
+    private final Headers headers;
+    private final StatusCode statusCode;
+    private final ResponseBody body;
+    private final long sentRequestAtMillis;
+    private final long receivedResponseAtMillis;
 
     Response(Builder builder) {
         this.request = builder.request;

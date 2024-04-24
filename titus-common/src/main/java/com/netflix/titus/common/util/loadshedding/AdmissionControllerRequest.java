@@ -18,7 +18,7 @@ package com.netflix.titus.common.util.loadshedding;
 
 import java.util.Objects;
 
-public class AdmissionControllerRequest {
+public final class AdmissionControllerRequest {
 
     private final String endpointName;
     private final String callerId;

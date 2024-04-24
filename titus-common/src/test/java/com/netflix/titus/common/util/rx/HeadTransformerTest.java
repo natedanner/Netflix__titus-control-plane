@@ -70,6 +70,7 @@ public class HeadTransformerTest {
         // Wait until hot observable emits directly next item
         int currentTick = emittedTicks.size();
         while (emittedTicks.size() == currentTick) {
+            continue;
         }
         int checkedCount = HEAD_ITEMS.size() + currentTick + 1;
         List<String> checkedSequence = testSubscriber.takeNext(checkedCount, 5, TimeUnit.SECONDS);
@@ -89,7 +90,7 @@ public class HeadTransformerTest {
         AtomicInteger errorCounter = new AtomicInteger();
         Subscription subscription = combined.subscribe(
                 next -> {
-                    if (next.equals("T3")) {
+                    if ("T3".equals(next)) {
                         throw new RuntimeException("simulated error");
                     }
                 },
@@ -98,6 +99,7 @@ public class HeadTransformerTest {
 
         // Wait until hot observable emits error
         while (!terminateFlag.get()) {
+            continue;
         }
 
         assertThat(terminateFlag.get()).isTrue();

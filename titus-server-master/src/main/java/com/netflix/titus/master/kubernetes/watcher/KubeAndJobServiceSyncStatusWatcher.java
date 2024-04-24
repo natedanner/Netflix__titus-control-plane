@@ -113,7 +113,7 @@ public class KubeAndJobServiceSyncStatusWatcher {
                     .withDescription("Compare Kube pod state with Titus job service")
                     .withInitialDelay(Duration.ofSeconds(60))
                     .withInterval(Duration.ofSeconds(10))
-                    .withTimeout(Duration.ofSeconds((60)))
+                    .withTimeout(Duration.ofSeconds(60))
                     .build();
 
             this.schedulerRef = titusRuntime.getLocalScheduler().schedule(

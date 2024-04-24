@@ -46,7 +46,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class DefaultLoadBalancerJobValidatorTest {
-    private static Logger logger = LoggerFactory.getLogger(DefaultLoadBalancerJobValidatorTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(DefaultLoadBalancerJobValidatorTest.class);
 
     private static final long TIMEOUT_MS = 30_000;
 

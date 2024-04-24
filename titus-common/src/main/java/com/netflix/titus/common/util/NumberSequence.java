@@ -123,7 +123,7 @@ public abstract class NumberSequence {
         }
     }
 
-    private static class ValuesSequence extends NumberSequence {
+    private static final class ValuesSequence extends NumberSequence {
 
         private final List<Long> numbers;
 
@@ -162,7 +162,7 @@ public abstract class NumberSequence {
         }
     }
 
-    private static class RangeSequence extends NumberSequence {
+    private static final class RangeSequence extends NumberSequence {
         private final long from;
         private final long to;
         private final long step;
@@ -236,7 +236,7 @@ public abstract class NumberSequence {
         }
     }
 
-    private static class CompositeSequence extends NumberSequence {
+    private static final class CompositeSequence extends NumberSequence {
 
         private final List<NumberSequence> subsequences;
         private final long count;

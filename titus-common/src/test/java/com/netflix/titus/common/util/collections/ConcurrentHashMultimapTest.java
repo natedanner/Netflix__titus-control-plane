@@ -304,9 +304,8 @@ public class ConcurrentHashMultimapTest {
 
     @Test
     public void concurrentPutAllMultimap() throws Exception {
-        ListMultimap<String, TestEntity> allGenerated = randomEntriesInMultipleThreads(itemsPerThread -> {
-            multiMap.putAll(itemsPerThread);
-        });
+        ListMultimap<String, TestEntity> allGenerated = randomEntriesInMultipleThreads(itemsPerThread ->
+            multiMap.putAll(itemsPerThread));
         assertThat(multiMap.keySet()).hasSize(allGenerated.keySet().size());
         allGenerated.entries().forEach(
                 entry -> assertThat(multiMap.containsEntry(entry.getKey(), entry.getValue())).isTrue()
@@ -315,11 +314,10 @@ public class ConcurrentHashMultimapTest {
 
     @Test
     public void concurrentPutAllPerKey() throws Exception {
-        ListMultimap<String, TestEntity> allGenerated = randomEntriesInMultipleThreads(itemsPerThread -> {
+        ListMultimap<String, TestEntity> allGenerated = randomEntriesInMultipleThreads(itemsPerThread ->
             itemsPerThread.asMap().forEach(
                     (key, values) -> multiMap.putAll(key, values)
-            );
-        });
+            ));
         assertThat(multiMap.keySet()).hasSize(allGenerated.keySet().size());
         allGenerated.entries().forEach(
                 entry -> assertThat(multiMap.containsEntry(entry.getKey(), entry.getValue())).isTrue()
@@ -328,11 +326,10 @@ public class ConcurrentHashMultimapTest {
 
     @Test
     public void concurrentPut() throws Exception {
-        ListMultimap<String, TestEntity> allGenerated = randomEntriesInMultipleThreads(itemsPerThread -> {
+        ListMultimap<String, TestEntity> allGenerated = randomEntriesInMultipleThreads(itemsPerThread ->
             itemsPerThread.entries().forEach(
                     entry -> multiMap.put(entry.getKey(), entry.getValue())
-            );
-        });
+            ));
         assertThat(multiMap.keySet()).hasSize(allGenerated.keySet().size());
         allGenerated.entries().forEach(
                 entry -> assertThat(multiMap.containsEntry(entry.getKey(), entry.getValue())).isTrue()

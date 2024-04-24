@@ -47,7 +47,7 @@ public class RetryActionInterceptorTest {
 
     private static final Retryer RETRY_POLICY = Retryers.exponentialBackoff(INITIAL_DELAY_MS, MAX_DELAY_MS, TimeUnit.MILLISECONDS, RETRY_LIMIT);
 
-    private TestScheduler testScheduler = Schedulers.test();
+    private final TestScheduler testScheduler = Schedulers.test();
 
     private final RetryActionInterceptor retryInterceptor = new RetryActionInterceptor(ATTR_NAME, RETRY_POLICY, testScheduler);
 

@@ -59,9 +59,8 @@ public class EmbeddedStdKubeApiFacade implements StdKubeApiFacade {
 
     @Override
     public Mono<V1Pod> createNamespacedPodAsync(String namespace, V1Pod pod) {
-        return Mono.fromRunnable(() -> {
-            embeddedKubeCluster.addPod(pod);
-        });
+        return Mono.fromRunnable(() ->
+            embeddedKubeCluster.addPod(pod));
     }
 
     @Override

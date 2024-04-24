@@ -64,7 +64,7 @@ public class BatchJobSchedulingTest {
         jobsScenarioBuilder.scheduleJob(twoTaskJob, jobScenario -> jobScenario
                 .expectJobEvent()
                 .advance()
-                .inActiveTasks((taskIdx, resubmit) -> ScenarioTemplates.acceptTask(taskIdx, resubmit))
+                .inActiveTasks(ScenarioTemplates::acceptTask)
                 .inActiveTasks((taskIdx, resubmit) -> ScenarioTemplates.startTask(taskIdx, resubmit, TaskState.Started))
                 .inActiveTasks((taskIdx, resubmit) -> ScenarioTemplates.triggerComputeProviderFinishedEvent(taskIdx, resubmit, 0))
                 .template(ScenarioTemplates.verifyJobWithFinishedTasksCompletes())
@@ -119,7 +119,7 @@ public class BatchJobSchedulingTest {
         jobsScenarioBuilder.scheduleJob(twoTaskJob, jobScenario -> jobScenario
                 .expectJobEvent()
                 .advance()
-                .inActiveTasks((taskIdx, resubmit) -> ScenarioTemplates.acceptTask(taskIdx, resubmit))
+                .inActiveTasks(ScenarioTemplates::acceptTask)
                 .inActiveTasks((taskIdx, resubmit) -> ScenarioTemplates.startTask(taskIdx, resubmit, TaskState.Started))
                 .template(ScenarioTemplates.triggerComputeProviderFinishedEvent(0, 0, 0))
                 .template(ScenarioTemplates.triggerComputeProviderFinishedEvent(1, 0, -1))
@@ -279,7 +279,7 @@ public class BatchJobSchedulingTest {
         jobsScenarioBuilder.scheduleJob(JobFunctions.changeBatchJobSize(oneTaskBatchJobDescriptor(), 100), jobScenario -> jobScenario
                 .expectJobEvent()
                 .advance()
-                .inActiveTasks((taskIdx, resubmit) -> ScenarioTemplates.acceptTask(taskIdx, resubmit))
+                .inActiveTasks(ScenarioTemplates::acceptTask)
                 .inActiveTasks((taskIdx, resubmit) -> ScenarioTemplates.startTask(taskIdx, resubmit, TaskState.Started))
                 .advance()
                 .allTasks(tasks -> assertThat(tasks.size() > CONCURRENT_STORE_UPDATE_LIMIT).isTrue())

@@ -54,7 +54,7 @@ import static com.netflix.titus.grpc.protogen.ScalingPolicy.ScalingPolicyDescrip
  * values are set.
  */
 public class InternalModelConverters {
-    private static Logger log = LoggerFactory.getLogger(InternalModelConverters.class);
+    private static final Logger log = LoggerFactory.getLogger(InternalModelConverters.class);
 
     public static AutoScalingPolicy toAutoScalingPolicy(PutPolicyRequest putPolicyRequestGrpc) {
         AutoScalingPolicy.Builder autoScalingPolicyBuilder = AutoScalingPolicy.newBuilder();
@@ -150,7 +150,7 @@ public class InternalModelConverters {
         if (customizedMetricSpecGrpc.getStatisticOneofCase() != STATISTICONEOF_NOT_SET) {
             customizedMetricSpecBuilder.withStatistic(toStatistic(customizedMetricSpecGrpc.getStatistic()));
         }
-        if (!customizedMetricSpecGrpc.getUnit().equals("")) {
+        if (!"".equals(customizedMetricSpecGrpc.getUnit())) {
             customizedMetricSpecBuilder
                     .withUnit(customizedMetricSpecGrpc.getUnit());
         }
@@ -235,9 +235,8 @@ public class InternalModelConverters {
 
     private static List<StepAdjustment> toStepAdjustmentList(List<StepAdjustments> stepAdjustmentsGrpcList) {
         List<StepAdjustment> stepAdjustmentList = new ArrayList<>();
-        stepAdjustmentsGrpcList.forEach((stepAdjustments) -> {
-            stepAdjustmentList.add(toStepAdjustment(stepAdjustments));
-        });
+        stepAdjustmentsGrpcList.forEach(stepAdjustments ->
+            stepAdjustmentList.add(toStepAdjustment(stepAdjustments)));
         return stepAdjustmentList;
     }
 

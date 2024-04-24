@@ -50,7 +50,7 @@ public class KubeApiException extends RuntimeException {
         if (e.getMessage().equalsIgnoreCase(NOT_FOUND)) {
             return ErrorCode.NOT_FOUND;
         }
-        if (e.getCode() == 409 && e.getMessage().equals("Conflict") && e.getResponseBody().contains("AlreadyExists")) {
+        if (e.getCode() == 409 && "Conflict".equals(e.getMessage()) && e.getResponseBody().contains("AlreadyExists")) {
             return ErrorCode.CONFLICT_ALREADY_EXISTS;
         }
         return ErrorCode.INTERNAL;

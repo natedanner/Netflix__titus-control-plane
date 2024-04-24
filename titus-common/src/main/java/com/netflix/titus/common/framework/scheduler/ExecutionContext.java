@@ -21,7 +21,7 @@ import java.util.Optional;
 import com.netflix.titus.common.framework.scheduler.model.ExecutionId;
 import com.netflix.titus.common.framework.scheduler.model.ScheduledAction;
 
-public class ExecutionContext {
+public final class ExecutionContext {
 
     private final String id;
     private final ExecutionId executionId;

@@ -85,7 +85,7 @@ public class FixedIntervalTokenBucketSupplier implements Supplier<TokenBucket> {
         return this.activeConfiguration;
     }
 
-    private class ActiveConfiguration {
+    private final class ActiveConfiguration {
 
         private final TokenBucket tokenBucket;
         private final long capacity;

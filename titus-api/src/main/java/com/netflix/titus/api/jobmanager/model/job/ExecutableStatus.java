@@ -90,7 +90,7 @@ public abstract class ExecutableStatus<STATE extends Enum<STATE>> {
                 '}';
     }
 
-    public static abstract class AbstractBuilder<
+    public abstract static class AbstractBuilder<
             STATE extends Enum<STATE>,
             B extends AbstractBuilder<STATE, B, S>,
             S extends ExecutableStatus<STATE>

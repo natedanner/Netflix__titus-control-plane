@@ -16,8 +16,8 @@
 package com.netflix.titus.master.appscale.service;
 
 public class JobScalingConstraints {
-    private int minCapacity;
-    private int maxCapacity;
+    private final int minCapacity;
+    private final int maxCapacity;
 
     public JobScalingConstraints(int minCapacity, int maxCapacity) {
         this.minCapacity = minCapacity;

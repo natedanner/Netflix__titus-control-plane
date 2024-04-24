@@ -90,7 +90,7 @@ public class DefaultLoadBalancerServiceTest {
     private PublishSubject<TargetStateBatchable> reconcilerEvents;
     private LoadBalancerJobValidator validator;
     private TestScheduler testScheduler;
-    private CallMetadata callMetadata = CallMetadata.newBuilder().withCallerId("Load Balancer test").build();
+    private final CallMetadata callMetadata = CallMetadata.newBuilder().withCallerId("Load Balancer test").build();
 
     private void defaultStubs() {
         when(client.registerAll(any(), any())).thenReturn(Completable.complete());

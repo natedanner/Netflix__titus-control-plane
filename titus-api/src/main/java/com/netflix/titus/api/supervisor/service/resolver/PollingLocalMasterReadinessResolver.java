@@ -34,7 +34,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Scheduler;
 
-public class PollingLocalMasterReadinessResolver implements LocalMasterReadinessResolver {
+public final class PollingLocalMasterReadinessResolver implements LocalMasterReadinessResolver {
 
     private static final Logger logger = LoggerFactory.getLogger(PollingLocalMasterReadinessResolver.class);
 

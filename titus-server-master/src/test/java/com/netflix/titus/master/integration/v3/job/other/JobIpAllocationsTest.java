@@ -185,9 +185,8 @@ public class JobIpAllocationsTest extends BaseIntegrationTest {
                 .putFilteringCriteria("jobIds", firstJobId)
                 .build());
         assertThat(firstTaskQueryResult.getItemsCount()).isEqualTo(1);
-        firstTaskQueryResult.getItemsList().forEach(task -> {
-            assertThat(task.getTaskContextMap()).doesNotContainKeys(TaskAttributes.TASK_ATTRIBUTES_IN_USE_IP_ALLOCATION);
-        });
+        firstTaskQueryResult.getItemsList().forEach(task ->
+            assertThat(task.getTaskContextMap()).doesNotContainKeys(TaskAttributes.TASK_ATTRIBUTES_IN_USE_IP_ALLOCATION));
         String firstTaskId = firstTaskQueryResult.getItems(0).getId();
 
         // Query the gRPC endpoint and ensure the second task has a waiting task context field.
@@ -196,9 +195,8 @@ public class JobIpAllocationsTest extends BaseIntegrationTest {
                 .putFilteringCriteria("jobIds", secondJobId)
                 .build());
         assertThat(secondTaskQueryResult.getItemsCount()).isEqualTo(1);
-        secondTaskQueryResult.getItemsList().forEach(task -> {
-            assertThat(task.getTaskContextMap()).contains(new AbstractMap.SimpleImmutableEntry<>(TaskAttributes.TASK_ATTRIBUTES_IN_USE_IP_ALLOCATION, firstTaskId));
-        });
+        secondTaskQueryResult.getItemsList().forEach(task ->
+            assertThat(task.getTaskContextMap()).contains(new AbstractMap.SimpleImmutableEntry<>(TaskAttributes.TASK_ATTRIBUTES_IN_USE_IP_ALLOCATION, firstTaskId)));
 
         // Observe the second job and ensure the streamed task has a waiting task context field.
         boolean verified = false;

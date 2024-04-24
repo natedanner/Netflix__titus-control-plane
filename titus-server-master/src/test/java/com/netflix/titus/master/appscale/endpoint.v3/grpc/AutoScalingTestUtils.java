@@ -42,9 +42,8 @@ public class AutoScalingTestUtils {
         TargetTrackingPolicyDescriptor targetPolicyDescriptor = scalingPolicy.getTargetPolicyDescriptor();
         TargetTrackingPolicyDescriptor targetPolicyWithUpdatedValue = targetPolicyDescriptor.toBuilder().setTargetValue(DoubleValue.newBuilder().setValue(targetValue).build()).build();
         ScalingPolicy scalingPolicyTobeUpdated = scalingPolicy.toBuilder().setTargetPolicyDescriptor(targetPolicyWithUpdatedValue).build();
-        UpdatePolicyRequest updatePolicyRequest = UpdatePolicyRequest.newBuilder().setPolicyId(ScalingPolicyID.newBuilder().setId(policyRefId).build())
+        return UpdatePolicyRequest.newBuilder().setPolicyId(ScalingPolicyID.newBuilder().setId(policyRefId).build())
                 .setScalingPolicy(scalingPolicyTobeUpdated).build();
-        return updatePolicyRequest;
     }
 
     public static UpdatePolicyRequest generateUpdateStepScalingPolicyRequest(String policyRefId, double threshold) {
@@ -52,9 +51,8 @@ public class AutoScalingTestUtils {
         AlarmConfiguration alarmConfig = scalingPolicy.getStepPolicyDescriptor().getAlarmConfig().toBuilder().setThreshold(DoubleValue.newBuilder().setValue(threshold).build()).build();
         StepScalingPolicyDescriptor stepScalingPolicyDescriptor = scalingPolicy.getStepPolicyDescriptor().toBuilder().setAlarmConfig(alarmConfig).build();
         ScalingPolicy scalingPolicyToBeUpdated = scalingPolicy.toBuilder().setStepPolicyDescriptor(stepScalingPolicyDescriptor).build();
-        UpdatePolicyRequest updatePolicyRequest = UpdatePolicyRequest.newBuilder().setPolicyId(ScalingPolicyID.newBuilder().setId(policyRefId).build())
+        return UpdatePolicyRequest.newBuilder().setPolicyId(ScalingPolicyID.newBuilder().setId(policyRefId).build())
                 .setScalingPolicy(scalingPolicyToBeUpdated).build();
-        return updatePolicyRequest;
     }
 
     public static PutPolicyRequest generatePutPolicyRequest(String jobId, PolicyType policyType) {

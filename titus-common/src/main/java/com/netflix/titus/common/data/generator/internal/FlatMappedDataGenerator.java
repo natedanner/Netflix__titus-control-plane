@@ -23,7 +23,7 @@ import com.netflix.titus.common.data.generator.DataGenerator;
 
 /**
  */
-public class FlatMappedDataGenerator<A, B> extends DataGenerator<B> {
+public final class FlatMappedDataGenerator<A, B> extends DataGenerator<B> {
 
     private final DataGenerator<A> source;
     private final DataGenerator<B> pending;

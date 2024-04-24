@@ -69,8 +69,7 @@ public class AutoScalingResource {
     @ApiOperation("Find scaling policies for a job")
     @Path("scalingPolicies")
     public GetPolicyResult getAllScalingPolicies() {
-        GetPolicyResult getPolicyResult = Responses.fromSingleValueObservable(autoScalingService.getAllScalingPolicies(resolveCallMetadata()));
-        return getPolicyResult;
+        return Responses.fromSingleValueObservable(autoScalingService.getAllScalingPolicies(resolveCallMetadata()));
     }
 
     @GET
@@ -78,8 +77,7 @@ public class AutoScalingResource {
     @Path("scalingPolicies/{jobId}")
     public GetPolicyResult getScalingPolicyForJob(@PathParam("jobId") String jobId) {
         JobId request = JobId.newBuilder().setId(jobId).build();
-        GetPolicyResult getPolicyResult = Responses.fromSingleValueObservable(autoScalingService.getJobScalingPolicies(request, resolveCallMetadata()));
-        return getPolicyResult;
+        return Responses.fromSingleValueObservable(autoScalingService.getJobScalingPolicies(request, resolveCallMetadata()));
     }
 
     @POST

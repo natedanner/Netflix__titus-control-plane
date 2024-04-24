@@ -20,7 +20,7 @@ import com.netflix.titus.api.jobmanager.service.JobManagerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AutoScalePolicyException extends RuntimeException {
+public final class AutoScalePolicyException extends RuntimeException {
     private static Logger log = LoggerFactory.getLogger(AutoScalePolicyException.class);
 
     public enum ErrorCode {

@@ -50,8 +50,8 @@ public class EsPublisher implements TasksPublisher, LeaderActivationListener {
     private final EsPublisherConfiguration esPublisherConfiguration;
     private final Registry registry;
 
-    private AtomicInteger numErrors = new AtomicInteger(0);
-    private AtomicInteger numTasksUpdated = new AtomicInteger(0);
+    private final AtomicInteger numErrors = new AtomicInteger(0);
+    private final AtomicInteger numTasksUpdated = new AtomicInteger(0);
     private AtomicLong lastPublishedTimestamp;
     private Disposable subscription;
     private Disposable taskEventsSourceConnection;

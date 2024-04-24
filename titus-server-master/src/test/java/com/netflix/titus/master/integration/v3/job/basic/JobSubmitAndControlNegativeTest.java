@@ -59,13 +59,13 @@ import static org.junit.Assert.fail;
 @Category(IntegrationTest.class)
 public class JobSubmitAndControlNegativeTest extends BaseIntegrationTest {
 
-    private final JobDescriptor.Builder BATCH_JOB_DESCR_BUILDER = toGrpcJobDescriptor(batchJobDescriptors().getValue()).toBuilder();
+    private final JobDescriptor.Builder batchJobDescrBuilder = toGrpcJobDescriptor(batchJobDescriptors().getValue()).toBuilder();
 
-    private final BatchJobSpec.Builder BATCH_JOB_SPEC_BUILDER = BATCH_JOB_DESCR_BUILDER.getBatch().toBuilder();
+    private final BatchJobSpec.Builder batchJobSpecBuilder = batchJobDescrBuilder.getBatch().toBuilder();
 
-    private final JobDescriptor.Builder SERVICE_JOB_DESCR_BUILDER = toGrpcJobDescriptor(serviceJobDescriptors().getValue()).toBuilder();
+    private final JobDescriptor.Builder serviceJobDescrBuilder = toGrpcJobDescriptor(serviceJobDescriptors().getValue()).toBuilder();
 
-    private final ServiceJobSpec.Builder SERVICE_JOB_SPEC_BUILDER = SERVICE_JOB_DESCR_BUILDER.getService().toBuilder();
+    private final ServiceJobSpec.Builder serviceJobSpecBuilder = serviceJobDescrBuilder.getService().toBuilder();
 
     @ClassRule
     public static final TitusStackResource titusStackResource = new TitusStackResource(basicKubeCell(2));
@@ -81,15 +81,15 @@ public class JobSubmitAndControlNegativeTest extends BaseIntegrationTest {
     public void testJobWithNoOwner() {
         submitBadJob(
                 client,
-                BATCH_JOB_DESCR_BUILDER.setOwner(Owner.getDefaultInstance()).build(),
+                batchJobDescrBuilder.setOwner(Owner.getDefaultInstance()).build(),
                 "owner.teamEmail"
         );
     }
 
     @Test(timeout = TEST_TIMEOUT_MS)
     public void testJobWithNoApplicationName() {
-        submitBadJob(client, BATCH_JOB_DESCR_BUILDER.setApplicationName("").build(), "applicationName");
-        submitBadJob(client, BATCH_JOB_DESCR_BUILDER.setApplicationName("   ").build(), "applicationName");
+        submitBadJob(client, batchJobDescrBuilder.setApplicationName("").build(), "applicationName");
+        submitBadJob(client, batchJobDescrBuilder.setApplicationName("   ").build(), "applicationName");
     }
 
     @Test(timeout = TEST_TIMEOUT_MS)
@@ -99,7 +99,7 @@ public class JobSubmitAndControlNegativeTest extends BaseIntegrationTest {
                 .build();
         submitBadJob(
                 client,
-                BATCH_JOB_DESCR_BUILDER.setContainer(BATCH_JOB_DESCR_BUILDER.getContainer().toBuilder().setResources(badContainer)).build(),
+                batchJobDescrBuilder.setContainer(batchJobDescrBuilder.getContainer().toBuilder().setResources(badContainer)).build(),
                 "container.containerResources.gpu"
         );
     }
@@ -118,7 +118,7 @@ public class JobSubmitAndControlNegativeTest extends BaseIntegrationTest {
                 .build();
         submitBadJob(
                 client,
-                BATCH_JOB_DESCR_BUILDER.setContainer(BATCH_JOB_DESCR_BUILDER.getContainer().toBuilder().setResources(badContainer)).build(),
+                batchJobDescrBuilder.setContainer(batchJobDescrBuilder.getContainer().toBuilder().setResources(badContainer)).build(),
                 "container.containerResources.cpu",
                 "container.containerResources.gpu",
                 "container.containerResources.memoryMB",
@@ -134,7 +134,7 @@ public class JobSubmitAndControlNegativeTest extends BaseIntegrationTest {
                 .build();
         submitBadJob(
                 client,
-                BATCH_JOB_DESCR_BUILDER.setContainer(BATCH_JOB_DESCR_BUILDER.getContainer().toBuilder().setResources(badEfs)).build(),
+                batchJobDescrBuilder.setContainer(batchJobDescrBuilder.getContainer().toBuilder().setResources(badEfs)).build(),
                 "container.containerResources.efsMounts[0].efsId",
                 "container.containerResources.efsMounts[0].mountPoint"
         );
@@ -148,7 +148,7 @@ public class JobSubmitAndControlNegativeTest extends BaseIntegrationTest {
                 .build();
         submitBadJob(
                 client,
-                BATCH_JOB_DESCR_BUILDER.setContainer(BATCH_JOB_DESCR_BUILDER.getContainer().toBuilder().setSecurityProfile(securityProfile)).build(),
+                batchJobDescrBuilder.setContainer(batchJobDescrBuilder.getContainer().toBuilder().setSecurityProfile(securityProfile)).build(),
                 "container.securityProfile.securityGroups", "container.securityProfile.iamRole"
         );
     }
@@ -157,7 +157,7 @@ public class JobSubmitAndControlNegativeTest extends BaseIntegrationTest {
     public void testJobWithoutImage() {
         submitBadJob(
                 client,
-                BATCH_JOB_DESCR_BUILDER.setContainer(BATCH_JOB_DESCR_BUILDER.getContainer().toBuilder().setImage(Image.getDefaultInstance())).build(),
+                batchJobDescrBuilder.setContainer(batchJobDescrBuilder.getContainer().toBuilder().setImage(Image.getDefaultInstance())).build(),
                 "container.image.name",
                 "container.image.noValidImageDigestOrTag"
         );
@@ -168,7 +168,7 @@ public class JobSubmitAndControlNegativeTest extends BaseIntegrationTest {
         Image badImage = Image.newBuilder().setName("????????").setTag("############").build();
         submitBadJob(
                 client,
-                BATCH_JOB_DESCR_BUILDER.setContainer(BATCH_JOB_DESCR_BUILDER.getContainer().toBuilder().setImage(badImage)).build(),
+                batchJobDescrBuilder.setContainer(batchJobDescrBuilder.getContainer().toBuilder().setImage(badImage)).build(),
                 "container.image.name",
                 "container.image.noValidImageDigestOrTag"
         );
@@ -178,7 +178,7 @@ public class JobSubmitAndControlNegativeTest extends BaseIntegrationTest {
     public void testInvalidSoftAndHardConstraints() {
         submitBadJob(
                 client,
-                BATCH_JOB_DESCR_BUILDER.setContainer(BATCH_JOB_DESCR_BUILDER.getContainer().toBuilder()
+                batchJobDescrBuilder.setContainer(batchJobDescrBuilder.getContainer().toBuilder()
                         .setSoftConstraints(Constraints.newBuilder().putConstraints("badSoftConstraint", "").build())
                         .setHardConstraints(Constraints.newBuilder().putConstraints("badHardConstraint", "").build())
                 ).build(),
@@ -191,7 +191,7 @@ public class JobSubmitAndControlNegativeTest extends BaseIntegrationTest {
     public void testOverlappingSoftAndHardConstraints() {
         submitBadJob(
                 client,
-                BATCH_JOB_DESCR_BUILDER.setContainer(BATCH_JOB_DESCR_BUILDER.getContainer().toBuilder()
+                batchJobDescrBuilder.setContainer(batchJobDescrBuilder.getContainer().toBuilder()
                         .setSoftConstraints(Constraints.newBuilder().putConstraints("UniqueHost", "true").build())
                         .setHardConstraints(Constraints.newBuilder().putConstraints("UniqueHost", "true").build())
                 ).build(),
@@ -203,7 +203,7 @@ public class JobSubmitAndControlNegativeTest extends BaseIntegrationTest {
     public void testBatchJobWithInvalidSize() {
         submitBadJob(
                 client,
-                BATCH_JOB_DESCR_BUILDER.setBatch(BATCH_JOB_SPEC_BUILDER.setSize(-5)).build(),
+                batchJobDescrBuilder.setBatch(batchJobSpecBuilder.setSize(-5)).build(),
                 "extensions.size"
         );
     }
@@ -212,7 +212,7 @@ public class JobSubmitAndControlNegativeTest extends BaseIntegrationTest {
     public void testTooLargeBatchJob() {
         submitBadJob(
                 client,
-                BATCH_JOB_DESCR_BUILDER.setBatch(BATCH_JOB_SPEC_BUILDER.setSize(5000)).build(),
+                batchJobDescrBuilder.setBatch(batchJobSpecBuilder.setSize(5000)).build(),
                 "extensions.size"
         );
     }
@@ -221,7 +221,7 @@ public class JobSubmitAndControlNegativeTest extends BaseIntegrationTest {
     public void testBatchJobWithTooLowRuntimeLimit() {
         submitBadJob(
                 client,
-                BATCH_JOB_DESCR_BUILDER.setBatch(BATCH_JOB_SPEC_BUILDER.setRuntimeLimitSec(4)).build(),
+                batchJobDescrBuilder.setBatch(batchJobSpecBuilder.setRuntimeLimitSec(4)).build(),
                 "extensions.runtimeLimitMs"
         );
     }
@@ -230,7 +230,7 @@ public class JobSubmitAndControlNegativeTest extends BaseIntegrationTest {
     public void testTooLargeBatchJobRuntimeLimit() {
         submitBadJob(
                 client,
-                BATCH_JOB_DESCR_BUILDER.setBatch(BATCH_JOB_SPEC_BUILDER.setRuntimeLimitSec(2 * JobConfiguration.MAX_RUNTIME_LIMIT_SEC)).build(),
+                batchJobDescrBuilder.setBatch(batchJobSpecBuilder.setRuntimeLimitSec(2 * JobConfiguration.MAX_RUNTIME_LIMIT_SEC)).build(),
                 "extensions.runtimeLimitMs"
         );
     }
@@ -240,7 +240,7 @@ public class JobSubmitAndControlNegativeTest extends BaseIntegrationTest {
         Capacity badCapacity = Capacity.newBuilder().setMin(-2).setDesired(-3).setMax(-4).build();
         submitBadJob(
                 client,
-                SERVICE_JOB_DESCR_BUILDER.setService(SERVICE_JOB_SPEC_BUILDER.setCapacity(badCapacity).build()).build(),
+                serviceJobDescrBuilder.setService(serviceJobSpecBuilder.setCapacity(badCapacity).build()).build(),
                 "extensions.capacity",
                 "extensions.capacity.desired",
                 "extensions.capacity.max",
@@ -253,7 +253,7 @@ public class JobSubmitAndControlNegativeTest extends BaseIntegrationTest {
         Capacity badCapacity = Capacity.newBuilder().setMin(1).setDesired(100).setMax(10_001).build();
         submitBadJob(
                 client,
-                SERVICE_JOB_DESCR_BUILDER.setService(SERVICE_JOB_SPEC_BUILDER.setCapacity(badCapacity)).build(),
+                serviceJobDescrBuilder.setService(serviceJobSpecBuilder.setCapacity(badCapacity)).build(),
                 "extensions.capacity"
         );
     }
@@ -265,7 +265,7 @@ public class JobSubmitAndControlNegativeTest extends BaseIntegrationTest {
         ).build();
         submitBadJob(
                 client,
-                BATCH_JOB_DESCR_BUILDER.setBatch(BATCH_JOB_SPEC_BUILDER.setRetryPolicy(badRetryPolicy)).build(),
+                batchJobDescrBuilder.setBatch(batchJobSpecBuilder.setRetryPolicy(badRetryPolicy)).build(),
                 "extensions.retryPolicy.retries"
         );
     }
@@ -277,7 +277,7 @@ public class JobSubmitAndControlNegativeTest extends BaseIntegrationTest {
         ).build();
         submitBadJob(
                 client,
-                BATCH_JOB_DESCR_BUILDER.setBatch(BATCH_JOB_SPEC_BUILDER.setRetryPolicy(badRetryPolicy)).build(),
+                batchJobDescrBuilder.setBatch(batchJobSpecBuilder.setRetryPolicy(badRetryPolicy)).build(),
                 "extensions.retryPolicy.retries",
                 "extensions.retryPolicy.delayMs"
         );
@@ -290,7 +290,7 @@ public class JobSubmitAndControlNegativeTest extends BaseIntegrationTest {
         ).build();
         submitBadJob(
                 client,
-                BATCH_JOB_DESCR_BUILDER.setBatch(BATCH_JOB_SPEC_BUILDER.setRetryPolicy(badRetryPolicy)).build(),
+                batchJobDescrBuilder.setBatch(batchJobSpecBuilder.setRetryPolicy(badRetryPolicy)).build(),
                 "extensions.retryPolicy.retries",
                 "extensions.retryPolicy.initialDelayMs",
                 "extensions.retryPolicy.maxDelayMs"

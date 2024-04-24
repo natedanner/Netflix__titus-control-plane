@@ -62,7 +62,7 @@ public class DefaultAutoScalingServiceGrpc extends AutoScalingServiceGrpc.AutoSc
                 .subscribe(
                         id -> responseObserver.onNext(GrpcModelConverters.toScalingPolicyId(id)),
                         e -> safeOnError(logger, e, responseObserver),
-                        () -> responseObserver.onCompleted());
+                        responseObserver::onCompleted);
     }
 
     private Mono<AutoScalingPolicy> validateAndConvertAutoScalingPolicyToCoreModel(PutPolicyRequest request) {

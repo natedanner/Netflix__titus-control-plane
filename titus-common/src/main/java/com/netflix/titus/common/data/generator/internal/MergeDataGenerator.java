@@ -22,7 +22,7 @@ import java.util.Optional;
 
 import com.netflix.titus.common.data.generator.DataGenerator;
 
-public class MergeDataGenerator<A> extends DataGenerator<A> {
+public final class MergeDataGenerator<A> extends DataGenerator<A> {
 
     private final List<DataGenerator<A>> sources;
     private final Optional<A> currentValue;
@@ -31,7 +31,7 @@ public class MergeDataGenerator<A> extends DataGenerator<A> {
     private MergeDataGenerator(List<DataGenerator<A>> sources, int startFrom) {
         this.sources = sources;
         this.currentIdx = findNext(sources, startFrom);
-        this.currentValue = (currentIdx == -1) ? Optional.empty() : sources.get(currentIdx).getOptionalValue();
+        this.currentValue = currentIdx == -1 ? Optional.empty() : sources.get(currentIdx).getOptionalValue();
     }
 
     @Override

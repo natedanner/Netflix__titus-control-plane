@@ -135,7 +135,7 @@ public class TaskMigrationDeschedulerTest {
     @Test
     public void testFitness() {
         List<TitusNode> removableAgents = nodeDataResolver.resolve().values().stream()
-                .filter(n -> n.getServerGroupId().equals("removable1"))
+                .filter(n -> "removable1".equals(n.getServerGroupId()))
                 .collect(Collectors.toList());
         String agent1 = removableAgents.get(0).getId();
         String agent2 = removableAgents.get(1).getId();

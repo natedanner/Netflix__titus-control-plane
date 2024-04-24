@@ -19,5 +19,5 @@ package com.netflix.titus.api.endpoint.v2.rest.representation;
 /**
  */
 public enum TitusTaskState {
-    QUEUED, DISPATCHED, STARTING, RUNNING, FINISHED, ERROR, STOPPED, CRASHED, FAILED;
+    QUEUED, DISPATCHED, STARTING, RUNNING, FINISHED, ERROR, STOPPED, CRASHED, FAILED
 }

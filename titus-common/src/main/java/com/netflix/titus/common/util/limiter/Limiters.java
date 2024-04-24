@@ -31,7 +31,7 @@ import com.netflix.titus.common.util.limiter.tokenbucket.internal.FixedIntervalT
 import com.netflix.titus.common.util.limiter.tokenbucket.internal.SpectatorTokenBucketDecorator;
 import com.netflix.titus.common.util.time.Clock;
 
-public class Limiters {
+public final class Limiters {
 
     private Limiters() {
     }

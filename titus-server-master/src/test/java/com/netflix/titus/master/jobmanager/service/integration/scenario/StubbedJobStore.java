@@ -134,7 +134,7 @@ public class StubbedJobStore implements JobStore {
     }
 
     public int getIndex(String taskId) {
-        return getIndexAndResubmit(taskId).map(p -> p.getLeft()).orElseThrow(() -> new IllegalStateException("Task " + taskId + " is not registered in store"));
+        return getIndexAndResubmit(taskId).map(Pair::getLeft).orElseThrow(() -> new IllegalStateException("Task " + taskId + " is not registered in store"));
     }
 
     public Optional<Pair<Integer, Integer>> getIndexAndResubmit(String taskId) {

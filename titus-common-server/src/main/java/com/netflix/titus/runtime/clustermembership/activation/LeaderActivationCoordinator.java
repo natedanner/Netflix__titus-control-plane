@@ -123,7 +123,7 @@ public class LeaderActivationCoordinator implements LeaderActivationStatus {
         );
         this.inActiveStateTimeId = registry.createId(METRIC_ROOT + "inActiveStateTime");
         PolledMeter.using(registry).withId(inActiveStateTimeId).monitorValue(this, self ->
-                (self.stateRef.get() == State.ElectedLeader && activationTimestamp > 0) ? self.clock.wallTime() - self.activationTimestamp : 0
+                self.stateRef.get() == State.ElectedLeader && activationTimestamp > 0 ? self.clock.wallTime() - self.activationTimestamp : 0
         );
 
         // We create the thread here, as the default one is NonBlocking, and we allow React blocking subscriptions in

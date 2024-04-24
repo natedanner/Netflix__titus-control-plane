@@ -77,7 +77,7 @@ public class JobCriteriaQueryTest extends BaseIntegrationTest {
 
     private static final Page PAGE = Page.newBuilder().setPageNumber(0).setPageSize(100).build();
 
-    private final static TitusStackResource titusStackResource = new TitusStackResource(
+    private static final TitusStackResource titusStackResource = new TitusStackResource(
             EmbeddedTitusCell.aTitusCell()
                     .withMaster(EmbeddedTitusMasters.basicMasterWithKubeIntegration(EmbeddedKubeClusters.basicClusterWithLargeInstances(20)).toBuilder()
                             .withCellName("embeddedCell")
@@ -91,7 +91,7 @@ public class JobCriteriaQueryTest extends BaseIntegrationTest {
                     .build()
     );
 
-    private final static JobsScenarioBuilder jobsScenarioBuilder = new JobsScenarioBuilder(titusStackResource);
+    private static final JobsScenarioBuilder jobsScenarioBuilder = new JobsScenarioBuilder(titusStackResource);
 
     @ClassRule
     public static final RuleChain ruleChain = RuleChain.outerRule(titusStackResource).around(jobsScenarioBuilder);

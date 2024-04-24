@@ -94,7 +94,7 @@ public class ClusterMembershipRevision<T> {
     }
 
     public Builder<T> toBuilder() {
-        return ClusterMembershipRevision.<T>newBuilder().withCurrent(current).withCode(code).withMessage(message).withRevision(revision).withTimestamp(timestamp);
+        return ClusterMembershipRevision.newBuilder().withCurrent(current).withCode(code).withMessage(message).withRevision(revision).withTimestamp(timestamp);
     }
 
     public static <T> Builder<T> newBuilder() {

@@ -134,9 +134,8 @@ public class AggregatingContainerHealthServiceTest {
     public void testBadHealthDownstreamSourceTerminatesClientSubscription() {
         StepVerifier.create(healthService.events(false))
                 // Break downstream health provider
-                .then(() -> {
-                    downstream2.breakSubscriptionsWithError(new RuntimeException("Simulated error"));
-                })
+                .then(() ->
+                    downstream2.breakSubscriptionsWithError(new RuntimeException("Simulated error")))
 
                 .verifyError(RuntimeException.class);
     }
@@ -165,7 +164,7 @@ public class AggregatingContainerHealthServiceTest {
         assertThat(badSubscriber.isDisposed()).isTrue();
     }
 
-    private class DownstreamHealthService implements ContainerHealthService {
+    private final class DownstreamHealthService implements ContainerHealthService {
 
         private final String name;
         private final Map<String, ContainerHealthStatus> healthStatuses = new HashMap<>();

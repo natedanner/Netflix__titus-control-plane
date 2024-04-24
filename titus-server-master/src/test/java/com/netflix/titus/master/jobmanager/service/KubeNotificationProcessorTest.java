@@ -136,9 +136,9 @@ public class KubeNotificationProcessorTest {
                 TITUS_NODE_DOMAIN + "ami", "ami123",
                 TITUS_NODE_DOMAIN + "stack", "myStack"
         ));
-        Map<String, String> UpdatedAnnotations = new HashMap<>();
-        UpdatedAnnotations.put(AnnotationKeyIPAddress, "1.2.3.4");
-        pod.getMetadata().setAnnotations(UpdatedAnnotations);
+        Map<String, String> updatedAnnotations = new HashMap<>();
+        updatedAnnotations.put(AnnotationKeyIPAddress, "1.2.3.4");
+        pod.getMetadata().setAnnotations(updatedAnnotations);
 
         Task updatedTask = processor.updateTaskStatus(
                 new PodWrapper(pod),

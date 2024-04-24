@@ -116,7 +116,7 @@ public class JsonMessageReaderWriter implements MessageBodyReader<Object>, Messa
         // Unless 'debug' flag is set, do not write error context
         if (entity instanceof ErrorResponse) {
             String debug = httpServletRequest.getParameter(DEBUG_PARAM);
-            if (debug == null || debug.equalsIgnoreCase("false")) {
+            if (debug == null || "false".equalsIgnoreCase(debug)) {
                 COMPACT_ERROR_WRITER.writeValue(entityStream, entity);
                 return;
             }

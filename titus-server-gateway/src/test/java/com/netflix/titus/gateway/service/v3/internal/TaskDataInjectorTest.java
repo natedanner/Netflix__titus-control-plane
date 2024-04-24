@@ -158,7 +158,7 @@ public class TaskDataInjectorTest {
                 newRelocationPlan(TASK2, deadline2)
         ));
 
-        TaskQueryResult merged = Observable.just(queryResult).map(queryResult1 -> taskDataInjector.injectIntoTaskQueryResult(queryResult1)).toBlocking().first();
+        TaskQueryResult merged = Observable.just(queryResult).map(taskDataInjector::injectIntoTaskQueryResult).toBlocking().first();
 
         assertThat(merged.getItems(0).getMigrationDetails().getNeedsMigration()).isTrue();
         assertThat(merged.getItems(0).getMigrationDetails().getDeadline()).isEqualTo(deadline1);
@@ -176,7 +176,7 @@ public class TaskDataInjectorTest {
                 .addItems(TASK2)
                 .build();
         when(relocationDataReplicator.getCurrent()).thenReturn(newRelocationSnapshot(newRelocationPlan(TASK1, deadline1)));
-        TaskQueryResult merged = Observable.just(queryResult).map(queryResult1 -> taskDataInjector.injectIntoTaskQueryResult(queryResult1)).toBlocking().first();
+        TaskQueryResult merged = Observable.just(queryResult).map(taskDataInjector::injectIntoTaskQueryResult).toBlocking().first();
 
         assertThat(merged.getItems(0).getMigrationDetails().getNeedsMigration()).isTrue();
         assertThat(merged.getItems(0).getMigrationDetails().getDeadline()).isEqualTo(deadline1);
@@ -196,7 +196,7 @@ public class TaskDataInjectorTest {
                 .addItems(legacyTask)
                 .build();
         when(relocationDataReplicator.getCurrent()).thenReturn(newRelocationSnapshot(newRelocationPlan(TASK1, deadline1)));
-        TaskQueryResult merged = Observable.just(queryResult).map(queryResult1 -> taskDataInjector.injectIntoTaskQueryResult(queryResult1)).toBlocking().first();
+        TaskQueryResult merged = Observable.just(queryResult).map(taskDataInjector::injectIntoTaskQueryResult).toBlocking().first();
 
         assertThat(merged.getItems(0).getMigrationDetails().getNeedsMigration()).isTrue();
         assertThat(merged.getItems(0).getMigrationDetails().getDeadline()).isEqualTo(deadline1);

@@ -70,7 +70,7 @@ public class ClientInvocationMetrics {
         clientMetrics.registerInvocation(durationMs);
     }
 
-    private static class ClientKey {
+    private static final class ClientKey {
         private final String application;
         private final List<Tag> tags;
 
@@ -112,7 +112,7 @@ public class ClientInvocationMetrics {
         }
     }
 
-    private class ClientMetrics {
+    private final class ClientMetrics {
 
         private final Counter counter;
         private final Timer latency;

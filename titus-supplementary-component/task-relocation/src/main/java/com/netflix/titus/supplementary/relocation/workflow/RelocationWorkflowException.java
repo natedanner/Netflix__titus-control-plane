@@ -16,7 +16,7 @@
 
 package com.netflix.titus.supplementary.relocation.workflow;
 
-public class RelocationWorkflowException extends RuntimeException {
+public final class RelocationWorkflowException extends RuntimeException {
 
     public enum ErrorCode {
         NotReady,

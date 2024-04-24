@@ -99,7 +99,7 @@ public class RelocationDataReplicatorProvider implements Provider<RelocationData
         }
     }
 
-    private static class RelocationDataReplicatorMetrics extends DataReplicatorMetrics<TaskRelocationSnapshot, TaskRelocationEvent> {
+    private static final class RelocationDataReplicatorMetrics extends DataReplicatorMetrics<TaskRelocationSnapshot, TaskRelocationEvent> {
 
         private RelocationDataReplicatorMetrics(String source, TitusRuntime titusRuntime) {
             super(source, false, titusRuntime);

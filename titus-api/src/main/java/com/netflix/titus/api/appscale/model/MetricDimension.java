@@ -20,8 +20,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class MetricDimension {
 
-    private String name;
-    private String value;
+    private final String name;
+    private final String value;
 
     public MetricDimension(String name, String value) {
         this.name = name;

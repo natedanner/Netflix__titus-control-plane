@@ -29,7 +29,7 @@ public class TransactionStatus<DATA> {
         ResultReady,
         Completed,
         Failed,
-        Cancelled;
+        Cancelled
     }
 
     private final State state;

@@ -183,8 +183,7 @@ public class InMemoryJobStore implements JobStore {
 
     @Override
     public Completable deleteArchivedTask(String jobId, String taskId) {
-        return Completable.fromAction(() -> {
-            archivedTasks.invalidate(taskId);
-        });
+        return Completable.fromAction(() ->
+            archivedTasks.invalidate(taskId));
     }
 }

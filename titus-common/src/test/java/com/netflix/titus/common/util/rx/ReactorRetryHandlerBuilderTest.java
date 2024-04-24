@@ -59,7 +59,7 @@ public class ReactorRetryHandlerBuilderTest {
         StepVerifier
                 .withVirtualTime(() ->
                         streamOf("A", new ServiceUnavailableException("Retry me"), "B", new IllegalArgumentException("Do not retry me."), "C")
-                                .retryWhen(newRetryHandlerBuilder().withRetryOnThrowable(ex -> ex instanceof ServiceUnavailableException).buildRetryExponentialBackoff())
+                                .retryWhen(newRetryHandlerBuilder().withRetryOnThrowable(ServiceUnavailableException.class::isInstance).buildRetryExponentialBackoff())
                 )
                 .expectNext("A")
                 .expectNoEvent(Duration.ofSeconds(RETRY_DELAY_SEC))

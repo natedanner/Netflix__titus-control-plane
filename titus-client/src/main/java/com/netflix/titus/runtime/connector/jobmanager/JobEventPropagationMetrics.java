@@ -29,7 +29,7 @@ import com.netflix.titus.common.util.event.EventPropagationUtil;
 
 import static com.netflix.titus.runtime.connector.jobmanager.JobEventPropagationUtil.FEDERATION_LABELS;
 
-public class JobEventPropagationMetrics {
+public final class JobEventPropagationMetrics {
 
     private final List<String> stageNames;
 

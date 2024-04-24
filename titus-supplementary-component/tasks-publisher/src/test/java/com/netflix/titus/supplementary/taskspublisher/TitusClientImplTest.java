@@ -39,12 +39,12 @@ public class TitusClientImplTest {
     private static TitusClient titusClient;
     private static Server testServer;
 
-    private static BatchJobTask taskOne = JobGenerator.oneBatchTask();
-    private static BatchJobTask taskTwo = JobGenerator.oneBatchTask();
-    private static BatchJobTask taskThree = JobGenerator.oneBatchTask();
-    private static BatchJobTask taskFour = JobGenerator.oneBatchTask();
-    private static BatchJobTask taskFive = JobGenerator.oneBatchTask();
-    private static Job<BatchJobExt> jobOne = JobGenerator.oneBatchJob();
+    private static final BatchJobTask taskOne = JobGenerator.oneBatchTask();
+    private static final BatchJobTask taskTwo = JobGenerator.oneBatchTask();
+    private static final BatchJobTask taskThree = JobGenerator.oneBatchTask();
+    private static final BatchJobTask taskFour = JobGenerator.oneBatchTask();
+    private static final BatchJobTask taskFive = JobGenerator.oneBatchTask();
+    private static final Job<BatchJobExt> jobOne = JobGenerator.oneBatchJob();
 
     public static class MockJobManagerService extends JobManagementServiceGrpc.JobManagementServiceImplBase {
         @Override

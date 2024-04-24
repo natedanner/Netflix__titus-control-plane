@@ -36,7 +36,7 @@ public class Headers {
 
     public String get(String name) {
         Collection<String> values = delegate.get(name);
-        if (values.size() > 0) {
+        if (!values.isEmpty()) {
             Iterables.getLast(values);
         }
         return null;

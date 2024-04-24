@@ -392,7 +392,7 @@ public class DefaultManyReconciler<DATA> implements ManyReconciler<DATA> {
         });
     }
 
-    private class AddHolder {
+    private final class AddHolder {
 
         private final ReconcilerEngine<DATA> executor;
         private final MonoSink<Void> sink;

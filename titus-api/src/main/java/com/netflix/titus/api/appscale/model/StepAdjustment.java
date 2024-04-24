@@ -46,7 +46,7 @@ public class StepAdjustment {
     }
 
 
-    public static class Builder {
+    public static final class Builder {
         private int scalingAdjustment;
         private Optional<Double> metricIntervalLowerBound = Optional.empty();
         private Optional<Double> metricIntervalUpperBound = Optional.empty();

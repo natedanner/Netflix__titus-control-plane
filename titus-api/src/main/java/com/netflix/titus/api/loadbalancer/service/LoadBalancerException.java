@@ -20,7 +20,7 @@ import org.slf4j.event.Level;
 
 import static java.lang.String.format;
 
-public class LoadBalancerException extends RuntimeException {
+public final class LoadBalancerException extends RuntimeException {
 
     public enum ErrorCode {
         JobMaxLoadBalancers

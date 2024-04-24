@@ -90,16 +90,14 @@ public class LoadBalancerGrpcTest extends BaseIntegrationTest {
         Map<String, Set<LoadBalancerId>> jobIdToLoadBalancersMap = LoadBalancerTests.putLoadBalancersPerJob(10, 50, putLoadBalancerWithJobId);
 
         // Remove the load balancers for each job
-        jobIdToLoadBalancersMap.forEach((jobId, loadBalancerIdSet) -> {
+        jobIdToLoadBalancersMap.forEach((jobId, loadBalancerIdSet) ->
             loadBalancerIdSet.forEach(loadBalancerId -> {
                 LoadBalancerTests.removeLoadBalancerFromJob(jobId, loadBalancerId, removeLoadBalancers);
-            });
-        });
+            }));
 
         // Check that there are no load balancers left
-        jobIdToLoadBalancersMap.forEach((jobId, loadBalancerIdSet) -> {
-            assertThat(LoadBalancerTests.getLoadBalancersForJob(jobId, getJobLoadBalancers).size()).isEqualTo(0);
-        });
+        jobIdToLoadBalancersMap.forEach((jobId, loadBalancerIdSet) ->
+            assertThat(LoadBalancerTests.getLoadBalancersForJob(jobId, getJobLoadBalancers).size()).isEqualTo(0));
     }
 
     @Test(timeout = TEST_TIMEOUT_MS)
@@ -119,10 +117,9 @@ public class LoadBalancerGrpcTest extends BaseIntegrationTest {
                         String jobId = getJobLoadBalancersResult.getJobId();
                         assertThat(verificationMap.containsKey(jobId)).isTrue();
                         getJobLoadBalancersResult.getLoadBalancersList().forEach(
-                                loadBalancerId -> {
+                                loadBalancerId ->
                                     // Mark the load balancer as checked
-                                    assertThat(verificationMap.get(jobId).remove(loadBalancerId)).isTrue();
-                                }
+                                    assertThat(verificationMap.get(jobId).remove(loadBalancerId)).isTrue()
                         );
                     }
             );
@@ -130,9 +127,8 @@ public class LoadBalancerGrpcTest extends BaseIntegrationTest {
         } while (result.getPagination().getHasMore());
         // Make sure that all of the data was checked
         verificationMap.forEach(
-                (jobId, loadBalancerSet) -> {
-                    assertThat(loadBalancerSet.isEmpty()).isTrue();
-                }
+                (jobId, loadBalancerSet) ->
+                    assertThat(loadBalancerSet.isEmpty()).isTrue()
         );
     }
 
@@ -165,26 +161,21 @@ public class LoadBalancerGrpcTest extends BaseIntegrationTest {
         } while (result.getPagination().getHasMore());
         // Make sure that all of the data was checked
         verificationMap.forEach(
-                (jobId, loadBalancerSet) -> {
-                    assertThat(loadBalancerSet.isEmpty()).isTrue();
-                }
+                (jobId, loadBalancerSet) ->
+                    assertThat(loadBalancerSet.isEmpty()).isTrue()
         );
     }
 
 
-    private BiConsumer<AddLoadBalancerRequest, TestStreamObserver<Empty>> putLoadBalancerWithJobId = (request, addResponse) -> {
+    private BiConsumer<AddLoadBalancerRequest, TestStreamObserver<Empty>> putLoadBalancerWithJobId = (request, addResponse) ->
         client.addLoadBalancer(request, addResponse);
-    };
 
-    private BiConsumer<JobId, TestStreamObserver<GetJobLoadBalancersResult>> getJobLoadBalancers = (request, getResponse) -> {
+    private BiConsumer<JobId, TestStreamObserver<GetJobLoadBalancersResult>> getJobLoadBalancers = (request, getResponse) ->
         client.getJobLoadBalancers(request, getResponse);
-    };
 
-    private BiConsumer<GetAllLoadBalancersRequest, TestStreamObserver<GetAllLoadBalancersResult>> getAllLoadBalancers = (request, getResponse) -> {
+    private BiConsumer<GetAllLoadBalancersRequest, TestStreamObserver<GetAllLoadBalancersResult>> getAllLoadBalancers = (request, getResponse) ->
         client.getAllLoadBalancers(request, getResponse);
-    };
 
-    private BiConsumer<RemoveLoadBalancerRequest, TestStreamObserver<Empty>> removeLoadBalancers = (request, removeResponse) -> {
+    private BiConsumer<RemoveLoadBalancerRequest, TestStreamObserver<Empty>> removeLoadBalancers = (request, removeResponse) ->
         client.removeLoadBalancer(request, removeResponse);
-    };
 }

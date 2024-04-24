@@ -76,7 +76,7 @@ public class StepScalingPolicyConfiguration {
         return new Builder();
     }
 
-    public static class Builder {
+    public static final class Builder {
         private Optional<Integer> coolDownSec = Optional.empty();
         private Optional<MetricAggregationType> metricAggregationType = Optional.empty();
         private Optional<StepAdjustmentType> adjustmentType = Optional.empty();

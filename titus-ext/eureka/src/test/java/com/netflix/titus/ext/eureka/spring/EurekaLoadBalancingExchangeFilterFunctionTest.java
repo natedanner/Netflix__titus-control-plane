@@ -90,7 +90,7 @@ public class EurekaLoadBalancingExchangeFilterFunctionTest {
         when(next.exchange(any())).thenAnswer(invocation -> {
             ClientRequest rewrittenRequest = invocation.getArgument(0);
             ClientResponse clientResponse = mock(ClientResponse.class);
-            if (rewrittenRequest.url().getHost().equals("1.0.0.1")) {
+            if ("1.0.0.1".equals(rewrittenRequest.url().getHost())) {
                 when(clientResponse.statusCode()).thenReturn(HttpStatus.OK);
             } else {
                 when(clientResponse.statusCode()).thenReturn(HttpStatus.INTERNAL_SERVER_ERROR);

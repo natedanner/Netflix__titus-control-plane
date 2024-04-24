@@ -65,9 +65,9 @@ import static com.netflix.titus.ext.aws.appscale.AWSAppAutoScalingUtil.buildScal
 @Singleton
 public class AWSAppAutoScalingClient implements AppAutoScalingClient {
     private static Logger logger = LoggerFactory.getLogger(AWSAppAutoScalingClient.class);
-    public final static String SERVICE_NAMESPACE = "custom-resource";
+    public static final String SERVICE_NAMESPACE = "custom-resource";
     // AWS requires this field be set to this specific value for all application-autoscaling calls.
-    public final static String SCALABLE_DIMENSION = "custom-resource:ResourceType:Property";
+    public static final String SCALABLE_DIMENSION = "custom-resource:ResourceType:Property";
 
     private final AWSApplicationAutoScalingAsync awsAppAutoScalingClientAsync;
     private final AWSAppScalingConfig awsAppScalingConfig;
@@ -222,12 +222,9 @@ public class AWSAppAutoScalingClient implements AppAutoScalingClient {
 
                 customizedMetricSpecAws.setDimensions(customizedMetricSpecInt.getMetricDimensionList()
                         .stream()
-                        .map(metricDimensionInt -> {
-                            MetricDimension metricDimensionAws = new MetricDimension()
+                        .map(metricDimensionInt -> new MetricDimension()
                                     .withName(metricDimensionInt.getName())
-                                    .withValue(metricDimensionInt.getValue());
-                            return metricDimensionAws;
-                        })
+                                    .withValue(metricDimensionInt.getValue()))
                         .collect(Collectors.toList()));
                 customizedMetricSpecAws.setMetricName(customizedMetricSpecInt.getMetricName());
                 customizedMetricSpecAws.setNamespace(customizedMetricSpecInt.getNamespace());

@@ -148,10 +148,10 @@ public class DefaultManyReconcilerTest {
     @Test
     public void testReconcilerAction() throws InterruptedException {
         newReconcilerWithRegistrations(
-                dataBefore -> dataBefore.equals("a") ? Collections.singletonList(Mono.just(dataAfter -> "b")) : Collections.emptyList(),
+                dataBefore -> "a".equals(dataBefore) ? Collections.singletonList(Mono.just(dataAfter -> "b")) : Collections.emptyList(),
                 "r1", "a"
         );
-        await().until(() -> reconciler.findById("r1").orElse("").equals("b"));
+        await().until(() -> "b".equals(reconciler.findById("r1").orElse("")));
     }
 
     /**

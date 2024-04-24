@@ -233,9 +233,9 @@ public class V1SpecPodFactoryTest {
     public void podHasSidecarAnnotations() {
         Job<BatchJobExt> job = JobGenerator.oneBatchJob();
         BatchJobTask task = JobGenerator.oneBatchTask();
-        String json_args = "{\"foo\":true,\"bar\":3.0}";
+        String jsonArgs = "{\"foo\":true,\"bar\":3.0}";
         List<PlatformSidecar> platformSidecars = Arrays.asList(
-                new PlatformSidecar("mysidecar", "stable", json_args)
+                new PlatformSidecar("mysidecar", "stable", jsonArgs)
         );
         job = job.toBuilder().withJobDescriptor(job.getJobDescriptor().toBuilder().withPlatformSidecars(platformSidecars).build()).build();
 
@@ -250,7 +250,7 @@ public class V1SpecPodFactoryTest {
         assertThat(annotations.get(expectedChannelAnnotation)).isEqualTo("stable");
 
         String expectedArgsAnnotation = "mysidecar" + "." + AnnotationKeySuffixSidecars + "/arguments";
-        assertThat(annotations.get(expectedArgsAnnotation)).isEqualTo(json_args);
+        assertThat(annotations.get(expectedArgsAnnotation)).isEqualTo(jsonArgs);
     }
 
     @Test

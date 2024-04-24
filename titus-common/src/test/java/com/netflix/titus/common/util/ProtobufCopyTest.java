@@ -30,36 +30,36 @@ import static org.assertj.core.api.Assertions.fail;
 
 public class ProtobufCopyTest {
 
-    private static Message OUTER_VALUE;
+    private static Message outerValue;
 
     @BeforeClass
     public static void setUp() throws Exception {
         Message innerValue = ProtoMessageBuilder.newInner("innerValue1", "innerValue2");
         Message innerValue2 = ProtoMessageBuilder.newInner("inner2Value1", "inner2Value2");
-        OUTER_VALUE = ProtoMessageBuilder.newOuter(innerValue, 10, innerValue, innerValue2);
+        outerValue = ProtoMessageBuilder.newOuter(innerValue, 10, innerValue, innerValue2);
     }
 
     @Test
     public void testTopLevelFieldSelection() throws Exception {
         // Include all fields
-        Message all = ProtobufExt.copy(OUTER_VALUE, asSet("objectField", "primitiveField"));
-        FieldDescriptor objectField = ProtoMessageBuilder.getAndAssertField(OUTER_VALUE, "objectField");
-        FieldDescriptor primitiveField = ProtoMessageBuilder.getAndAssertField(OUTER_VALUE, "primitiveField");
+        Message all = ProtobufExt.copy(outerValue, asSet("objectField", "primitiveField"));
+        FieldDescriptor objectField = ProtoMessageBuilder.getAndAssertField(outerValue, "objectField");
+        FieldDescriptor primitiveField = ProtoMessageBuilder.getAndAssertField(outerValue, "primitiveField");
         assertFieldHasValue(all, objectField);
         assertFieldHasValue(all, primitiveField);
 
         // Include only second field
-        Message secondOnly = ProtobufExt.copy(OUTER_VALUE, asSet("primitiveField"));
+        Message secondOnly = ProtobufExt.copy(outerValue, asSet("primitiveField"));
         assertFieldHasNoValue(secondOnly, objectField);
         assertFieldHasValue(secondOnly, primitiveField);
     }
 
     @Test
     public void testNestedSimpleFieldSelection() throws Exception {
-        Message filtered = ProtobufExt.copy(OUTER_VALUE, asSet("objectField.stringField1", "primitiveField"));
-        FieldDescriptor objectField = ProtoMessageBuilder.getAndAssertField(OUTER_VALUE, "objectField");
-        FieldDescriptor primitiveField = ProtoMessageBuilder.getAndAssertField(OUTER_VALUE, "primitiveField");
-        FieldDescriptor objectArrayField = ProtoMessageBuilder.getAndAssertField(OUTER_VALUE, "objectArrayField");
+        Message filtered = ProtobufExt.copy(outerValue, asSet("objectField.stringField1", "primitiveField"));
+        FieldDescriptor objectField = ProtoMessageBuilder.getAndAssertField(outerValue, "objectField");
+        FieldDescriptor primitiveField = ProtoMessageBuilder.getAndAssertField(outerValue, "primitiveField");
+        FieldDescriptor objectArrayField = ProtoMessageBuilder.getAndAssertField(outerValue, "objectArrayField");
         FieldDescriptor stringField1 = ProtoMessageBuilder.getAndAssertField(objectField.getMessageType(), "stringField1");
         FieldDescriptor stringField2 = ProtoMessageBuilder.getAndAssertField(objectField.getMessageType(), "stringField2");
 
@@ -73,10 +73,10 @@ public class ProtobufCopyTest {
 
     @Test
     public void testCollectionFieldSelection() throws Exception {
-        Message filtered = ProtobufExt.copy(OUTER_VALUE, asSet("objectArrayField", "primitiveField"));
-        FieldDescriptor objectField = OUTER_VALUE.getDescriptorForType().findFieldByName("objectField");
-        FieldDescriptor primitiveField = OUTER_VALUE.getDescriptorForType().findFieldByName("primitiveField");
-        FieldDescriptor objectArrayField = OUTER_VALUE.getDescriptorForType().findFieldByName("objectArrayField");
+        Message filtered = ProtobufExt.copy(outerValue, asSet("objectArrayField", "primitiveField"));
+        FieldDescriptor objectField = outerValue.getDescriptorForType().findFieldByName("objectField");
+        FieldDescriptor primitiveField = outerValue.getDescriptorForType().findFieldByName("primitiveField");
+        FieldDescriptor objectArrayField = outerValue.getDescriptorForType().findFieldByName("objectArrayField");
         FieldDescriptor stringField1 = ProtoMessageBuilder.getAndAssertField(objectField.getMessageType(), "stringField1");
         FieldDescriptor stringField2 = ProtoMessageBuilder.getAndAssertField(objectField.getMessageType(), "stringField2");
 
@@ -94,9 +94,9 @@ public class ProtobufCopyTest {
 
     @Test
     public void testNestedCollectionFieldSelection() throws Exception {
-        Message filtered = ProtobufExt.copy(OUTER_VALUE, asSet("objectArrayField.stringField1", "primitiveField"));
-        FieldDescriptor objectField = OUTER_VALUE.getDescriptorForType().findFieldByName("objectField");
-        FieldDescriptor objectArrayField = OUTER_VALUE.getDescriptorForType().findFieldByName("objectArrayField");
+        Message filtered = ProtobufExt.copy(outerValue, asSet("objectArrayField.stringField1", "primitiveField"));
+        FieldDescriptor objectField = outerValue.getDescriptorForType().findFieldByName("objectField");
+        FieldDescriptor objectArrayField = outerValue.getDescriptorForType().findFieldByName("objectArrayField");
         FieldDescriptor stringField1 = ProtoMessageBuilder.getAndAssertField(objectField.getMessageType(), "stringField1");
         FieldDescriptor stringField2 = ProtoMessageBuilder.getAndAssertField(objectField.getMessageType(), "stringField2");
 

@@ -30,7 +30,7 @@ import static com.netflix.titus.common.util.CollectionsExt.nonNull;
  * {@link JobQueryCriteria} covers now v2 API search criteria. It must be refactored once v3 query mechanism
  * is finalized.
  */
-public class JobQueryCriteria<TASK_STATE, JOB_TYPE extends Enum<JOB_TYPE>> {
+public final class JobQueryCriteria<TASK_STATE, JOB_TYPE extends Enum<JOB_TYPE>> {
 
     private final Set<String> jobIds;
     private final Set<String> taskIds;
@@ -441,7 +441,7 @@ public class JobQueryCriteria<TASK_STATE, JOB_TYPE extends Enum<JOB_TYPE>> {
         }
 
         public Builder<TASK_STATE, JOB_TYPE> but() {
-            return JobQueryCriteria.<TASK_STATE, JOB_TYPE>newBuilder()
+            return JobQueryCriteria.newBuilder()
                     .withJobIds(jobIds)
                     .withIncludeArchived(includeArchived)
                     .withJobState(jobState)

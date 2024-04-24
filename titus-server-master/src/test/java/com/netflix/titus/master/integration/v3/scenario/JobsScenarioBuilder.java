@@ -196,9 +196,8 @@ public class JobsScenarioBuilder extends ExternalResource {
                 JobQueryResult queryResult = rethrow(() -> responseObserver.takeNext(TIMEOUT_MS, TimeUnit.MILLISECONDS));
 
                 List<JobScenarioBuilder> result = new ArrayList<>();
-                queryResult.getItemsList().forEach(job -> {
-                    result.add(new JobScenarioBuilder(titusOperations, this, job.getId()));
-                });
+                queryResult.getItemsList().forEach(job ->
+                    result.add(new JobScenarioBuilder(titusOperations, this, job.getId())));
 
                 return result;
             } catch (Exception e) {

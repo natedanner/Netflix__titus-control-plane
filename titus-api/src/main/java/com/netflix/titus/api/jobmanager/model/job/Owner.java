@@ -82,8 +82,7 @@ public class Owner {
         }
 
         public Owner build() {
-            Owner owner = new Owner(teamEmail);
-            return owner;
+            return new Owner(teamEmail);
         }
     }
 }

@@ -65,7 +65,7 @@ class CellWithLoadBalancers extends LoadBalancerServiceGrpc.LoadBalancerServiceI
         );
 
         final List<JobLoadBalancer> jobLoadBalancersList = page.getLeft();
-        final Set<String> jobIds = jobLoadBalancersList.stream().map(jobLoadBalancer -> jobLoadBalancer.getJobId()).collect(Collectors.toSet());
+        final Set<String> jobIds = jobLoadBalancersList.stream().map(JobLoadBalancer::getJobId).collect(Collectors.toSet());
 
         final GetAllLoadBalancersResult.Builder allResultsBuilder = GetAllLoadBalancersResult.newBuilder();
         final List<GetJobLoadBalancersResult> getJobLoadBalancersResults = jobIds.stream()

@@ -388,7 +388,7 @@ public final class JobFunctions {
     }
 
     public static Task fixArchivedTaskStatus(Task task, Clock clock) {
-        Task fixed = task.toBuilder()
+        return task.toBuilder()
                 .withStatus(TaskStatus.newBuilder()
                         .withState(TaskState.Finished)
                         .withReasonCode("inconsistent")
@@ -398,7 +398,6 @@ public final class JobFunctions {
                 )
                 .withStatusHistory(CollectionsExt.copyAndAdd(task.getStatusHistory(), task.getStatus()))
                 .build();
-        return fixed;
     }
 
     public static Task addAllocatedResourcesToTask(Task task, TaskStatus status, TwoLevelResource twoLevelResource, Map<String, String> taskContext) {

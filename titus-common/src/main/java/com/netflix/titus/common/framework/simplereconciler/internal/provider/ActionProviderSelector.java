@@ -117,7 +117,7 @@ public class ActionProviderSelector<DATA> {
         return result.iterator();
     }
 
-    private static class ProviderState<DATA> {
+    private static final class ProviderState<DATA> {
 
         private final ReconcilerActionProvider<DATA> actionProvider;
         private final long executionIntervalMs;

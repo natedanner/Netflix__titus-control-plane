@@ -95,7 +95,7 @@ public class TitusQuotasManager {
     @Activator
     public void enterActiveMode() {
         this.jobUpdateDisposable = jobOperations.observeJobsReactor()
-                .filter(event -> event instanceof JobUpdateEvent)
+                .filter(JobUpdateEvent.class::isInstance)
                 .map(event -> (Job) event.getCurrent())
                 .transformDeferred(ReactorExt.head(jobOperations::getJobs))
                 .transformDeferred(ReactorRetriers.instrumentedRetryer(NAME, RETRY_INTERVAL, logger))

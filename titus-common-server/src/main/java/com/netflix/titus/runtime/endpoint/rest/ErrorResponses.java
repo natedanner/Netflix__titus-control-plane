@@ -212,7 +212,7 @@ public final class ErrorResponses {
                 || ErrorResponse.ErrorResponseBuilder.class.getName().equals(className);
     }
 
-    static class StackTraceRepresentation {
+    static final class StackTraceRepresentation {
 
         private final String message;
         private final String type;

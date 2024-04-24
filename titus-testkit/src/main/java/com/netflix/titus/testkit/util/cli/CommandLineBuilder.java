@@ -79,7 +79,7 @@ public class CommandLineBuilder {
 
     private static boolean hasHelpOption(String[] args) {
         for (String arg : args) {
-            if (arg.equals("-h") || arg.equals("--help")) {
+            if ("-h".equals(arg) || "--help".equals(arg)) {
                 return true;
             }
         }

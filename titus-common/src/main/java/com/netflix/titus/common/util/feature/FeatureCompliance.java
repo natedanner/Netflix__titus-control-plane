@@ -38,7 +38,7 @@ public interface FeatureCompliance<T> {
     Optional<NonComplianceList<T>> checkCompliance(T value);
 
 
-    class NonCompliance<T> {
+    final class NonCompliance<T> {
 
         private final String featureId;
         private final T value;
@@ -98,7 +98,7 @@ public interface FeatureCompliance<T> {
         }
     }
 
-    class NonComplianceList<T> {
+    final class NonComplianceList<T> {
 
         private final List<NonCompliance<T>> violations;
 

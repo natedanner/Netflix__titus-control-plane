@@ -23,7 +23,7 @@ import static java.lang.String.format;
 /**
  * A custom {@link RuntimeException} implementation that indicates errors communicating with a IAM connector.
  */
-public class IamConnectorException extends RuntimeException {
+public final class IamConnectorException extends RuntimeException {
 
     public enum ErrorCode {
         INTERNAL,

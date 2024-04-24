@@ -21,7 +21,7 @@ import com.netflix.titus.api.supervisor.model.ReadinessStatus;
 import com.netflix.titus.api.supervisor.service.LocalMasterReadinessResolver;
 import reactor.core.publisher.Flux;
 
-public class AlwaysEnabledLocalMasterReadinessResolver implements LocalMasterReadinessResolver {
+public final class AlwaysEnabledLocalMasterReadinessResolver implements LocalMasterReadinessResolver {
 
     private static final ReadinessStatus ALWAYS_READY = ReadinessStatus.newBuilder()
             .withState(ReadinessState.Enabled)

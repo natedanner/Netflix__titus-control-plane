@@ -19,7 +19,7 @@ package com.netflix.titus.master.eviction.service.quota;
 import java.util.Objects;
 import java.util.Optional;
 
-public class ConsumptionResult {
+public final class ConsumptionResult {
 
     private static final ConsumptionResult APPROVED = new ConsumptionResult(true, Optional.empty());
 

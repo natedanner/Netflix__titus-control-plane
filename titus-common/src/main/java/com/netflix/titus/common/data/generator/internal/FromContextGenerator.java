@@ -22,7 +22,7 @@ import java.util.function.Function;
 import com.netflix.titus.common.data.generator.DataGenerator;
 import com.netflix.titus.common.util.tuple.Pair;
 
-public class FromContextGenerator<CONTEXT, V> extends DataGenerator<V> {
+public final class FromContextGenerator<CONTEXT, V> extends DataGenerator<V> {
 
     private final Function<CONTEXT, Pair<CONTEXT, Optional<V>>> valueSupplier;
     private final Pair<CONTEXT, Optional<V>> current;

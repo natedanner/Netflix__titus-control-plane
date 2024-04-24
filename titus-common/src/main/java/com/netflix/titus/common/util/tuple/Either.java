@@ -22,7 +22,7 @@ import java.util.function.Function;
  * A container type that holds either a value or an error. It provides a collection of additional methods
  * similar two {@link java.util.Optional}.
  */
-public class Either<T, E> {
+public final class Either<T, E> {
 
     private final T value;
     private final E error;

@@ -44,7 +44,7 @@ import com.netflix.titus.api.jobmanager.model.job.retry.ImmediateRetryPolicy;
  * <li>All information {@link ServiceJobExt specific to Service jobs}: capacity, retry policy, etc</li>
  * </ol>
  */
-public class JobCompatibility {
+public final class JobCompatibility {
 
     private final JobDescriptor<ServiceJobExt> from;
     private final JobDescriptor<ServiceJobExt> to;

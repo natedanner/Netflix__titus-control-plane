@@ -23,7 +23,7 @@ import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.LoadingCache;
 import com.netflix.titus.api.model.Level;
 
-public class CapacityGroupReference extends Reference {
+public final class CapacityGroupReference extends Reference {
 
     private static final LoadingCache<String, CapacityGroupReference> CACHE = Caffeine.newBuilder()
             .expireAfterWrite(Duration.ofHours(1))

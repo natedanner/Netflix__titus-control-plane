@@ -55,7 +55,7 @@ public final class JobSnapshotFactories {
         return new PCollectionJobSnapshotFactory(autoFixInconsistencies, archiveMode, inconsistentDataListener, titusRuntime);
     }
 
-    private static class PCollectionJobSnapshotFactory implements JobSnapshotFactory {
+    private static final class PCollectionJobSnapshotFactory implements JobSnapshotFactory {
 
         private final boolean autoFixInconsistencies;
         private final boolean archiveMode;

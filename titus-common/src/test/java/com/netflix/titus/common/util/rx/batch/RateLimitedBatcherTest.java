@@ -361,7 +361,7 @@ public class RateLimitedBatcherTest {
                 BatchableOperationMock::getResourceId, strategy, "testBatcher", new NoopRegistry(), testScheduler);
     }
 
-    private static class ExceptionThrowingOperator implements Observable.Operator<Object, Batch<?, ?>> {
+    private static final class ExceptionThrowingOperator implements Observable.Operator<Object, Batch<?, ?>> {
         private final String errorMessage;
 
         private ExceptionThrowingOperator(String errorMessage) {

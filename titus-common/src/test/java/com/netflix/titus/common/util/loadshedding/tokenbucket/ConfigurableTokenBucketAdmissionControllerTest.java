@@ -18,6 +18,7 @@ package com.netflix.titus.common.util.loadshedding.tokenbucket;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.Objects;
 
 import com.netflix.archaius.config.DefaultSettableConfig;
 import com.netflix.titus.common.framework.scheduler.model.ScheduleDescriptor;
@@ -68,7 +69,7 @@ public class ConfigurableTokenBucketAdmissionControllerTest {
     public void testRefresh() {
         // Single configuration
         TokenBucketTestConfigurations.SHARED_ANY_PROPERTIES.forEach(config::setProperty);
-        await().until(() -> currentDelegate != null);
+        await().until(Objects::nonNull);
 
         AdmissionControllerDelegateMock firstDelegate = currentDelegate;
         assertThat(firstDelegate.configuration).hasSize(1);
@@ -81,7 +82,7 @@ public class ConfigurableTokenBucketAdmissionControllerTest {
         assertThat(secondDelegate.configuration).hasSize(2);
     }
 
-    private static class AdmissionControllerDelegateMock implements AdaptiveAdmissionController {
+    private static final class AdmissionControllerDelegateMock implements AdaptiveAdmissionController {
 
         private final List<TokenBucketConfiguration> configuration;
 

@@ -25,7 +25,7 @@ import static java.lang.String.format;
 /**
  * A custom runtime exception that indicates an error in the job store.
  */
-public class JobStoreException extends RuntimeException {
+public final class JobStoreException extends RuntimeException {
 
     public enum ErrorCode {
         CASSANDRA_DRIVER_ERROR,

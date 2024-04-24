@@ -38,7 +38,7 @@ public class VersionSuppliers {
         return (T) task.toBuilder().withVersion(supplier.nextVersion()).build();
     }
 
-    private static class SimpleVersionSupplier implements VersionSupplier {
+    private static final class SimpleVersionSupplier implements VersionSupplier {
 
         private final Clock clock;
 

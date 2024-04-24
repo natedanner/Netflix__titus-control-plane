@@ -93,7 +93,7 @@ final class MultiNodeClusterMemberResolverMetrics {
         }
     }
 
-    private class DirectConnection implements Closeable {
+    private final class DirectConnection implements Closeable {
 
         private final DirectClusterMemberResolver directResolver;
         private final long startTime;
@@ -136,7 +136,7 @@ final class MultiNodeClusterMemberResolverMetrics {
         }
     }
 
-    private class KnownMember implements Closeable {
+    private final class KnownMember implements Closeable {
 
         private final long startTime;
 
@@ -167,7 +167,7 @@ final class MultiNodeClusterMemberResolverMetrics {
         }
     }
 
-    private class Leader implements Closeable {
+    private final class Leader implements Closeable {
 
         private final long startTime;
 

@@ -71,7 +71,7 @@ class FsmMetricsImpl<S> implements SpectatorExt.FsmMetrics<S> {
 
     enum StateHolderLifecycle {Active, Inactive, Removable}
 
-    private class StateHolder {
+    private final class StateHolder {
 
         private final Registry registry;
         private final S state;
@@ -95,12 +95,11 @@ class FsmMetricsImpl<S> implements SpectatorExt.FsmMetrics<S> {
                 PolledMeter.using(registry).withId(this.currentStateId).monitorValue(this,
                         // Be sure to access all fields via 'self' object in this method
                         self -> {
-                            switch (self.lifecycle) {
-                                case Active:
-                                    return 1;
-                                case Inactive:
-                                    self.lifecycle = StateHolderLifecycle.Removable;
-                                    return 0;
+                            if (self.lifecycle == FsmMetricsImpl.StateHolderLifecycle.Active) {
+                                return 1;
+                            } else if (self.lifecycle == FsmMetricsImpl.StateHolderLifecycle.Inactive) {
+                                self.lifecycle = StateHolderLifecycle.Removable;
+                                return 0;
                             }
                             // Removable
                             PolledMeter.remove(self.registry, self.currentStateId);

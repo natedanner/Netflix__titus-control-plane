@@ -40,7 +40,7 @@ import org.pcollections.PMap;
 /**
  * TODO Finished tasks are not handled correctly for batch jobs (they are in active data set until replaced).
  */
-public class PCollectionJobSnapshot extends JobSnapshot {
+public final class PCollectionJobSnapshot extends JobSnapshot {
 
     final PMap<String, CachedJob> cachedJobsById;
     final PMap<String, Job<?>> jobsById;

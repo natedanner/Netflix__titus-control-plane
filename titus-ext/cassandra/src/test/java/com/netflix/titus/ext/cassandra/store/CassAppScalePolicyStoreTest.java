@@ -71,9 +71,9 @@ public class CassAppScalePolicyStoreTest {
             STARTUP_TIMEOUT
     );
 
-    private static String POLICY_1_ID = UUID.randomUUID().toString();
-    private static String POLICY_2_ID = UUID.randomUUID().toString();
-    private static String POLICY_3_ID = UUID.randomUUID().toString();
+    private static String policy1Id = UUID.randomUUID().toString();
+    private static String policy2Id = UUID.randomUUID().toString();
+    private static String policy3Id = UUID.randomUUID().toString();
 
 
     @Before
@@ -90,28 +90,28 @@ public class CassAppScalePolicyStoreTest {
         // record 1
         String jobId = "job-1";
         String serializedValue = ObjectMappers.appScalePolicyMapper().writeValueAsString(buildAutoScalingPolicy(jobId).getPolicyConfiguration());
-        BoundStatement boundStatement = stmt.bind(UUID.fromString(POLICY_1_ID), jobId, PolicyStatus.Pending.name(), serializedValue);
+        BoundStatement boundStatement = stmt.bind(UUID.fromString(policy1Id), jobId, PolicyStatus.Pending.name(), serializedValue);
         session.execute(boundStatement);
 
         // record 2
         String jobIdTwo = "job-2";
         String serializedValueTwo = ObjectMappers.appScalePolicyMapper().writeValueAsString(buildAutoScalingPolicy(jobIdTwo).getPolicyConfiguration());
-        boundStatement = stmt.bind(UUID.fromString(POLICY_2_ID), jobIdTwo, PolicyStatus.Pending.name(), serializedValueTwo);
+        boundStatement = stmt.bind(UUID.fromString(policy2Id), jobIdTwo, PolicyStatus.Pending.name(), serializedValueTwo);
         session.execute(boundStatement);
 
         // record 3
-        boundStatement = stmt.bind(UUID.fromString(POLICY_3_ID), jobId, PolicyStatus.Pending.name(), serializedValue);
+        boundStatement = stmt.bind(UUID.fromString(policy3Id), jobId, PolicyStatus.Pending.name(), serializedValue);
         session.execute(boundStatement);
 
         // insert job-policy relationship
         insertStmt = "INSERT INTO app_scale_jobs(job_id, ref_id) VALUES(?, ?);";
         stmt = session.prepare(insertStmt);
 
-        boundStatement = stmt.bind("job-1", UUID.fromString(POLICY_1_ID));
+        boundStatement = stmt.bind("job-1", UUID.fromString(policy1Id));
         session.execute(boundStatement);
-        boundStatement = stmt.bind("job-1", UUID.fromString(POLICY_3_ID));
+        boundStatement = stmt.bind("job-1", UUID.fromString(policy3Id));
         session.execute(boundStatement);
-        boundStatement = stmt.bind("job-2", UUID.fromString(POLICY_2_ID));
+        boundStatement = stmt.bind("job-2", UUID.fromString(policy2Id));
         session.execute(boundStatement);
     }
 
@@ -128,14 +128,14 @@ public class CassAppScalePolicyStoreTest {
 
         List<AutoScalingPolicy> jobOnePolicies = store.retrievePoliciesForJob("job-1").toList().toBlocking().first();
         Assertions.assertThat(jobOnePolicies.size()).isEqualTo(2);
-        List<String> refIdList = jobOnePolicies.stream().map(as -> as.getRefId()).collect(Collectors.toList());
-        Assertions.assertThat(refIdList).containsOnly(POLICY_1_ID, POLICY_3_ID);
+        List<String> refIdList = jobOnePolicies.stream().map(AutoScalingPolicy::getRefId).collect(Collectors.toList());
+        Assertions.assertThat(refIdList).containsOnly(policy1Id, policy3Id);
 
 
         List<AutoScalingPolicy> jobTwoPolicies = store.retrievePoliciesForJob("job-2").toList().toBlocking().first();
         Assertions.assertThat(jobTwoPolicies.size()).isEqualTo(1);
-        List<String> jobTwoRefIdList = jobTwoPolicies.stream().map(as -> as.getRefId()).collect(Collectors.toList());
-        Assertions.assertThat(jobTwoRefIdList).isEqualTo(Arrays.asList(POLICY_2_ID));
+        List<String> jobTwoRefIdList = jobTwoPolicies.stream().map(AutoScalingPolicy::getRefId).collect(Collectors.toList());
+        Assertions.assertThat(jobTwoRefIdList).isEqualTo(Arrays.asList(policy2Id));
 
         // verify metric lower/upper bounds
         List<StepAdjustment> stepAdjustments = jobTwoPolicies.stream()
@@ -168,7 +168,7 @@ public class CassAppScalePolicyStoreTest {
         autoScalingPolicyObservable = store.retrievePoliciesForJob(jobId);
         List<AutoScalingPolicy> autoScalingPolicies = autoScalingPolicyObservable.toList().toBlocking().first();
         Assertions.assertThat(autoScalingPolicies.size()).isEqualTo(2);
-        List<String> refIdList = autoScalingPolicies.stream().map(ap -> ap.getRefId()).collect(Collectors.toList());
+        List<String> refIdList = autoScalingPolicies.stream().map(AutoScalingPolicy::getRefId).collect(Collectors.toList());
         Assertions.assertThat(refIdList).isEqualTo(Arrays.asList(refId, refIdTwo));
         Assertions.assertThat(autoScalingPolicies.get(1).getStatus()).isEqualTo(PolicyStatus.Pending);
 
@@ -329,12 +329,11 @@ public class CassAppScalePolicyStoreTest {
                 .build();
 
 
-        AutoScalingPolicy autoScalingPolicy = AutoScalingPolicy.newBuilder()
+        return AutoScalingPolicy.newBuilder()
                 .withPolicyConfiguration(policyConfiguration)
                 .withStatus(PolicyStatus.Pending)
                 .withStatusMessage("ICE-ed by AWS")
                 .withJobId(jobId)
                 .build();
-        return autoScalingPolicy;
     }
 }

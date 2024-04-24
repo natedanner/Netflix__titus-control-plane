@@ -736,13 +736,13 @@ public class DefaultJobManagementServiceGrpc extends JobManagementServiceGrpc.Jo
                 .map(j -> {
                     if (!JobFunctions.isServiceJob(j)) {
                         throw JobManagerException.notServiceJob(j.getId());
-                    } else if (j.getJobDescriptor().getContainer().getContainerResources().getSignedIpAddressAllocations().size() > 0 &&
+                    } else if (!j.getJobDescriptor().getContainer().getContainerResources().getSignedIpAddressAllocations().isEmpty() &&
                             capacityAttributes.getMax().orElse(0) > j.getJobDescriptor().getContainer().getContainerResources().getSignedIpAddressAllocations().size()) {
                         throw JobManagerException.invalidMaxCapacity(
                                 j.getId(),
                                 capacityAttributes.getMax().orElse(0),
                                 j.getJobDescriptor().getContainer().getContainerResources().getSignedIpAddressAllocations().size());
-                    } else if (j.getJobDescriptor().getContainer().getContainerResources().getEbsVolumes().size() > 0 &&
+                    } else if (!j.getJobDescriptor().getContainer().getContainerResources().getEbsVolumes().isEmpty() &&
                             capacityAttributes.getMax().orElse(0) > j.getJobDescriptor().getContainer().getContainerResources().getEbsVolumes().size()) {
                         throw JobManagerException.invalidMaxCapacity(
                                 j.getId(),

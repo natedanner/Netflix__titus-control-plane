@@ -29,9 +29,9 @@ import io.grpc.stub.MetadataUtils;
 
 public class SampleContextServerInterceptor implements ServerInterceptor {
 
-    private static String CONTEXT_HEADER = "X-Titus-SimpleContext";
-    private static Metadata.Key<String> CONTEXT_KEY = Metadata.Key.of(CONTEXT_HEADER, Metadata.ASCII_STRING_MARSHALLER);
-    private static Context.Key<SampleContext> CALLER_ID_CONTEXT_KEY = Context.key(CONTEXT_HEADER);
+    private static final String CONTEXT_HEADER = "X-Titus-SimpleContext";
+    private static final Metadata.Key<String> CONTEXT_KEY = Metadata.Key.of(CONTEXT_HEADER, Metadata.ASCII_STRING_MARSHALLER);
+    private static final Context.Key<SampleContext> CALLER_ID_CONTEXT_KEY = Context.key(CONTEXT_HEADER);
 
     public static final SampleContext CONTEXT_UNDEFINED = new SampleContext("undefined");
 

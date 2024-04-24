@@ -18,7 +18,7 @@ package com.netflix.titus.testkit.embedded.kube.event;
 
 import java.util.function.Function;
 
-public class EmbeddedKubeEvent<T> {
+public final class EmbeddedKubeEvent<T> {
 
     public enum Kind {
         ADDED,

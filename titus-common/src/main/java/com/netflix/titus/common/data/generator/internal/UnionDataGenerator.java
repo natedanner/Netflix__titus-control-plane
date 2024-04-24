@@ -28,7 +28,7 @@ import com.netflix.titus.common.util.tuple.Pair;
 
 /**
  */
-public class UnionDataGenerator<A> extends DataGenerator<List<A>> {
+public final class UnionDataGenerator<A> extends DataGenerator<List<A>> {
 
     private static final double DEFAULT_DENSITY = 0.3;
     private static final int DEFAULT_INITIAL_CHUNK_SIZE = 3;

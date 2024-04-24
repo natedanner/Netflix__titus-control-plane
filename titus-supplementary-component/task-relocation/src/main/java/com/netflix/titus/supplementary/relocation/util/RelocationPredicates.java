@@ -133,9 +133,9 @@ public class RelocationPredicates {
     }
 
     private static boolean isRelocationRequiredImmediately(Task task) {
-        return task.getAttributes()
-                .getOrDefault(RelocationAttributes.RELOCATION_REQUIRED_IMMEDIATELY, "false")
-                .equalsIgnoreCase("true");
+        return "true"
+                .equalsIgnoreCase(task.getAttributes()
+                .getOrDefault(RelocationAttributes.RELOCATION_REQUIRED_IMMEDIATELY, "false"));
     }
 
     private static boolean isRelocationRequiredByImmediately(Job<?> job, Task task) {
@@ -147,19 +147,19 @@ public class RelocationPredicates {
     }
 
     private static boolean isRelocationNotAllowed(Job<?> job) {
-        return job.getJobDescriptor().getAttributes()
-                .getOrDefault(RelocationAttributes.RELOCATION_NOT_ALLOWED, "false")
-                .equalsIgnoreCase("true");
+        return "true"
+                .equalsIgnoreCase(job.getJobDescriptor().getAttributes()
+                .getOrDefault(RelocationAttributes.RELOCATION_NOT_ALLOWED, "false"));
     }
 
     private static boolean isRelocationNotAllowed(Task task) {
-        return task.getAttributes()
-                .getOrDefault(RelocationAttributes.RELOCATION_NOT_ALLOWED, "false")
-                .equalsIgnoreCase("true");
+        return "true"
+                .equalsIgnoreCase(task.getAttributes()
+                .getOrDefault(RelocationAttributes.RELOCATION_NOT_ALLOWED, "false"));
     }
 
     private static boolean checkRelocationAttribute(Map<String, String> attributes) {
-        return attributes.getOrDefault(RelocationAttributes.RELOCATION_REQUIRED, "false").equalsIgnoreCase("true");
+        return "true".equalsIgnoreCase(attributes.getOrDefault(RelocationAttributes.RELOCATION_REQUIRED, "false"));
     }
 
     private static long getJobTimestamp(Job<?> job, String key) {

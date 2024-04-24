@@ -31,7 +31,7 @@ import rx.Completable;
 import rx.Observable;
 
 public class InMemoryPolicyStore implements AppScalePolicyStore {
-    private static Logger log = LoggerFactory.getLogger(InMemoryPolicyStore.class);
+    private static final Logger log = LoggerFactory.getLogger(InMemoryPolicyStore.class);
 
     private final Map<String, AutoScalingPolicy> policyMap = new ConcurrentHashMap<>();
 

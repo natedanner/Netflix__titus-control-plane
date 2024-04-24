@@ -34,7 +34,7 @@ class FilterOutFirstMarker implements ClientResponseObserver<Empty, JobChangeNot
     private final Emitter<JobChangeNotification> emitter;
     private final CountDownLatch latch;
 
-    private volatile boolean markerReceived = false;
+    private volatile boolean markerReceived;
 
     FilterOutFirstMarker(Emitter<JobChangeNotification> destination, CountDownLatch markersReceived) {
         this.emitter = destination;

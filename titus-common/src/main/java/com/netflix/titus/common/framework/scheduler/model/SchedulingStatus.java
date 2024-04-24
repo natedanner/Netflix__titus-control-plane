@@ -21,7 +21,7 @@ import java.util.Optional;
 
 import com.google.common.base.Preconditions;
 
-public class SchedulingStatus {
+public final class SchedulingStatus {
 
     public enum SchedulingState {
         Waiting,

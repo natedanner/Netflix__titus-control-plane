@@ -165,7 +165,7 @@ public abstract class Task {
 
     public abstract TaskBuilder<?, ?> toBuilder();
 
-    public static abstract class TaskBuilder<T extends Task, B extends TaskBuilder<T, B>> {
+    public abstract static class TaskBuilder<T extends Task, B extends TaskBuilder<T, B>> {
         protected String id;
         protected String jobId;
         protected TaskStatus status;

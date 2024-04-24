@@ -241,7 +241,7 @@ public class NetworkExt {
     /**
      * Limited to IPv4.
      */
-    public static class NetworkAddress {
+    public static final class NetworkAddress {
         private final String address;
         private final int maskLength;
         private final long mask;

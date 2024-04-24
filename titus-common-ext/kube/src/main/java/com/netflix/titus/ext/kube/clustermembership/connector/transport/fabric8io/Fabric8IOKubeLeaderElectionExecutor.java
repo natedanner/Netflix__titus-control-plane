@@ -256,7 +256,7 @@ public class Fabric8IOKubeLeaderElectionExecutor implements KubeLeaderElectionEx
                 .build();
     }
 
-    private class LeaderElectionHandler {
+    private final class LeaderElectionHandler {
 
         private final Thread leaderThread;
 

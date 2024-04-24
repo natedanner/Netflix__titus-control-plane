@@ -81,7 +81,7 @@ public class JobEbsVolumeSanitizerTest {
      */
     @Test
     public void testMetadataAdded() {
-        ComputeValidator.EbsVolumeValidationRequest request_a = ComputeValidator.EbsVolumeValidationRequest.newBuilder()
+        ComputeValidator.EbsVolumeValidationRequest requestA = ComputeValidator.EbsVolumeValidationRequest.newBuilder()
                 .setEbsVolumeId(EBS_VOLUME_A.getVolumeId())
                 .build();
         String azA = "us-east-1a";
@@ -90,13 +90,13 @@ public class JobEbsVolumeSanitizerTest {
                 .withVolumeAvailabilityZone(azA)
                 .withVolumeCapacityGB(sizeA)
                 .build();
-        ComputeValidator.EbsVolumeValidationResponse response_a = ComputeValidator.EbsVolumeValidationResponse.newBuilder()
+        ComputeValidator.EbsVolumeValidationResponse responseA = ComputeValidator.EbsVolumeValidationResponse.newBuilder()
                 .setSuccess(ComputeValidator.EbsVolumeValidationResponse.Success.newBuilder()
                         .setEbsVolumeAvailabilityZone(azA)
                         .setEbsVolumeCapacityGB(sizeA)
                         .build())
                 .build();
-        ComputeValidator.EbsVolumeValidationRequest request_b = ComputeValidator.EbsVolumeValidationRequest.newBuilder()
+        ComputeValidator.EbsVolumeValidationRequest requestB = ComputeValidator.EbsVolumeValidationRequest.newBuilder()
                 .setEbsVolumeId(EBS_VOLUME_B.getVolumeId())
                 .build();
         String azB = "us-east-1b";
@@ -105,15 +105,15 @@ public class JobEbsVolumeSanitizerTest {
                 .withVolumeAvailabilityZone(azB)
                 .withVolumeCapacityGB(sizeB)
                 .build();
-        ComputeValidator.EbsVolumeValidationResponse response_b = ComputeValidator.EbsVolumeValidationResponse.newBuilder()
+        ComputeValidator.EbsVolumeValidationResponse responseB = ComputeValidator.EbsVolumeValidationResponse.newBuilder()
                 .setSuccess(ComputeValidator.EbsVolumeValidationResponse.Success.newBuilder()
                         .setEbsVolumeAvailabilityZone(azB)
                         .setEbsVolumeCapacityGB(sizeB)
                         .build())
                 .build();
 
-        when(validationClient.validateEbsVolume(request_a)).thenReturn(Mono.just(response_a));
-        when(validationClient.validateEbsVolume(request_b)).thenReturn(Mono.just(response_b));
+        when(validationClient.validateEbsVolume(requestA)).thenReturn(Mono.just(responseA));
+        when(validationClient.validateEbsVolume(requestB)).thenReturn(Mono.just(responseB));
 
         StepVerifier.create(sanitizer.sanitize(JOB_WITH_DEFAULT_MULTIPLE_EBS_VOLUMES))
                 .expectNextMatches(operator ->

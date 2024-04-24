@@ -23,7 +23,7 @@ import java.util.function.Function;
 import com.netflix.titus.common.data.generator.DataGenerator;
 import com.netflix.titus.common.util.tuple.Pair;
 
-public class SeqDataGenerator<A, CONTEXT> extends DataGenerator<A[]> {
+public final class SeqDataGenerator<A, CONTEXT> extends DataGenerator<A[]> {
 
     private final int size;
     private final Function<CONTEXT, Pair<CONTEXT, Optional<A>>> factory;

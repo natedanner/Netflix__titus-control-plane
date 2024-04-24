@@ -38,7 +38,7 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.junit.rules.ExternalResource;
 
-public class JaxRsServerResource<S> extends ExternalResource {
+public final class JaxRsServerResource<S> extends ExternalResource {
 
     private final S restService;
     private final List<Filter> filters;
@@ -132,7 +132,7 @@ public class JaxRsServerResource<S> extends ExternalResource {
         return baseURI;
     }
 
-    public static class Builder<S> {
+    public static final class Builder<S> {
 
         private final S restService;
         private final List<Filter> filters = new ArrayList<>();

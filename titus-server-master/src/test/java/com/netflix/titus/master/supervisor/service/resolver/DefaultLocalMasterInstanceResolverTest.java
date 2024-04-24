@@ -36,7 +36,7 @@ public class DefaultLocalMasterInstanceResolverTest {
 
     private final LocalMasterReadinessResolver localMasterReadinessResolver = mock(LocalMasterReadinessResolver.class);
 
-    private MasterInstance initial = MasterInstanceGenerator.masterInstances(MasterState.Starting, "testId").getValue();
+    private final MasterInstance initial = MasterInstanceGenerator.masterInstances(MasterState.Starting, "testId").getValue();
 
     private DefaultLocalMasterInstanceResolver resolver;
 

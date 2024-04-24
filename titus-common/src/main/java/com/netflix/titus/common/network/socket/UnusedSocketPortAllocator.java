@@ -29,7 +29,7 @@ import com.netflix.titus.common.util.StringExt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class UnusedSocketPortAllocator implements SocketPortAllocator {
+public final class UnusedSocketPortAllocator implements SocketPortAllocator {
 
     private static final Logger logger = LoggerFactory.getLogger(UnusedSocketPortAllocator.class);
 

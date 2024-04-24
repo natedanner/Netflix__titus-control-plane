@@ -23,7 +23,7 @@ import reactor.core.publisher.Flux;
 
 public class DataReplicatorDelegate<SNAPSHOT extends ReplicatedSnapshot, TRIGGER> implements DataReplicator<SNAPSHOT, TRIGGER> {
 
-    private DataReplicator<SNAPSHOT, TRIGGER> delegate;
+    private final DataReplicator<SNAPSHOT, TRIGGER> delegate;
 
     public DataReplicatorDelegate(DataReplicator<SNAPSHOT, TRIGGER> delegate) {
         this.delegate = delegate;

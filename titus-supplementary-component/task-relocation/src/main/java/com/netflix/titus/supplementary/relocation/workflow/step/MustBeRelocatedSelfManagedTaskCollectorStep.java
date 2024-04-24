@@ -109,7 +109,7 @@ public class MustBeRelocatedSelfManagedTaskCollectorStep {
         Map<String, TitusNode> taskToInstanceMap = RelocationUtil.buildTasksToInstanceMap(nodes, jobOperations);
 
         List<Triple<Job<?>, Task, TitusNode>> result = new ArrayList<>();
-        jobOperations.getJobs().forEach(job -> {
+        jobOperations.getJobs().forEach(job ->
             jobOperations.getTasks(job.getId()).forEach(task -> {
                 TaskState taskState = task.getStatus().getState();
                 if (taskState == TaskState.StartInitiated || taskState == TaskState.Started) {
@@ -120,8 +120,7 @@ public class MustBeRelocatedSelfManagedTaskCollectorStep {
                         logger.debug("Task in active state with no agent instance: taskId={}, state={}", task.getId(), task.getStatus().getState());
                     }
                 }
-            });
-        });
+            }));
         return result;
     }
 

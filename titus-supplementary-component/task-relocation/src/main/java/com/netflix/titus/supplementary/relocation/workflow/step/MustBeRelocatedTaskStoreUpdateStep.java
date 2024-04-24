@@ -51,7 +51,7 @@ public class MustBeRelocatedTaskStoreUpdateStep {
     private final RelocationTransactionLogger transactionLog;
     private final StepMetrics metrics;
 
-    private Map<String, TaskRelocationPlan> relocationsPlanInStore;
+    private final Map<String, TaskRelocationPlan> relocationsPlanInStore;
 
     public MustBeRelocatedTaskStoreUpdateStep(RelocationConfiguration configuration,
                                               TaskRelocationStore store,

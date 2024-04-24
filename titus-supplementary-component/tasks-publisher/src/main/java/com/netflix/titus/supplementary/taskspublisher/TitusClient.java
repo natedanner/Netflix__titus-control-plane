@@ -29,7 +29,7 @@ public interface TitusClient {
 
     Flux<JobOrTaskUpdate> getJobAndTaskUpdates();
 
-    class JobOrTaskUpdate {
+    final class JobOrTaskUpdate {
 
         private final Job job;
         private final Task task;

@@ -24,7 +24,7 @@ import com.netflix.titus.api.jobmanager.model.job.disruptionbudget.PercentagePer
 import com.netflix.titus.common.runtime.TitusRuntime;
 import com.netflix.titus.common.util.tuple.Pair;
 
-public class JobPercentagePerHourRelocationRateController extends AbstractRatePerIntervalRateController {
+public final class JobPercentagePerHourRelocationRateController extends AbstractRatePerIntervalRateController {
 
     private final EffectiveJobDisruptionBudgetResolver budgetResolver;
 

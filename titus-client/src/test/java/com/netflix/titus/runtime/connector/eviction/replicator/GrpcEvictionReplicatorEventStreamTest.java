@@ -39,10 +39,10 @@ public class GrpcEvictionReplicatorEventStreamTest {
 
     private final TitusRuntime titusRuntime = TitusRuntimes.test();
 
-    private final JobComponentStub JobComponentStub = new JobComponentStub(titusRuntime);
+    private final JobComponentStub jobComponentStub = new JobComponentStub(titusRuntime);
 
     private final EvictionComponentStub evictionComponentStub = new EvictionComponentStub(
-            JobComponentStub,
+            jobComponentStub,
             titusRuntime
     );
 

@@ -32,7 +32,7 @@ import com.netflix.titus.api.model.Tier;
 
 import static java.lang.String.format;
 
-public class JobManagerException extends RuntimeException {
+public final class JobManagerException extends RuntimeException {
 
     public enum ErrorCode {
         JobCreateLimited,
@@ -255,7 +255,7 @@ public class JobManagerException extends RuntimeException {
     public static JobManagerException notCompatible(Job<ServiceJobExt> jobFrom, Job<ServiceJobExt> jobTo, String details) {
         return new JobManagerException(
                 ErrorCode.JobsNotCompatible,
-                format("Operation requires jobs to be compatible: %s -> %s\n%s", jobFrom.getId(), jobTo.getId(), details)
+                format("Operation requires jobs to be compatible: %s -> %s%n%s", jobFrom.getId(), jobTo.getId(), details)
         );
     }
 

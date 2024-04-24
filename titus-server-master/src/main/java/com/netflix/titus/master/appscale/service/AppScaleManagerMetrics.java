@@ -31,7 +31,7 @@ import com.netflix.titus.common.util.spectator.SpectatorExt;
 
 public class AppScaleManagerMetrics {
     private final Id errorMetricId;
-    private Registry registry;
+    private final Registry registry;
     private final AtomicInteger numTargets;
     private final Counter droppedRequestsCount;
 

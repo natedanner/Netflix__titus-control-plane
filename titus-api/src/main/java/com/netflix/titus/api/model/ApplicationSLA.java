@@ -50,7 +50,7 @@ public class ApplicationSLA {
      * Total number of instances required by this application. Titus will keep pre-allocated resources to always
      * fulfill this requirement.
      */
-    private int instanceCount;
+    private final int instanceCount;
 
     public ApplicationSLA(String appName,
                           Tier tier,

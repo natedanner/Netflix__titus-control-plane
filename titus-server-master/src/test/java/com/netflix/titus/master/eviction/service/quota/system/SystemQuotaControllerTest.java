@@ -40,7 +40,7 @@ import static org.mockito.Mockito.when;
 
 public class SystemQuotaControllerTest {
 
-    private static TestClock clock = Clocks.testWorldClock(2000, Month.JANUARY, 1).jumpForwardTo(DayOfWeek.MONDAY);
+    private static final TestClock clock = Clocks.testWorldClock(2000, Month.JANUARY, 1).jumpForwardTo(DayOfWeek.MONDAY);
 
     private final TitusRuntime titusRuntime = TitusRuntimes.test(clock);
 

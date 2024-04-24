@@ -20,7 +20,7 @@ import java.util.Optional;
 
 import com.netflix.titus.api.appscale.model.AutoScalingPolicy;
 
-public class AppScaleAction {
+public final class AppScaleAction {
     public enum ActionType {
         CREATE_SCALING_POLICY,
         DELETE_SCALING_POLICY,
@@ -68,7 +68,7 @@ public class AppScaleAction {
         return new AppScaleActionsBuilder();
     }
 
-    public static class AppScaleActionsBuilder {
+    public static final class AppScaleActionsBuilder {
         private AppScaleActionsBuilder() {
         }
 

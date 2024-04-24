@@ -51,7 +51,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.mock;
 
 public class DefaultAutoScalingServiceGrpcTest {
-    private static Logger log = LoggerFactory.getLogger(DefaultAutoScalingServiceGrpcTest.class);
+    private static final Logger log = LoggerFactory.getLogger(DefaultAutoScalingServiceGrpcTest.class);
 
     private final AppScalePolicyStore appScalePolicyStore = new InMemoryPolicyStore();
     private final AppScaleManager appScaleManager = new DefaultAppScaleManager(appScalePolicyStore,

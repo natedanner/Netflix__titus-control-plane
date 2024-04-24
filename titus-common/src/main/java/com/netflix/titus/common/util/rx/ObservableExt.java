@@ -143,7 +143,7 @@ public class ObservableExt {
      * the resulting {@link Observable} terminates and notifies observers of a {@link java.util.concurrent.TimeoutException}.
      */
     public static <T> Observable.Transformer<T, T> subscriptionTimeout(Supplier<Long> timeout, TimeUnit unit, Scheduler scheduler) {
-        return (observable) -> observable.lift(new SubscriptionTimeout<T>(timeout, unit, scheduler));
+        return observable -> observable.lift(new SubscriptionTimeout<T>(timeout, unit, scheduler));
     }
 
     /**
@@ -154,7 +154,7 @@ public class ObservableExt {
         return source.ignoreElements().materialize().take(1).map(result ->
                 result.getKind() == Notification.Kind.OnError
                         ? Optional.of(result.getThrowable())
-                        : Optional.<Throwable>empty()
+                        : Optional.empty()
         ).toSingle();
     }
 

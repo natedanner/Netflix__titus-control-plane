@@ -18,7 +18,7 @@ package com.netflix.titus.api.model.reference;
 
 import com.netflix.titus.api.model.Level;
 
-public class SystemReference extends Reference {
+public final class SystemReference extends Reference {
 
     private static final SystemReference INSTANCE = new SystemReference();
 

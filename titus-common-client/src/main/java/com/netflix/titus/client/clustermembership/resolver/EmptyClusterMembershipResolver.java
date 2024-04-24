@@ -19,7 +19,7 @@ package com.netflix.titus.client.clustermembership.resolver;
 import com.netflix.titus.api.clustermembership.model.ClusterMembershipSnapshot;
 import reactor.core.publisher.Flux;
 
-public class EmptyClusterMembershipResolver implements ClusterMemberResolver {
+public final class EmptyClusterMembershipResolver implements ClusterMemberResolver {
 
     private static final ClusterMemberResolver INSTANCE = new EmptyClusterMembershipResolver();
 

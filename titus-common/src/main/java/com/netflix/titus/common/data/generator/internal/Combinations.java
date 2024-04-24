@@ -27,7 +27,7 @@ import com.google.common.base.Preconditions;
  * of unique tuples, containing one element from the same range. The ranges can be re-sized, to increase number
  * of available elements.
  */
-class Combinations {
+final class Combinations {
 
     private static final int[][] EMPTY_TUPLES = new int[0][];
 

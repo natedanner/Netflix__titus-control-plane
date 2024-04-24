@@ -22,7 +22,7 @@ import java.util.List;
 import com.google.common.base.Preconditions;
 import com.google.common.primitives.Longs;
 
-public class HistogramDescriptor {
+public final class HistogramDescriptor {
 
     private final long[] valueBounds;
     private final List<Long> valueBoundList;
@@ -47,8 +47,7 @@ public class HistogramDescriptor {
         if (insertionPoint >= 0) {
             return insertionPoint;
         }
-        int position = -(insertionPoint + 1);
-        return position;
+        return -(insertionPoint + 1);
     }
 
     private boolean isAscending(long[] valueBounds) {

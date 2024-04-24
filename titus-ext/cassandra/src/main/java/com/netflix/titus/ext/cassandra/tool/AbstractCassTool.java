@@ -111,7 +111,7 @@ public abstract class AbstractCassTool {
 
     private boolean hasHelpOption(String[] args) {
         for (int i = 0; i < args.length; i++) {
-            if (args[i].equals("-h") || args[i].equals("--help")) {
+            if ("-h".equals(args[i]) || "--help".equals(args[i])) {
                 return true;
             }
         }
@@ -126,7 +126,7 @@ public abstract class AbstractCassTool {
         } catch (ParseException e) {
             throw new IllegalArgumentException(e.getMessage());
         }
-        if (cli.getArgList().size() > 0) {
+        if (!cli.getArgList().isEmpty()) {
             throw new IllegalArgumentException("Too many command line arguments: " + cli.getArgList());
         }
         return cli;

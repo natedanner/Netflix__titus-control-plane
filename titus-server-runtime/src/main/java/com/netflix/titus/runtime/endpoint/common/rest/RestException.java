@@ -19,7 +19,7 @@ package com.netflix.titus.runtime.endpoint.common.rest;
 /**
  *
  */
-public class RestException extends RuntimeException {
+public final class RestException extends RuntimeException {
 
     private final int statusCode;
     private final String message;

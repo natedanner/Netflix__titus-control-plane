@@ -22,7 +22,7 @@ import java.util.Objects;
 
 import com.google.common.base.Preconditions;
 
-public class ScheduledAction {
+public final class ScheduledAction {
 
     private final String id;
     private final SchedulingStatus status;

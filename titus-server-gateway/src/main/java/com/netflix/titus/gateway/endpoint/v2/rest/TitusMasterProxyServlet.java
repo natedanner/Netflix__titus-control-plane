@@ -181,7 +181,7 @@ public class TitusMasterProxyServlet extends HttpServlet {
 
             if (clientResponse.hasBody()) {
                 responseInputStream = clientResponse.getBody().get(InputStream.class);
-                responseInputStream = (configuration.isProxyErrorLoggingEnabled() && !clientResponse.isSuccessful()) ?
+                responseInputStream = configuration.isProxyErrorLoggingEnabled() && !clientResponse.isSuccessful() ?
                         new ByteCopyInputStream(responseInputStream, MAX_BYTES_TO_BUFFER) : responseInputStream;
 
                 ByteStreams.copy(responseInputStream, response.getOutputStream());
@@ -322,7 +322,7 @@ public class TitusMasterProxyServlet extends HttpServlet {
             if (bytesRead > 0) {
                 int available = byteCopySize - position;
                 if (available > 0) {
-                    int length = (available < len) ? available : len;
+                    int length = available < len ? available : len;
                     bytes.write(b, off, length);
                     position += bytesRead;
                 }

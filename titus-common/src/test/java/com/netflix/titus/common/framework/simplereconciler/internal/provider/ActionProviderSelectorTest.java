@@ -131,7 +131,7 @@ public class ActionProviderSelectorTest {
         ), titusRuntime);
         Iterator<ReconcilerActionProvider<String>> it = selector.next(testClock.wallTime());
         ReconcilerActionProvider<String> next = it.next();
-        if (next.getPolicy().getName().equals("a")) {
+        if ("a".equals(next.getPolicy().getName())) {
             expectInternal(it, "b");
             selector.updateEvaluationTime("a", testClock.wallTime());
             it = selector.next(testClock.wallTime());

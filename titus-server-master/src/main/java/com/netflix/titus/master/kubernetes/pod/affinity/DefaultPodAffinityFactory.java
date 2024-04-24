@@ -85,7 +85,7 @@ public class DefaultPodAffinityFactory implements PodAffinityFactory {
         return new Processor(job, task).build();
     }
 
-    private class Processor {
+    private final class Processor {
 
         private final Job<?> job;
         private final Task task;

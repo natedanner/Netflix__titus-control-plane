@@ -16,7 +16,7 @@
 
 package com.netflix.titus.runtime.endpoint.authorization;
 
-public class AuthorizationStatus {
+public final class AuthorizationStatus {
 
     private static final AuthorizationStatus SUCCESS = new AuthorizationStatus(true, "Access granted");
 

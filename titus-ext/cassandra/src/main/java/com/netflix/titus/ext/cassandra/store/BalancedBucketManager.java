@@ -34,7 +34,7 @@ import com.netflix.spectator.api.Registry;
 public class BalancedBucketManager<T> {
     private final Object mutex = new Object();
     private final int maxBucketSize;
-    private Registry registry;
+    private final Registry registry;
     private final Map<T, Integer> itemToBucket;
     private final Map<Integer, Integer> bucketSizes;
 

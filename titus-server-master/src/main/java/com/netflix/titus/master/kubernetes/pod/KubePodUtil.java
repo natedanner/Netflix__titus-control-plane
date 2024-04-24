@@ -277,7 +277,7 @@ public class KubePodUtil {
 
     public static List<String> getVolumeNames(List<V1Volume> volumes) {
         return volumes.stream()
-                .map(e -> e.getName())
+                .map(V1Volume::getName)
                 .collect(Collectors.toList());
     }
 

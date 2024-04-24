@@ -84,7 +84,7 @@ public class AutoScalingPolicy {
                 '}';
     }
 
-    public static class Builder {
+    public static final class Builder {
         private String refId;
         private String jobId;
         private PolicyConfiguration policyConfiguration;

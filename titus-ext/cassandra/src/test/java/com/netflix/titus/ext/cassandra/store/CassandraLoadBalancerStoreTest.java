@@ -111,9 +111,8 @@ public class CassandraLoadBalancerStoreTest {
         CassandraLoadBalancerStore store = getInitdStore();
 
         // Apply the testData to the store
-        testData.forEach((jobLoadBalancer, state) -> {
-            assertThat(store.addOrUpdateLoadBalancer(jobLoadBalancer, state).await(TIMEOUT_MS, TimeUnit.MILLISECONDS)).isTrue();
-        });
+        testData.forEach((jobLoadBalancer, state) ->
+            assertThat(store.addOrUpdateLoadBalancer(jobLoadBalancer, state).await(TIMEOUT_MS, TimeUnit.MILLISECONDS)).isTrue());
 
         // Check that all expected data was loaded
         checkDataSetExists(store, testData);
@@ -159,9 +158,8 @@ public class CassandraLoadBalancerStoreTest {
 
         Map<String, List<JobLoadBalancerState>> byJobId = store.getAssociations().stream()
                 .collect(Collectors.groupingBy(JobLoadBalancerState::getJobId));
-        testData.forEach((jobLoadBalancer, state) -> {
-            assertThat(byJobId.get(jobLoadBalancer.getJobId())).isNullOrEmpty();
-        });
+        testData.forEach((jobLoadBalancer, state) ->
+            assertThat(byJobId.get(jobLoadBalancer.getJobId())).isNullOrEmpty());
     }
 
     @Test
@@ -169,13 +167,11 @@ public class CassandraLoadBalancerStoreTest {
         Map<JobLoadBalancer, JobLoadBalancer.State> testData = generateTestData(10, 20, 1).getAssociations();
         CassandraLoadBalancerStore store = getInitdStore();
 
-        testData.forEach((jobLoadBalancer, state) -> {
-            assertThat(store.addOrUpdateLoadBalancer(jobLoadBalancer, ASSOCIATED).await(TIMEOUT_MS, TimeUnit.MILLISECONDS)).isTrue();
-        });
+        testData.forEach((jobLoadBalancer, state) ->
+            assertThat(store.addOrUpdateLoadBalancer(jobLoadBalancer, ASSOCIATED).await(TIMEOUT_MS, TimeUnit.MILLISECONDS)).isTrue());
 
-        testData.forEach((jobLoadBalancer, state) -> {
-            assertThat(store.addOrUpdateLoadBalancer(jobLoadBalancer, DISSOCIATED).await(TIMEOUT_MS, TimeUnit.MILLISECONDS)).isTrue();
-        });
+        testData.forEach((jobLoadBalancer, state) ->
+            assertThat(store.addOrUpdateLoadBalancer(jobLoadBalancer, DISSOCIATED).await(TIMEOUT_MS, TimeUnit.MILLISECONDS)).isTrue());
 
         Map<String, List<JobLoadBalancerState>> byJobId = store.getAssociations().stream()
                 .collect(Collectors.groupingBy(JobLoadBalancerState::getJobId));
@@ -291,9 +287,8 @@ public class CassandraLoadBalancerStoreTest {
         List<JobLoadBalancer> jobLoadBalancerPage;
         do {
             jobLoadBalancerPage = store.getAssociationsPage(currentPageOffset, pageSize);
-            jobLoadBalancerPage.forEach(jobLoadBalancer -> {
-                assertThat(unverifiedData.remove(jobLoadBalancer)).isTrue();
-            });
+            jobLoadBalancerPage.forEach(jobLoadBalancer ->
+                assertThat(unverifiedData.remove(jobLoadBalancer)).isTrue());
             // Make sure all but the last page is full size
             if ((numTestJobs * numTestLbs) - currentPageOffset >= pageSize) {
                 assertThat(jobLoadBalancerPage.size()).isEqualTo(pageSize);
@@ -304,7 +299,7 @@ public class CassandraLoadBalancerStoreTest {
             currentPageOffset += jobLoadBalancerPage.size();
             // Make sure we've stopped before reading beyond the data set size
             assertThat(currentPageOffset <= numTestJobs * numTestLbs).isTrue();
-        } while (jobLoadBalancerPage.size() > 0);
+        } while (!jobLoadBalancerPage.isEmpty());
         // Make sure all of the data was checked
         assertThat(unverifiedData.isEmpty()).isTrue();
     }

@@ -287,7 +287,7 @@ public class AggregatingLoadBalancerServiceTest {
         final List<GetJobLoadBalancersResult> onNextEvents = resultSubscriber.getOnNextEvents();
         assertThat(onNextEvents).hasSize(1);
         final List<LoadBalancerId> loadBalancersList = onNextEvents.get(0).getLoadBalancersList();
-        final List<String> resultLoadBalancers = loadBalancersList.stream().map(loadBalancerId -> loadBalancerId.getId()).collect(Collectors.toList());
+        final List<String> resultLoadBalancers = loadBalancersList.stream().map(LoadBalancerId::getId).collect(Collectors.toList());
         assertThat(resultLoadBalancers).contains(LB_1, LB_2);
     }
 

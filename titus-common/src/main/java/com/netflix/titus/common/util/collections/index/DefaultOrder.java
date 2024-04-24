@@ -140,7 +140,7 @@ public class DefaultOrder<INDEX_KEY, PRIMARY_KEY, INPUT, OUTPUT> implements Orde
         return filtered;
     }
 
-    private static class ListItem<INDEX_KEY, PRIMARY_KEY, INPUT, OUTPUT> {
+    private static final class ListItem<INDEX_KEY, PRIMARY_KEY, INPUT, OUTPUT> {
 
         private final INDEX_KEY indexKey;
         private final PRIMARY_KEY primaryKey;

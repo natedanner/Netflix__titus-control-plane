@@ -22,7 +22,7 @@ import com.google.common.collect.ImmutableMap;
 import com.netflix.titus.common.data.generator.DataGenerator;
 import com.netflix.titus.common.util.tuple.Pair;
 
-public class BindDataGenerator<A, B> extends DataGenerator<Pair<A, B>> {
+public final class BindDataGenerator<A, B> extends DataGenerator<Pair<A, B>> {
 
     private final DataGenerator<A> domain;
     private final DataGenerator<B> codomain;

@@ -24,7 +24,7 @@ import com.google.common.base.Preconditions;
 import com.netflix.titus.common.data.generator.DataGenerator;
 import com.netflix.titus.common.util.tuple.Pair;
 
-public class BatchDataGenerator<T> extends DataGenerator<List<T>> {
+public final class BatchDataGenerator<T> extends DataGenerator<List<T>> {
 
     private final DataGenerator<T> source;
     private final int batchSize;

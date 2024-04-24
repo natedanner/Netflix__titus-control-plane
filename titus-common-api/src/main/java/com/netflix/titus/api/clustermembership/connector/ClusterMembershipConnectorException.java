@@ -16,7 +16,7 @@
 
 package com.netflix.titus.api.clustermembership.connector;
 
-public class ClusterMembershipConnectorException extends RuntimeException {
+public final class ClusterMembershipConnectorException extends RuntimeException {
 
     public enum ErrorCode {
         Conflict,

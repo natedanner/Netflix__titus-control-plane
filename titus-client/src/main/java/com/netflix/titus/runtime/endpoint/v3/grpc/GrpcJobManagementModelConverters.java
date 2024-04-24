@@ -436,17 +436,16 @@ public final class GrpcJobManagementModelConverters {
     }
 
     private static Volume toCoreVolume(com.netflix.titus.grpc.protogen.Volume grpcVolume) {
-        switch (grpcVolume.getVolumeSourceCase()) {
-            case SHAREDCONTAINERVOLUMESOURCE:
-                VolumeSource source = toCoreSharedVolumeSource(grpcVolume.getSharedContainerVolumeSource());
-                return Volume.newBuilder()
-                        .withName(grpcVolume.getName())
-                        .withVolumeSource(source).build();
-            case SAASVOLUMESOURCE:
-                VolumeSource saaSSource = toCoreSaaSVolumeSource(grpcVolume.getSaaSVolumeSource());
-                return Volume.newBuilder()
-                        .withName(grpcVolume.getName())
-                        .withVolumeSource(saaSSource).build();
+        if (grpcVolume.getVolumeSourceCase() == com.netflix.titus.grpc.protogen.Volume.VolumeSourceCase.SHAREDCONTAINERVOLUMESOURCE) {
+            VolumeSource source = toCoreSharedVolumeSource(grpcVolume.getSharedContainerVolumeSource());
+            return Volume.newBuilder()
+                    .withName(grpcVolume.getName())
+                    .withVolumeSource(source).build();
+        } else if (grpcVolume.getVolumeSourceCase() == com.netflix.titus.grpc.protogen.Volume.VolumeSourceCase.SAASVOLUMESOURCE) {
+            VolumeSource saaSSource = toCoreSaaSVolumeSource(grpcVolume.getSaaSVolumeSource());
+            return Volume.newBuilder()
+                    .withName(grpcVolume.getName())
+                    .withVolumeSource(saaSSource).build();
         }
         return null;
     }

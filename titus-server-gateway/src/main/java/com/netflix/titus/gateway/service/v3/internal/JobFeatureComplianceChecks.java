@@ -225,7 +225,7 @@ class JobFeatureComplianceChecks {
 
     private static String toString(MigrationPolicy migrationPolicy) {
         try {
-            return (migrationPolicy == null ? "none" : ObjectMappers.storeMapper().writeValueAsString(migrationPolicy));
+            return migrationPolicy == null ? "none" : ObjectMappers.storeMapper().writeValueAsString(migrationPolicy);
         } catch (Exception e) {
             return String.format("<%s>", e.getMessage());
         }

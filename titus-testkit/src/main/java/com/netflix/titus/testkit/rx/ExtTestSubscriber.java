@@ -87,6 +87,7 @@ public class ExtTestSubscriber<T> extends Subscriber<T> {
 
     public void skipAvailable() {
         while (takeNext() != null) {
+            continue;
         }
     }
 

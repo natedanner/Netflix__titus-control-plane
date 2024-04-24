@@ -39,7 +39,7 @@ class ReactorClientInvocationHandler<REACT_API> implements InvocationHandler {
         if (methodHandler != null) {
             return methodHandler.apply(args);
         }
-        if (method.getName().equals("toString")) {
+        if ("toString".equals(method.getName())) {
             return toStringValue;
         }
         return method.invoke(this, args);

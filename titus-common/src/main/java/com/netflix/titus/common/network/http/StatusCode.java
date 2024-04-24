@@ -107,7 +107,7 @@ public enum StatusCode {
     private final int code;
     private final String description;
     private StatusClass statusClass;
-    private boolean retryable;
+    private final boolean retryable;
 
     /**
      * An enumeration representing the class of status code. Family is used

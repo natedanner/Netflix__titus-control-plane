@@ -18,7 +18,7 @@ package com.netflix.titus.api.connector.cloud;
 
 import java.util.Collection;
 
-public class CloudConnectorException extends RuntimeException {
+public final class CloudConnectorException extends RuntimeException {
 
     public enum ErrorCode {
         Internal,

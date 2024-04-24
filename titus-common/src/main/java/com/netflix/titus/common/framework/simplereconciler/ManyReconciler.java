@@ -79,7 +79,7 @@ public interface ManyReconciler<DATA> {
         return new Builder<>();
     }
 
-    class Builder<DATA> {
+    final class Builder<DATA> {
 
         private String name = "default";
         private Duration quickCycle;
@@ -248,8 +248,7 @@ public interface ManyReconciler<DATA> {
                 actionProviders.add(externalActionProvider);
             }
             actionProviders.addAll(internalActionProviders.values());
-            ActionProviderSelectorFactory<DATA> providerSelector = new ActionProviderSelectorFactory<>(name, actionProviders, titusRuntime);
-            return providerSelector;
+            return new ActionProviderSelectorFactory<>(name, actionProviders, titusRuntime);
         }
     }
 }

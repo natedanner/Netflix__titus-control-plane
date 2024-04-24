@@ -589,7 +589,7 @@ public class DefaultV3JobOperations implements V3JobOperations {
             jobId = UUID.randomUUID().toString();
         }
 
-        return Job.<E>newBuilder()
+        return Job.newBuilder()
                 .withId(jobId)
                 .withJobDescriptor(jobDescriptor)
                 .withStatus(JobStatus.newBuilder()

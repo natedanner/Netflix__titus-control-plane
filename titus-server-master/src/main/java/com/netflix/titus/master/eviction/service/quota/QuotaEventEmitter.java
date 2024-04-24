@@ -105,7 +105,7 @@ public class QuotaEventEmitter {
         });
     }
 
-    private class SinkHolder {
+    private final class SinkHolder {
 
         private final FluxSink<EvictionEvent> sink;
         private Map<Reference, EvictionQuota> emittedQuotas = Collections.emptyMap();

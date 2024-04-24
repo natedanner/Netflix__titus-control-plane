@@ -27,7 +27,7 @@ import java.util.Objects;
  * @param <I> type of the batch identifier (index)
  * @param <T> type of items in the batch
  */
-public class Batch<T extends Batchable<?>, I> {
+public final class Batch<T extends Batchable<?>, I> {
     private static final Comparator<Batch<?, ?>> COMPARING_BY_SIZE = Comparator.comparingInt(b -> b.getItems().size());
 
     public static Comparator<Batch<?, ?>> bySize() {

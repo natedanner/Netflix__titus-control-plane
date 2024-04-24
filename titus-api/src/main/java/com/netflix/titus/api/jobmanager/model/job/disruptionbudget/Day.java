@@ -67,10 +67,10 @@ public enum Day {
         }
     };
 
-    private static EnumSet<Day> WEEKDAYS = EnumSet.of(Monday, Tuesday, Wednesday, Thursday, Friday);
-    private static EnumSet<Day> WEEKEND = EnumSet.of(Saturday, Sunday);
+    private static final EnumSet<Day> WEEKDAYS = EnumSet.of(Monday, Tuesday, Wednesday, Thursday, Friday);
+    private static final EnumSet<Day> WEEKEND = EnumSet.of(Saturday, Sunday);
 
-    private static Map<DayOfWeek, Day> DAY_OF_WEEK_TO_DAY_MAP = new ImmutableMap.Builder<DayOfWeek, Day>()
+    private static final Map<DayOfWeek, Day> DAY_OF_WEEK_TO_DAY_MAP = new ImmutableMap.Builder<DayOfWeek, Day>()
             .put(DayOfWeek.SUNDAY, Day.Sunday)
             .put(DayOfWeek.MONDAY, Day.Monday)
             .put(DayOfWeek.TUESDAY, Day.Tuesday)

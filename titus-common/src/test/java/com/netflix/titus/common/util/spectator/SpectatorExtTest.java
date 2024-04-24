@@ -27,7 +27,7 @@ public class SpectatorExtTest {
     @Test
     public void testUniqueTagValue() {
         assertThat(SpectatorExt.uniqueTagValue("testBase", value -> false)).isEqualTo("testBase");
-        assertThat(SpectatorExt.uniqueTagValue("testBase", value -> value.equals("testBase"))).startsWith("testBase#");
+        assertThat(SpectatorExt.uniqueTagValue("testBase", "testBase"::equals)).startsWith("testBase#");
         AtomicInteger counter = new AtomicInteger();
         assertThat(SpectatorExt.uniqueTagValue("testBase", value -> counter.incrementAndGet() < 5)).startsWith("testBase#");
         assertThat(counter).hasValue(5);

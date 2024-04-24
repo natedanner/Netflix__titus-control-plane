@@ -298,7 +298,7 @@ public class GatewayJobServiceGateway extends JobServiceGatewayDelegate {
             }
         }
 
-        return observable.timeout(tunablesConfiguration.getRequestTimeoutMs(), TimeUnit.MILLISECONDS).map(queryResult -> taskDataInjector.injectIntoTaskQueryResult(queryResult));
+        return observable.timeout(tunablesConfiguration.getRequestTimeoutMs(), TimeUnit.MILLISECONDS).map(taskDataInjector::injectIntoTaskQueryResult);
     }
 
     @Override

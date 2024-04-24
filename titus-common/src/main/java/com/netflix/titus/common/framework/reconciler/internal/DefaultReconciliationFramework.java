@@ -88,7 +88,7 @@ public class DefaultReconciliationFramework<EVENT> implements ReconciliationFram
     private final Scheduler.Worker worker;
 
     private volatile boolean runnable = true;
-    private volatile boolean started = false;
+    private volatile boolean started;
 
     private final EventDistributor<EVENT> eventDistributor;
 

@@ -20,7 +20,7 @@ import com.netflix.titus.api.supervisor.model.MasterInstance;
 
 import static java.lang.String.format;
 
-public class SupervisorServiceException extends RuntimeException {
+public final class SupervisorServiceException extends RuntimeException {
 
     public enum ErrorCode {
         MasterInstanceNotFound,

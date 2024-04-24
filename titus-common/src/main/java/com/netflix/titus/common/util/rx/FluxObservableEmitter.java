@@ -24,7 +24,7 @@ import rx.Subscription;
 
 class FluxObservableEmitter<T> implements Consumer<FluxSink<T>> {
 
-    private Observable<T> source;
+    private final Observable<T> source;
 
     FluxObservableEmitter(Observable<T> source) {
         this.source = source;

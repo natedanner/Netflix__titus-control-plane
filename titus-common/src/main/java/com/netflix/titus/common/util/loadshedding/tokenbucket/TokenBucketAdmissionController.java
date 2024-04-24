@@ -252,7 +252,7 @@ public class TokenBucketAdmissionController implements AdaptiveAdmissionControll
                 .build();
     }
 
-    private static class TokenBucketInstance {
+    private static final class TokenBucketInstance {
 
         private final TokenBucketConfiguration configuration;
         private final TokenBucket tokenBucket;

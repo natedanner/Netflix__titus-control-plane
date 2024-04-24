@@ -148,7 +148,7 @@ class GrpcClusterMembershipLeaderNameResolver extends NameResolver {
         }
     }
 
-    private static class LeaderMetrics {
+    private static final class LeaderMetrics {
         private final long electedTimestamp;
         private final Id metricLeaderId;
         private final TitusRuntime titusRuntime;

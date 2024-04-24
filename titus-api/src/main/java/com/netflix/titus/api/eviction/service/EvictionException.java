@@ -22,7 +22,7 @@ import com.netflix.titus.api.jobmanager.model.job.TaskState;
 import com.netflix.titus.api.model.reference.Reference;
 import com.netflix.titus.common.util.StringExt;
 
-public class EvictionException extends RuntimeException {
+public final class EvictionException extends RuntimeException {
 
     public enum ErrorCode {
         BadConfiguration,

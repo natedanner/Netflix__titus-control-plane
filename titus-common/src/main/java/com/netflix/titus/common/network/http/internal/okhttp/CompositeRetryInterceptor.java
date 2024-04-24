@@ -33,7 +33,7 @@ public class CompositeRetryInterceptor implements Interceptor {
 
     public CompositeRetryInterceptor(List<Interceptor> interceptors, int numberOfRetries) {
         Preconditions.checkNotNull(interceptors);
-        Preconditions.checkArgument(interceptors.size() > 0, "There must be at least 1 intercepor");
+        Preconditions.checkArgument(!interceptors.isEmpty(), "There must be at least 1 intercepor");
 
         this.interceptors = interceptors;
         this.attempts = numberOfRetries + 1;

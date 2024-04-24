@@ -138,12 +138,11 @@ public class JobS3LogLocationValidator implements AdmissionValidator<JobDescript
     private Set<ValidationError> toValidationError(List<ValidationFailure> failures) {
         Set<ValidationError> result = new HashSet<>();
 
-        failures.forEach(failure -> {
+        failures.forEach(failure ->
             result.add(new ValidationError(
                     JobAttributes.JOB_CONTAINER_ATTRIBUTE_S3_BUCKET_NAME,
                     String.format("Access denied: errorCode=%s, errorMessage=%s", failure.getErrorCode(), failure.getErrorMessage())
-            ));
-        });
+            )));
 
         return result;
     }

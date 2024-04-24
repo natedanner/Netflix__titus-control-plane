@@ -93,7 +93,7 @@ public class GrpcEvictionService extends EvictionServiceGrpc.EvictionServiceImpl
 
     @Override
     public void terminateTask(TaskTerminateRequest request, StreamObserver<TaskTerminateResponse> responseObserver) {
-        execute(callMetadataResolver, responseObserver, callMetadata -> {
+        execute(callMetadataResolver, responseObserver, callMetadata ->
             evictionOperations.terminateTask(request.getTaskId(), request.getReason(), CallMetadataUtils.toCallerId(callMetadata)).subscribe(
                     next -> {
                     },
@@ -107,9 +107,7 @@ public class GrpcEvictionService extends EvictionServiceGrpc.EvictionServiceImpl
                         );
                         responseObserver.onCompleted();
                     }
-            );
-
-        });
+            ));
     }
 
     @Override

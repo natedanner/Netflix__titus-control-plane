@@ -74,7 +74,7 @@ public class EmbeddedTitusGateway {
     private int masterGrpcPort;
     private int masterHttpPort;
 
-    private int httpPort;
+    private final int httpPort;
     private final int grpcPort;
     private final boolean enableREST;
     private final JobStore store;

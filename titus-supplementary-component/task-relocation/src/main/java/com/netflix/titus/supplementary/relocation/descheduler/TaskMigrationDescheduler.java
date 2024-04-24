@@ -235,7 +235,7 @@ class TaskMigrationDescheduler {
             }
         }
 
-        if (chosenList.size() == 0) {
+        if (chosenList.isEmpty()) {
             return FITNESS_RESULT_NONE;
         }
 

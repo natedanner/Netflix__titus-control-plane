@@ -31,7 +31,7 @@ import com.netflix.titus.common.util.tuple.Pair;
  * are immutable, thus each change produces a new version of an entity. Also each child update requires update of a parent
  * entity, when the reference to the child changes (a new version is created).
  */
-public class EntityHolder {
+public final class EntityHolder {
 
     private final String id;
     private final Object entity;

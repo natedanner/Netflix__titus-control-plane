@@ -42,7 +42,7 @@ import com.netflix.titus.ext.aws.DataPlaneAgentCredentialsProvider;
 
 import static com.netflix.titus.common.util.CollectionsExt.asSet;
 
-public class Main {
+public final class Main {
 
     private static final String REGION = "us-east-1";
 
@@ -84,7 +84,7 @@ public class Main {
         Stopwatch started = Stopwatch.createStarted();
         try {
             Main main = new Main(createConnector());
-            if (cmd.equals("agentAssume")) {
+            if ("agentAssume".equals(cmd)) {
                 main.canAgentAssume(params.get(0));
             }
         } catch (Throwable e) {

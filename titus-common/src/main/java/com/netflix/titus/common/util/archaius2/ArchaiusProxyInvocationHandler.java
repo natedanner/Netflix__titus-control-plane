@@ -120,7 +120,7 @@ class ArchaiusProxyInvocationHandler implements InvocationHandler {
         );
     }
 
-    private class PropertyMethodHandler implements MethodHandler {
+    private final class PropertyMethodHandler implements MethodHandler {
 
         private final String key;
         private final String baseKeyName;
@@ -179,7 +179,7 @@ class ArchaiusProxyInvocationHandler implements InvocationHandler {
         }
     }
 
-    private static class ValueHolder {
+    private static final class ValueHolder {
 
         private final String stringValue;
         private final Object value;

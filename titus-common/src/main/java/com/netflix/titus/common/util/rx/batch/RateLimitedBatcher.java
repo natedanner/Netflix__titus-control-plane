@@ -78,7 +78,7 @@ import rx.plugins.RxJavaHooks;
  * @param <T> type of items to be queued and batched
  * @param <I> type of the value (an index, usually a field of T, provided by <tt>IndexExtractor</tt>) to batch by
  */
-public class RateLimitedBatcher<T extends Batchable<?>, I> implements Observable.Operator<Batch<T, I>, T> {
+public final class RateLimitedBatcher<T extends Batchable<?>, I> implements Observable.Operator<Batch<T, I>, T> {
     private final Logger logger = LoggerFactory.getLogger(RateLimitedBatcher.class);
 
     private static final String ACTION_FLUSH = "flush";
@@ -112,7 +112,7 @@ public class RateLimitedBatcher<T extends Batchable<?>, I> implements Observable
                                                                               String metricsRoot,
                                                                               Registry registry,
                                                                               Scheduler scheduler) {
-        return new RateLimitedBatcher<T, I>(tokenBucket, initialDelay, maxDelay, indexExtractor, emissionStrategy, metricsRoot, registry, scheduler);
+        return new RateLimitedBatcher<>(tokenBucket, initialDelay, maxDelay, indexExtractor, emissionStrategy, metricsRoot, registry, scheduler);
     }
 
     private RateLimitedBatcher(TokenBucket tokenBucket,
@@ -202,19 +202,19 @@ public class RateLimitedBatcher<T extends Batchable<?>, I> implements Observable
         /**
          * tracks when upstream has completed emitting, so we can terminate after flushing what is currently pending
          */
-        private volatile boolean done = false;
+        private volatile boolean done;
         /**
          * tracks when an error has been scheduled to be sent, so we interrupt pending work
          */
-        private volatile boolean isOnErrorScheduled = false;
+        private volatile boolean isOnErrorScheduled;
         /**
          * tracks when an error event has been sent to downstream subscribers, so we don't try and send more.
          */
-        private volatile boolean sentError = false;
+        private volatile boolean sentError;
         /**
          * tracks when a completed event has been sent to downstream subscribers, so we don't try and send more.
          */
-        private volatile boolean sentCompleted = false;
+        private volatile boolean sentCompleted;
 
         private Flusher(Subscriber<? super Batch<T, I>> downstream) {
             this.downstream = downstream;

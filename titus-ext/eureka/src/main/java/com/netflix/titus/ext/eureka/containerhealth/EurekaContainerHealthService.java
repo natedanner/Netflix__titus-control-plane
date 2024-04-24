@@ -217,12 +217,11 @@ public class EurekaContainerHealthService implements ContainerHealthService {
         List<Task> allTasks = new ArrayList<>();
         List<ContainerHealthEvent> events = new ArrayList<>();
 
-        allJobsAndTasks.forEach(jobAndTasks -> {
+        allJobsAndTasks.forEach(jobAndTasks ->
             jobAndTasks.getRight().forEach(task -> {
                 handleTaskStateUpdate(jobAndTasks.getLeft(), task, state).ifPresent(events::add);
                 allTasks.add(task);
-            });
-        });
+            }));
 
         // Cleanup, in case we have stale entries.
         Set<String> unknownTaskIds = CollectionsExt.copyAndRemove(state.keySet(), allTasks.stream().map(Task::getId).collect(Collectors.toSet()));

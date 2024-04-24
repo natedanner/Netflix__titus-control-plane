@@ -127,7 +127,7 @@ public class AsgLocalMasterReadinessResolver implements LocalMasterReadinessReso
         ReadinessState effectiveState = null;
         String message = null;
 
-        if (response.getAutoScalingGroups().size() < 1) {
+        if (response.getAutoScalingGroups().isEmpty()) {
             setNewTagValue("");
             effectiveState = ReadinessState.Disabled;
             message = "ASG not found: " + configuration.getTitusMasterAsgName();

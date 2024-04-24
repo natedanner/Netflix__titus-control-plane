@@ -81,7 +81,7 @@ public class GrpcClusterMembershipNameResolverFactory extends NameResolver.Facto
         return SCHEME;
     }
 
-    private static class Allocation implements Closeable {
+    private static final class Allocation implements Closeable {
 
         private final ClusterMemberResolver clusterMemberResolver;
         private final GrpcClusterMembershipLeaderNameResolver grpcClusterMembershipLeaderNameResolver;

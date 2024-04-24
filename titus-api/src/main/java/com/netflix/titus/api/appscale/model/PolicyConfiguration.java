@@ -68,7 +68,7 @@ public class PolicyConfiguration {
     }
 
 
-    public static class Builder {
+    public static final class Builder {
         private String name;
         private PolicyType policyType;
         private StepScalingPolicyConfiguration stepScalingPolicyConfiguration;

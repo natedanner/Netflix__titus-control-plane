@@ -158,7 +158,7 @@ class TaskDataInjector {
         String name = getNameFromImageString(imageWithoutRegistry);
         bi.setName(name);
         String digestFromImageString = getDigestFromImageString(imageWithoutRegistry);
-        if (digestFromImageString.equals("")) {
+        if ("".equals(digestFromImageString)) {
             // If the image string doesn't have a digest, then the best we can do is
             // set the tag from whatever the image string has
             bi.setTag(getTagFromImageString(imageWithoutRegistry));

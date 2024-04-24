@@ -48,7 +48,7 @@ public class DefaultSupervisorOperationsTest {
     private final MasterMonitor masterMonitor = mock(MasterMonitor.class);
     private final PublishSubject<List<MasterInstance>> masterMonitorSubject = PublishSubject.create();
 
-    private LeaderActivator leaderActivator = mock(LeaderActivator.class);
+    private final LeaderActivator leaderActivator = mock(LeaderActivator.class);
 
     private DefaultSupervisorOperations supervisorOperations;
 

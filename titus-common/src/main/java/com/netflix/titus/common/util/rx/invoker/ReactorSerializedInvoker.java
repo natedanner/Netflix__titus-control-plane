@@ -38,7 +38,7 @@ import reactor.core.scheduler.Scheduler.Worker;
 /**
  * A simple queue for Spring Reactor {@link Mono} actions, which execution order must be serialized.
  */
-public class ReactorSerializedInvoker<T> {
+public final class ReactorSerializedInvoker<T> {
 
     private static final Logger logger = LoggerFactory.getLogger(ReactorSerializedInvoker.class);
 
@@ -194,7 +194,7 @@ public class ReactorSerializedInvoker<T> {
         }
     }
 
-    private class ActionHandler {
+    private final class ActionHandler {
 
         private final Mono<T> action;
         private final MonoSink<T> sink;

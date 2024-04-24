@@ -40,7 +40,7 @@ public class RegExpExtTest {
     public void testDynamicModifications() {
         String message = "hello\nend";
         AtomicReference<String> config = new AtomicReference<>(".*hello.*");
-        Function<String, Matcher> matcher = RegExpExt.dynamicMatcher(() -> config.get(), Pattern.DOTALL, e -> {
+        Function<String, Matcher> matcher = RegExpExt.dynamicMatcher(config::get, Pattern.DOTALL, e -> {
             throw new IllegalStateException(e);
         });
         assertThat(matcher.apply(message).matches()).isTrue();

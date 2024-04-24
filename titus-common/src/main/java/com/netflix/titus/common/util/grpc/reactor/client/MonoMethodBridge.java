@@ -72,7 +72,7 @@ class MonoMethodBridge<GRPC_STUB extends AbstractStub<GRPC_STUB>, CONTEXT> imple
         return Mono.create(sink -> new MonoInvocation(sink, args)).timeout(reactorTimeout);
     }
 
-    private class MonoInvocation {
+    private final class MonoInvocation {
 
         private MonoInvocation(MonoSink<Object> sink, Object[] args) {
             StreamObserver<Object> grpcStreamObserver = new ClientResponseObserver<Object, Object>() {

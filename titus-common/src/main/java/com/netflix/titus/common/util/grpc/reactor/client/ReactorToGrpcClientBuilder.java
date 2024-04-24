@@ -36,7 +36,7 @@ import io.grpc.stub.AbstractStub;
 import org.reactivestreams.Publisher;
 import reactor.core.publisher.Mono;
 
-public class ReactorToGrpcClientBuilder<REACT_API, GRPC_STUB extends AbstractStub<GRPC_STUB>, CONTEXT> {
+public final class ReactorToGrpcClientBuilder<REACT_API, GRPC_STUB extends AbstractStub<GRPC_STUB>, CONTEXT> {
 
     private static final long DEFAULT_REQUEST_TIMEOUT_MS = 60_000;
 

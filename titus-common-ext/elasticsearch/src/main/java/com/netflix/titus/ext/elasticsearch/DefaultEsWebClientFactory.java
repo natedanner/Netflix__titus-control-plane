@@ -24,7 +24,7 @@ import reactor.netty.tcp.TcpClient;
 
 
 public class DefaultEsWebClientFactory implements EsWebClientFactory {
-    private EsClientConfiguration esClientConfiguration;
+    private final EsClientConfiguration esClientConfiguration;
 
     public DefaultEsWebClientFactory(EsClientConfiguration esClientConfiguration) {
         this.esClientConfiguration = esClientConfiguration;
@@ -45,10 +45,9 @@ public class DefaultEsWebClientFactory implements EsWebClientFactory {
         return HttpClient.create().tcpConfiguration(tcpClient -> {
             TcpClient tcpClientWithConnectionTimeout = tcpClient.option(ChannelOption.CONNECT_TIMEOUT_MILLIS,
                     esClientConfiguration.getConnectTimeoutMillis());
-            return tcpClientWithConnectionTimeout.doOnConnected(connection -> {
+            return tcpClientWithConnectionTimeout.doOnConnected(connection ->
                 //TODO Investigate why WriteTimeoutHandler appears to be broken in netty-handler 4.1.36.RELEASE package.
-                connection.addHandlerLast(new ReadTimeoutHandler(esClientConfiguration.getReadTimeoutSeconds()));
-            });
+                connection.addHandlerLast(new ReadTimeoutHandler(esClientConfiguration.getReadTimeoutSeconds())));
         });
     }
 }

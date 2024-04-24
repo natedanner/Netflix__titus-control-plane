@@ -39,7 +39,7 @@ public class DefaultGrpcToReactorServerFactory<CONTEXT> implements GrpcToReactor
 
     @Override
     public <REACT_SERVICE> ServerServiceDefinition apply(ServiceDescriptor serviceDescriptor, REACT_SERVICE reactService, Class<REACT_SERVICE> reactorDetailedFallbackClass) {
-        return GrpcToReactorServerBuilder.<REACT_SERVICE, CONTEXT>newBuilder(serviceDescriptor, reactService)
+        return GrpcToReactorServerBuilder.newBuilder(serviceDescriptor, reactService)
                 .withContext(contextType, contextResolver)
                 .withReactorFallbackClass(reactorDetailedFallbackClass)
                 .build();

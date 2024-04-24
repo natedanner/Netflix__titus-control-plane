@@ -21,7 +21,7 @@ import java.util.function.BiFunction;
 
 import com.netflix.titus.common.data.generator.DataGenerator;
 
-public class LoopedDataGenerator<A> extends DataGenerator<A> {
+public final class LoopedDataGenerator<A> extends DataGenerator<A> {
 
     private final DataGenerator<A> reference;
     private final DataGenerator<A> currentSource;

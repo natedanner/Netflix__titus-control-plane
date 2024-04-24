@@ -43,7 +43,7 @@ public class AutoScalableTarget {
         return new Builder();
     }
 
-    public static class Builder {
+    public static final class Builder {
         private String resourceId;
         private int minCapacity;
         private int maxCapacity;

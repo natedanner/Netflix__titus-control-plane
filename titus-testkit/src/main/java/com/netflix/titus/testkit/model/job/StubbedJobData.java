@@ -433,8 +433,7 @@ class StubbedJobData {
                 changeJob(job -> {
                     int desired = JobFunctions.getJobDesiredSize(job);
                     Capacity newCapacity = capacity.toBuilder().withDesired(desired).build();
-                    Job<ServiceJobExt> updatedJob = JobFunctions.changeServiceJobCapacity(serviceJob, newCapacity);
-                    return updatedJob;
+                    return JobFunctions.changeServiceJobCapacity(serviceJob, newCapacity);
                 });
             } else {
                 Task newTask = createTaskReplacement(killedTask);

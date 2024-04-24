@@ -118,7 +118,7 @@ public final class PropertiesExt {
             String name = key.trim();
 
             int idx = name.indexOf('.');
-            String rootPart = (idx == -1 || idx == name.length() - 1)
+            String rootPart = idx == -1 || idx == name.length() - 1
                     ? name
                     : name.substring(0, idx);
 
@@ -212,7 +212,7 @@ public final class PropertiesExt {
         return root;
     }
 
-    public static class PropertyNode<V> {
+    public static final class PropertyNode<V> {
         private final String name;
         private Optional<V> value;
         private final Map<String, PropertyNode<V>> children;

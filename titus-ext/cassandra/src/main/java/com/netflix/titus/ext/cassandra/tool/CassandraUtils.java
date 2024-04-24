@@ -115,7 +115,7 @@ public class CassandraUtils {
 
         AsyncCassandraExecutor executor = new AsyncCassandraExecutor(targetSession, PAGE_SIZE, SPLIT);
 
-        long recordCount = sourceData
+        return sourceData
                 .flatMap(pair -> {
                     BoundStatement boundStatement = insertStatement.bind(pair.getLeft(), pair.getRight());
                     return executor
@@ -125,8 +125,6 @@ public class CassandraUtils {
                 }, MAX_CONCURRENCY)
                 .reduce(0L, (acc, v) -> acc + v)
                 .toBlocking().firstOrDefault(null);
-
-        return recordCount;
     }
 
     public static void copyTable(CommandContext context, String table) {

@@ -40,6 +40,7 @@ import com.netflix.titus.runtime.eviction.endpoint.grpc.GrpcEvictionModelConvert
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import reactor.core.publisher.Mono;
+import reactor.core.publisher.SignalType;
 
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -120,25 +121,24 @@ public class EvictionResource {
                         .terminateTask(taskId, Evaluators.getOrDefault(reason, "Reason not provided"))
                         .materialize()
                         .flatMap(event -> {
-                            switch (event.getType()) {
-                                case ON_ERROR:
-                                    if (event.getThrowable() instanceof EvictionException) {
-                                        return Mono.just(TaskTerminateResponse.newBuilder()
-                                                .setAllowed(false)
-                                                .setReasonCode("failure")
-                                                .setReasonMessage(event.getThrowable().getMessage())
-                                                .build()
-                                        );
-                                    }
-                                    return Mono.error(event.getThrowable());
-                                case ON_COMPLETE:
-                                    return Mono.just(TaskTerminateResponse.newBuilder()
-                                            .setAllowed(true)
-                                            .setReasonCode("normal")
-                                            .setReasonMessage("Terminated")
-                                            .build()
-                                    );
-                            }
+                    if (event.getType() == SignalType.ON_ERROR) {
+                        if (event.getThrowable() instanceof EvictionException) {
+                            return Mono.just(TaskTerminateResponse.newBuilder()
+                                    .setAllowed(false)
+                                    .setReasonCode("failure")
+                                    .setReasonMessage(event.getThrowable().getMessage())
+                                    .build()
+                            );
+                        }
+                        return Mono.error(event.getThrowable());
+                    } else if (event.getType() == SignalType.ON_COMPLETE) {
+                        return Mono.just(TaskTerminateResponse.newBuilder()
+                                .setAllowed(true)
+                                .setReasonCode("normal")
+                                .setReasonMessage("Terminated")
+                                .build()
+                        );
+                    }
                             return Mono.empty();
                         })
         );

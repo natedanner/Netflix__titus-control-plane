@@ -58,7 +58,7 @@ public class EmbeddedTitusFederation {
 
     private final Map<String, CellInfo> cells;
 
-    private int httpPort;
+    private final int httpPort;
     private final int grpcPort;
     private final Properties properties;
 
@@ -260,7 +260,7 @@ public class EmbeddedTitusFederation {
         }
     }
 
-    private static class CellInfo {
+    private static final class CellInfo {
 
         private final String cellId;
         private final EmbeddedTitusCell cell;

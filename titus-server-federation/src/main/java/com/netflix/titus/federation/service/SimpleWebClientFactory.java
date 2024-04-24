@@ -19,7 +19,7 @@ package com.netflix.titus.federation.service;
 import com.netflix.titus.api.federation.model.Cell;
 import org.springframework.web.reactive.function.client.WebClient;
 
-public class SimpleWebClientFactory implements WebClientFactory {
+public final class SimpleWebClientFactory implements WebClientFactory {
 
     private static final WebClientFactory INSTANCE = new SimpleWebClientFactory();
 

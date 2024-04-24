@@ -23,7 +23,7 @@ import com.netflix.titus.common.data.generator.DataGenerator;
 
 /**
  */
-public class MappedDataGenerator<A, B> extends DataGenerator<B> {
+public final class MappedDataGenerator<A, B> extends DataGenerator<B> {
 
     private final DataGenerator<A> sourceGenerator;
     private final Function<A, B> transformer;

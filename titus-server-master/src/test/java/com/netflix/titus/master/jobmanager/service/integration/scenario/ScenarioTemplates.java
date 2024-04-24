@@ -70,9 +70,8 @@ public class ScenarioTemplates {
     public static <E extends JobDescriptorExt> Function<JobScenarioBuilder, JobScenarioBuilder> triggerComputePlatformStartInitiatedEvent(int taskIdx, int resubmit) {
         return jobScenario -> jobScenario
                 .triggerComputePlatformStartInitiatedEvent(taskIdx, resubmit)
-                .expectTaskUpdatedInStore(taskIdx, resubmit, task -> {
-                    assertThat(task.getStatus().getState()).isEqualTo(TaskState.StartInitiated);
-                })
+                .expectTaskUpdatedInStore(taskIdx, resubmit, task ->
+                    assertThat(task.getStatus().getState()).isEqualTo(TaskState.StartInitiated))
                 .expectTaskStateChangeEvent(taskIdx, resubmit, TaskState.StartInitiated);
     }
 

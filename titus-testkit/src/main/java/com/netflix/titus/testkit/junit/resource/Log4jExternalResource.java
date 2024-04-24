@@ -24,7 +24,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.junit.rules.ExternalResource;
 
-public class Log4jExternalResource extends ExternalResource {
+public final class Log4jExternalResource extends ExternalResource {
 
     private final List<Logger> loggers = new ArrayList<>();
     private final List<Level> levels = new ArrayList<>();

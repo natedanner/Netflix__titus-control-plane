@@ -23,7 +23,7 @@ import com.netflix.titus.api.jobmanager.model.job.Job;
 import com.netflix.titus.api.jobmanager.model.job.Task;
 import com.netflix.titus.api.model.callmetadata.CallMetadata;
 
-public class TaskUpdateEvent extends JobManagerEvent<Task> {
+public final class TaskUpdateEvent extends JobManagerEvent<Task> {
 
     private final Job<?> currentJob;
     private final boolean movedFromAnotherJob;

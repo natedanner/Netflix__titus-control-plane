@@ -47,9 +47,8 @@ public class StreamDataReplicatorTest {
                 .expectNoEvent(Duration.ofSeconds(1))
 
                 .then(() -> eventSink.emitNext(new ReplicatorEvent<>(new StringSnapshot("firstUpdate"), "firstTrigger", 0), Sinks.EmitFailureHandler.FAIL_FAST))
-                .assertNext(replicator -> {
-                    assertThat(replicator.getCurrent()).isEqualTo(new StringSnapshot("firstUpdate"));
-                })
+                .assertNext(replicator ->
+                    assertThat(replicator.getCurrent()).isEqualTo(new StringSnapshot("firstUpdate")))
 
                 .thenCancel()
                 .verify();
@@ -75,10 +74,10 @@ public class StreamDataReplicatorTest {
                     assertThat(eventSink.currentSubscriberCount()).isZero();
 
                 })
-                .verifyErrorMatches(error -> error.getMessage().equals("Data replicator closed"));
+                .verifyErrorMatches(error -> "Data replicator closed".equals(error.getMessage()));
     }
 
-    private static class StringSnapshot extends ReplicatedSnapshot {
+    private static final class StringSnapshot extends ReplicatedSnapshot {
 
         private final String value;
 

@@ -21,7 +21,7 @@ import java.util.function.Function;
 
 import com.netflix.titus.common.data.generator.DataGenerator;
 
-public class FilterDataGenerator<A> extends DataGenerator<A> {
+public final class FilterDataGenerator<A> extends DataGenerator<A> {
 
     private final DataGenerator<A> source;
     private final Function<A, Boolean> predicate;

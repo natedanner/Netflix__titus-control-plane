@@ -48,7 +48,7 @@ import io.grpc.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TitusGrpcServer {
+public final class TitusGrpcServer {
 
     private static final Logger logger = LoggerFactory.getLogger(TitusGrpcServer.class);
 
@@ -104,7 +104,7 @@ public class TitusGrpcServer {
         return new Builder().withPort(port).withTitusRuntime(titusRuntime);
     }
 
-    public static class Builder {
+    public static final class Builder {
 
         private int port;
         private TitusRuntime titusRuntime;
@@ -188,7 +188,7 @@ public class TitusGrpcServer {
         }
     }
 
-    private static class ServiceBuilder {
+    private static final class ServiceBuilder {
 
         private final ServerServiceDefinition serviceDefinition;
         private final List<ServerInterceptor> interceptors;

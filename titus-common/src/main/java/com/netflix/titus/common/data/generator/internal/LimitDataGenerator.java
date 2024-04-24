@@ -21,7 +21,7 @@ import java.util.Optional;
 import com.google.common.base.Preconditions;
 import com.netflix.titus.common.data.generator.DataGenerator;
 
-public class LimitDataGenerator<A> extends DataGenerator<A> {
+public final class LimitDataGenerator<A> extends DataGenerator<A> {
 
     private final DataGenerator<A> source;
     private final int remaining;

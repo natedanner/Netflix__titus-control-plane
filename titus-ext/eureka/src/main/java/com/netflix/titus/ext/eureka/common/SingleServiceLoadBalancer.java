@@ -141,7 +141,7 @@ public class SingleServiceLoadBalancer implements Closeable, EurekaEventListener
         }
     }
 
-    private class EurekaInstance {
+    private final class EurekaInstance {
 
         private final AtomicReference<InstanceInfo> instanceInfoRef;
 

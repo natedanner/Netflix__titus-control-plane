@@ -81,7 +81,7 @@ public class EventEmitterTransformerTest {
         assertThat(output.next()).isEqualTo(new StringEvent("b", false));
     }
 
-    private static class StringEvent {
+    private static final class StringEvent {
 
         private final String value;
         private final boolean added;

@@ -34,7 +34,7 @@ import static com.netflix.titus.runtime.endpoint.v3.grpc.GrpcJobQueryModelConver
  * Collection of functions to convert load balancer models from internal to gRPC formats.
  */
 public final class GrpcModelConverters {
-    private static Logger logger = LoggerFactory.getLogger(GrpcModelConverters.class);
+    private static final Logger logger = LoggerFactory.getLogger(GrpcModelConverters.class);
 
     public static GetAllLoadBalancersResult toGetAllLoadBalancersResult(List<JobLoadBalancer> jobLoadBalancerList, Pagination runtimePagination) {
         GetAllLoadBalancersResult.Builder allLoadBalancersResult = GetAllLoadBalancersResult.newBuilder();
@@ -49,7 +49,7 @@ public final class GrpcModelConverters {
             // Check if we're processing a new Job ID
             if (!addedJobIds.contains(jobId)) {
                 // Add any previous JobID's result if it existed
-                if (getJobLoadBalancersResultBuilder.getLoadBalancersBuilderList().size() > 0) {
+                if (!getJobLoadBalancersResultBuilder.getLoadBalancersBuilderList().isEmpty()) {
                     allLoadBalancersResult.addJobLoadBalancers(getJobLoadBalancersResultBuilder.build());
                 }
                 getJobLoadBalancersResultBuilder = GetJobLoadBalancersResult.newBuilder()
@@ -59,7 +59,7 @@ public final class GrpcModelConverters {
             getJobLoadBalancersResultBuilder.addLoadBalancers(LoadBalancerId.newBuilder().setId(jobLoadBalancer.getLoadBalancerId()).build());
         }
 
-        if (getJobLoadBalancersResultBuilder.getLoadBalancersBuilderList().size() > 0) {
+        if (!getJobLoadBalancersResultBuilder.getLoadBalancersBuilderList().isEmpty()) {
             allLoadBalancersResult.addJobLoadBalancers(getJobLoadBalancersResultBuilder.build());
         }
         return allLoadBalancersResult.build();

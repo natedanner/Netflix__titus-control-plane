@@ -92,13 +92,12 @@ public class SimpleAdmissionBackoffStrategy implements AdmissionBackoffStrategy 
     @Override
     public void onError(long elapsedMs, AdaptiveAdmissionController.ErrorKind errorKind, Throwable cause) {
         switch (errorKind) {
-            case RateLimited:
-            default:
-                rateLimitedCount.getAndIncrement();
-                break;
             case Unavailable:
                 unavailableCount.getAndIncrement();
                 break;
+            case RateLimited:
+            default:
+                rateLimitedCount.getAndIncrement();
         }
     }
 

@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class NetworkConfiguration {
 
-    final private int networkMode;
+    private final int networkMode;
 
     public NetworkConfiguration(int networkMode) {
         this.networkMode = networkMode;

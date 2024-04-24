@@ -205,9 +205,8 @@ class ExtendedJobSanitizer implements EntitySanitizer {
             violatedFeaturesBuilder.append(violation.getFeatureId()).append(',');
 
             String detailsPrefix = TITUS_NON_COMPLIANT + "details." + violation.getFeatureId() + '.';
-            violation.getContext().forEach((key, value) -> {
-                violationJobAttributes.put(detailsPrefix + key, value);
-            });
+            violation.getContext().forEach((key, value) ->
+                violationJobAttributes.put(detailsPrefix + key, value));
         });
         violationJobAttributes.put(TITUS_NON_COMPLIANT_FEATURES, violatedFeaturesBuilder.substring(0, violatedFeaturesBuilder.length() - 1));
 

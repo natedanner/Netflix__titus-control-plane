@@ -16,7 +16,7 @@
 
 package com.netflix.titus.common.framework.scheduler;
 
-public class LocalSchedulerException extends RuntimeException {
+public final class LocalSchedulerException extends RuntimeException {
 
     public enum ErrorCode {
         Cancelled,

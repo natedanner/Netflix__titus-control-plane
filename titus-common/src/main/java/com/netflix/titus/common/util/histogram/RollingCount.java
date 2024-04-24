@@ -23,7 +23,7 @@ import com.google.common.base.Preconditions;
 /**
  * Counts number of items in a rolling time window.
  */
-public class RollingCount {
+public final class RollingCount {
 
     private final int steps;
     private final long stepTimeMs;

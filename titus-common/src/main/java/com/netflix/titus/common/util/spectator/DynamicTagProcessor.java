@@ -66,7 +66,7 @@ class DynamicTagProcessor<METRIC> implements MetricSelector<METRIC> {
         return id;
     }
 
-    private static class Tags {
+    private static final class Tags {
 
         private final Map<String, String> tagMap;
 

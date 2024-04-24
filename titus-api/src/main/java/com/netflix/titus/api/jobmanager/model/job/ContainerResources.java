@@ -286,7 +286,7 @@ public class ContainerResources {
         }
 
         public ContainerResources build() {
-            ContainerResources containerResources = new ContainerResources(
+            return new ContainerResources(
                     cpu,
                     gpu,
                     memoryMB,
@@ -297,7 +297,6 @@ public class ContainerResources {
                     shmMB,
                     nonNull(signedIpAddressAllocations),
                     nonNull(ebsVolumes));
-            return containerResources;
         }
     }
 }

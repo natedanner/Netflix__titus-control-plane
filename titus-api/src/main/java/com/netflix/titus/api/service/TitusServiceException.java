@@ -28,7 +28,7 @@ import static java.lang.String.format;
 /**
  * A custom runtime exception that indicates an error in the service layer and will propagate to transport layer.
  */
-public class TitusServiceException extends RuntimeException {
+public final class TitusServiceException extends RuntimeException {
 
     public enum ErrorCode {
         INTERNAL,

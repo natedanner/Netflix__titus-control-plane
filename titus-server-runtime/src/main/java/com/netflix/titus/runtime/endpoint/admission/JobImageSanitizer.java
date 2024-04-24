@@ -119,11 +119,10 @@ public class JobImageSanitizer implements AdmissionSanitizer<JobDescriptor> {
             );
             // We are ignoring most image validation errors. We will filter
             // fewer errors as we gain feature confidence.
-            switch (tre.getErrorCode()) {
-                case IMAGE_NOT_FOUND:
-                    return false;
-                default:
-                    return true;
+            if (tre.getErrorCode() == TitusRegistryException.ErrorCode.IMAGE_NOT_FOUND) {
+                return false;
+            } else {
+                return true;
             }
         }
         validatorMetrics.incrementValidationError(

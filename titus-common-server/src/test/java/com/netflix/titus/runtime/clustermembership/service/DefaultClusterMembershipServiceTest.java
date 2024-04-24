@@ -53,7 +53,7 @@ public class DefaultClusterMembershipServiceTest {
 
     private final HealthIndicator healthIndicator = mock(HealthIndicator.class);
 
-    private ClusterMembershipConnectorStub connector = new ClusterMembershipConnectorStub();
+    private final ClusterMembershipConnectorStub connector = new ClusterMembershipConnectorStub();
 
     private final TitusRxSubscriber<ClusterMembershipEvent> eventSubscriber = new TitusRxSubscriber<>();
 

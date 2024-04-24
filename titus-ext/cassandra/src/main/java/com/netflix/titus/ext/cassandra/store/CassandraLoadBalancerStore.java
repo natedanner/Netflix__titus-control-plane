@@ -427,7 +427,7 @@ public class CassandraLoadBalancerStore implements LoadBalancerStore {
      * @param association
      */
     private void removeJobLoadBalancerAssociation(JobLoadBalancer association) {
-        Supplier<TreeSet<JobLoadBalancer>> supplier = () -> new TreeSet<>();
+        Supplier<TreeSet<JobLoadBalancer>> supplier = TreeSet::new;
 
         jobToAssociatedLoadBalancersMap.computeIfPresent(association.getJobId(),
                 (jobId, associations) -> {

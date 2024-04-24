@@ -146,8 +146,7 @@ public class BatchJobExt implements JobDescriptor.JobDescriptorExt {
         }
 
         public BatchJobExt build() {
-            BatchJobExt batchJobExt = new BatchJobExt(size, runtimeLimitMs, retryPolicy, retryOnRuntimeLimit);
-            return batchJobExt;
+            return new BatchJobExt(size, runtimeLimitMs, retryPolicy, retryOnRuntimeLimit);
         }
     }
 }

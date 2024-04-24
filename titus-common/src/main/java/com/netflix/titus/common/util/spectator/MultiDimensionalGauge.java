@@ -62,7 +62,7 @@ public class MultiDimensionalGauge {
     private volatile long lastCommitted = -1;
 
     MultiDimensionalGauge(Id rootId, Collection<String> discerningTagNames, Registry registry) {
-        Preconditions.checkArgument(discerningTagNames.size() > 0, "At least one discerning tag name expected");
+        Preconditions.checkArgument(!discerningTagNames.isEmpty(), "At least one discerning tag name expected");
         this.rootId = rootId;
         this.dimension = discerningTagNames.size();
         this.discerningTagNames = new ArrayList<>(discerningTagNames);
@@ -90,7 +90,7 @@ public class MultiDimensionalGauge {
         return tagNamesOrder;
     }
 
-    public class Setter {
+    public final class Setter {
 
         private final long revisionId;
         private final Map<List<String>, Double> newValues = new HashMap<>();

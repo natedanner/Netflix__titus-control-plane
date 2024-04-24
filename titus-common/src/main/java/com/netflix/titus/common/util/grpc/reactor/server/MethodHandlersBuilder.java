@@ -107,7 +107,7 @@ class MethodHandlersBuilder<CONTEXT, REACT_SERVICE> {
         // Check return types
         if (returnTypeParameter == Void.class) {
             Preconditions.checkArgument(
-                    outputTypeName.equals("Empty"),
+                    "Empty".equals(outputTypeName),
                     "Reactor Mono<Void>/Flux<Void> can be mapped to GRPC/Empty only: %s", methodDescriptor.getFullMethodName()
             );
         } else {

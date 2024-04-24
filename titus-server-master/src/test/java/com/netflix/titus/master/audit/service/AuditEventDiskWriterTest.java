@@ -44,15 +44,15 @@ public class AuditEventDiskWriterTest {
     private static final String LOG_FOLDER = "build/auditLogs";
     private static final File LOG_FILE = new File(LOG_FOLDER, LOG_FILE_NAME);
 
-    private TestScheduler testScheduler = Schedulers.test();
+    private final TestScheduler testScheduler = Schedulers.test();
 
     private final RxEventBus rxEventBus = mock(RxEventBus.class);
     private final AuditLogConfiguration config = mock(AuditLogConfiguration.class);
     private final AuditLogService auditLogService = mock(AuditLogService.class);
 
     private AuditEventDiskWriter auditEventDiskWriter;
-    private PublishSubject<AuditLogEvent> eventSubject = PublishSubject.create();
-    private PublishSubject<UserRequestEvent> rxEventSubject = PublishSubject.create();
+    private final PublishSubject<AuditLogEvent> eventSubject = PublishSubject.create();
+    private final PublishSubject<UserRequestEvent> rxEventSubject = PublishSubject.create();
 
     @Before
     public void setUp() throws Exception {

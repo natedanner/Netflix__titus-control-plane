@@ -213,11 +213,11 @@ public class DefaultLoadBalancerReconciler implements LoadBalancerReconciler {
                                                         List<JobLoadBalancerState> associations) {
         Instant now = now();
 
-        ReconciliationUpdates updates = (loadBalancer.current.getState().equals(LoadBalancer.State.ACTIVE)) ?
+        ReconciliationUpdates updates = loadBalancer.current.getState().equals(LoadBalancer.State.ACTIVE) ?
                 updatesForActiveLoadBalancer(loadBalancer, associations)
                 : updatesForRemovedLoadBalancer(loadBalancer, associations);
 
-        Completable cleanupTargets = (!updates.toRemove.isEmpty()) ?
+        Completable cleanupTargets = !updates.toRemove.isEmpty() ?
                 ReactorExt.toCompletable(store.removeDeregisteredTargets(updates.toRemove))
                         // bring processing back the the Rx threads, otherwise it happens in the C* driver threadpool
                         .observeOn(Schedulers.computation())
@@ -229,7 +229,7 @@ public class DefaultLoadBalancerReconciler implements LoadBalancerReconciler {
                 : Completable.complete();
 
         // clean up dissociated entries only if it is safe: all targets have been deregistered and there is nothing to be removed
-        Completable cleanupDissociated = (updates.toDeregister.isEmpty() && updates.toRemove.isEmpty()) ?
+        Completable cleanupDissociated = updates.toDeregister.isEmpty() && updates.toRemove.isEmpty() ?
                 Completable.mergeDelayError(removeAllDissociated(associations), MAX_ORPHAN_CLEANUP_CONCURRENCY)
                         .doOnSubscribe(ignored -> logger.debug("Cleaning up dissociated jobs for load balancer {}", loadBalancer.current.getId()))
                         .compose(removeMetrics.asCompletable())
@@ -399,7 +399,7 @@ public class DefaultLoadBalancerReconciler implements LoadBalancerReconciler {
         return Instant.ofEpochMilli(scheduler.now());
     }
 
-    private static class LoadBalancerWithKnownTargets {
+    private static final class LoadBalancerWithKnownTargets {
         private final LoadBalancer current;
         /**
          * Targets that have been previously registered by us.
@@ -412,7 +412,7 @@ public class DefaultLoadBalancerReconciler implements LoadBalancerReconciler {
         }
     }
 
-    private class ReconciliationUpdates {
+    private final class ReconciliationUpdates {
         private final String loadBalancerId;
         private final Set<LoadBalancerTarget> toRegister;
         private final Set<LoadBalancerTarget> toDeregister;

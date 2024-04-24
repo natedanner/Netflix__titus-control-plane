@@ -21,7 +21,7 @@ import java.util.Optional;
 import com.netflix.titus.api.jobmanager.model.job.Job;
 import com.netflix.titus.api.model.callmetadata.CallMetadata;
 
-public class JobUpdateEvent extends JobManagerEvent<Job> {
+public final class JobUpdateEvent extends JobManagerEvent<Job> {
 
     private JobUpdateEvent(Job current, Optional<Job> previous, boolean archived, CallMetadata callMetadata) {
         super(current, previous, archived, callMetadata);

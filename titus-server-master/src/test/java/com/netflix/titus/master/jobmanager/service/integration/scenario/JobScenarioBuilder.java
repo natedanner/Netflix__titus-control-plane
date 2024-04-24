@@ -195,9 +195,8 @@ public class JobScenarioBuilder {
                 BatchJobTask batchTask = (BatchJobTask) task;
                 templateFun.apply(batchTask.getIndex(), batchTask.getResubmitNumber()).apply(this);
             } else {
-                jobStore.getIndexAndResubmit(task.getId()).ifPresent(pair -> {
-                    templateFun.apply(pair.getLeft(), task.getResubmitNumber()).apply(this);
-                });
+                jobStore.getIndexAndResubmit(task.getId()).ifPresent(pair ->
+                    templateFun.apply(pair.getLeft(), task.getResubmitNumber()).apply(this));
             }
         });
         return this;

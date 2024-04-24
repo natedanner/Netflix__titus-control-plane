@@ -102,7 +102,7 @@ public abstract class TitusChangeAction implements ChangeAction {
                 .callMetadata(changeAction.getCallMetadata());
     }
 
-    public static class Builder {
+    public static final class Builder {
 
         final String name;
         String id;

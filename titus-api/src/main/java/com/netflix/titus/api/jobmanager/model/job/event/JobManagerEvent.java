@@ -80,7 +80,7 @@ public abstract class JobManagerEvent<TYPE> {
         return new JobKeepAliveEvent(timestamp);
     }
 
-    private static class SnapshotMarkerEvent extends JobManagerEvent<Job> {
+    private static final class SnapshotMarkerEvent extends JobManagerEvent<Job> {
 
         private SnapshotMarkerEvent() {
             super(Job.newBuilder().build(),

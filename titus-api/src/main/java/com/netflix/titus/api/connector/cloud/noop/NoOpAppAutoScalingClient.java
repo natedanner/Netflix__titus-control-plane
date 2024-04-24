@@ -25,7 +25,7 @@ import rx.Completable;
 import rx.Observable;
 
 public class NoOpAppAutoScalingClient implements AppAutoScalingClient {
-    private static Logger log = LoggerFactory.getLogger(NoOpAppAutoScalingClient.class);
+    private static final Logger log = LoggerFactory.getLogger(NoOpAppAutoScalingClient.class);
 
     @Override
     public Completable createScalableTarget(String jobId, int minCapacity, int maxCapacity) {

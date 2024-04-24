@@ -106,6 +106,6 @@ public class PersistentVolumeReclaimController extends BaseGcController<V1Persis
         V1PersistentVolumeStatus status = v1PersistentVolume.getStatus() == null
                 ? new V1PersistentVolumeStatus()
                 : v1PersistentVolume.getStatus();
-        return status.getPhase() == null || status.getPhase().equalsIgnoreCase("Released");
+        return status.getPhase() == null || "Released".equalsIgnoreCase(status.getPhase());
     }
 }

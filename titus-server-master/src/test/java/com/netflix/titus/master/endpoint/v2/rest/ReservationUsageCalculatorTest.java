@@ -51,7 +51,7 @@ public class ReservationUsageCalculatorTest {
 
     private final JobComponentStub jobComponentStub = new JobComponentStub(titusRuntime);
 
-    private ApplicationSlaManagementService capacityManagementService = mock(ApplicationSlaManagementService.class);
+    private final ApplicationSlaManagementService capacityManagementService = mock(ApplicationSlaManagementService.class);
 
     private final ReservationUsageCalculator calculator = new ReservationUsageCalculator(
             jobComponentStub.getJobOperations(),

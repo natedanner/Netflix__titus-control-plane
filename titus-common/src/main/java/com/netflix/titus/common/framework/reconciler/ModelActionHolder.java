@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * {@link ModelAction} wrapper with context information.
  */
-public class ModelActionHolder {
+public final class ModelActionHolder {
 
     public enum Model {Reference, Running, Store}
 

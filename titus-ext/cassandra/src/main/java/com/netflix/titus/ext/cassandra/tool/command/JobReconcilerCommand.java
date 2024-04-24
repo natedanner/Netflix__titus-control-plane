@@ -65,7 +65,7 @@ public class JobReconcilerCommand implements Command {
         reconciler.printReport();
     }
 
-    private class Reconciler {
+    private final class Reconciler {
 
         private final CommandContext context;
         private final Map<String, Integer> tableSizes = new HashMap<>();

@@ -42,7 +42,7 @@ import static com.netflix.titus.master.loadbalancer.service.LoadBalancerTests.bu
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class DefaultLoadBalancerGrpcTest {
-    private static Logger logger = LoggerFactory.getLogger(DefaultLoadBalancerGrpcTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(DefaultLoadBalancerGrpcTest.class);
     private DefaultLoadBalancerServiceGrpc serviceGrpc;
 
     @Before
@@ -78,12 +78,11 @@ public class DefaultLoadBalancerGrpcTest {
         });
 
         // Remove the load balancers for each job
-        jobIdToLoadBalancersMap.forEach((jobId, loadBalancerIdSet) -> {
+        jobIdToLoadBalancersMap.forEach((jobId, loadBalancerIdSet) ->
             loadBalancerIdSet.forEach(loadBalancerId -> {
                 logger.info("Removing load balancer {} from Job {}", loadBalancerId.getId(), jobId);
                 LoadBalancerTests.removeLoadBalancerFromJob(jobId, loadBalancerId, removeLoadBalancers);
-            });
-        });
+            }));
 
         // Check that there are no load balancers left
         jobIdToLoadBalancersMap.forEach((jobId, loadBalancerIdSet) -> {
@@ -100,19 +99,15 @@ public class DefaultLoadBalancerGrpcTest {
                 .getJobLoadBalancersCount()).isEqualTo(0);
     }
 
-    private BiConsumer<AddLoadBalancerRequest, TestStreamObserver<Empty>> putLoadBalancerWithJobId = (request, addResponse) -> {
+    private final BiConsumer<AddLoadBalancerRequest, TestStreamObserver<Empty>> putLoadBalancerWithJobId = (request, addResponse) ->
         serviceGrpc.addLoadBalancer(request, addResponse);
-    };
 
-    private BiConsumer<JobId, TestStreamObserver<GetJobLoadBalancersResult>> getJobLoadBalancers = (request, getResponse) -> {
+    private final BiConsumer<JobId, TestStreamObserver<GetJobLoadBalancersResult>> getJobLoadBalancers = (request, getResponse) ->
         serviceGrpc.getJobLoadBalancers(request, getResponse);
-    };
 
-    private BiConsumer<GetAllLoadBalancersRequest, TestStreamObserver<GetAllLoadBalancersResult>> getAllLoadBalancers = (request, getResponse) -> {
+    private final BiConsumer<GetAllLoadBalancersRequest, TestStreamObserver<GetAllLoadBalancersResult>> getAllLoadBalancers = (request, getResponse) ->
         serviceGrpc.getAllLoadBalancers(request, getResponse);
-    };
 
-    private BiConsumer<RemoveLoadBalancerRequest, TestStreamObserver<Empty>> removeLoadBalancers = (request, removeResponse) -> {
+    private final BiConsumer<RemoveLoadBalancerRequest, TestStreamObserver<Empty>> removeLoadBalancers = (request, removeResponse) ->
         serviceGrpc.removeLoadBalancer(request, removeResponse);
-    };
 }

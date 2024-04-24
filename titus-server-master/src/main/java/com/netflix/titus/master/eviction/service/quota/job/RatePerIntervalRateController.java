@@ -20,7 +20,7 @@ import com.netflix.titus.api.jobmanager.model.job.Job;
 import com.netflix.titus.api.jobmanager.model.job.disruptionbudget.RatePerIntervalDisruptionBudgetRate;
 import com.netflix.titus.common.runtime.TitusRuntime;
 
-public class RatePerIntervalRateController extends AbstractRatePerIntervalRateController {
+public final class RatePerIntervalRateController extends AbstractRatePerIntervalRateController {
 
     private final EffectiveJobDisruptionBudgetResolver budgetResolver;
 

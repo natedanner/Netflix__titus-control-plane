@@ -91,9 +91,8 @@ public class JobSnapshotLoader {
         jsonTree.fieldNames().forEachRemaining(key -> {
             ArrayNode values = (ArrayNode) jsonTree.get(key);
             int bucketId = Integer.parseInt(key);
-            values.forEach(value -> {
-                items.add(Pair.of(bucketId, value.asText()));
-            });
+            values.forEach(value ->
+                items.add(Pair.of(bucketId, value.asText())));
         });
         long written = CassandraUtils.writeIntoTwoColumnTable(session, table, Observable.from(items));
         System.out.println(String.format("Successfully writen %s entries into table %s", written, table));

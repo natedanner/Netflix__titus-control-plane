@@ -135,9 +135,8 @@ public class ObserveJobsCommand implements CliCommand {
                         }
                         Optional<EventPropagationTrace> trace = metrics.recordJob(((JobUpdateEvent) next).getCurrent(), !snapshotRead.get());
                         if (printLatency) {
-                            trace.ifPresent(t -> {
-                                logger.info("Event propagation data: stages={}", t);
-                            });
+                            trace.ifPresent(t ->
+                                logger.info("Event propagation data: stages={}", t));
                         }
                     } else if (next instanceof TaskUpdateEvent) {
                         Task task = ((TaskUpdateEvent) next).getCurrent();

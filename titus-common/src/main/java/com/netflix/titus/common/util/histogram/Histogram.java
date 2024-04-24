@@ -20,7 +20,7 @@ import java.util.List;
 
 import com.google.common.primitives.Longs;
 
-public class Histogram {
+public final class Histogram {
 
     private final List<Long> counters;
     private final HistogramDescriptor histogramDescriptor;
@@ -42,7 +42,7 @@ public class Histogram {
         return new Builder(histogramDescriptor);
     }
 
-    public static class Builder {
+    public static final class Builder {
 
         private final HistogramDescriptor histogramDescriptor;
         private final long[] counters;

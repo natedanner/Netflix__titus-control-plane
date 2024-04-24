@@ -30,7 +30,7 @@ import rx.Subscription;
 /**
  * See {@link ObservableExt#propagate(Observable, int)} for more information.
  */
-class Propagator<T> {
+final class Propagator<T> {
 
     private final Observable<T> source;
     private final AtomicInteger remainingSubscriptions;

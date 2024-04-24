@@ -21,10 +21,10 @@ import java.util.List;
 
 public final class Request {
 
-    private String url;
-    private String method;
-    private Headers headers;
-    private RequestBody body;
+    private final String url;
+    private final String method;
+    private final Headers headers;
+    private final RequestBody body;
 
     Request(Builder builder) {
         this.url = builder.url;

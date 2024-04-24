@@ -75,8 +75,8 @@ public class CassAppScalePolicyStore implements AppScalePolicyStore {
     private Session session;
     private final CassandraStoreConfiguration config;
 
-    private static String GET_ALL_JOB_IDS = "SELECT * FROM app_scale_jobs;";
-    private static String GET_POLICY_BY_ID = "SELECT * FROM app_scale_policy where ref_id = ?;";
+    private static String getAllJobIds = "SELECT * FROM app_scale_jobs;";
+    private static String getPolicyById = "SELECT * FROM app_scale_policy where ref_id = ?;";
     private static final String INSERT_NEW_POLICY = "INSERT INTO app_scale_policy(ref_id, job_id, status, value) VALUES (?, ?, ?, ?);";
     private static final String INSERT_JOB_ID_WITH_POLICY_REF_ID = "INSERT INTO app_scale_jobs(job_id, ref_id) VALUES (?, ?);";
     private static final String UPDATE_POLICY_CONFIG = "UPDATE app_scale_policy set value = ? where ref_id = ?;";
@@ -98,13 +98,13 @@ public class CassAppScalePolicyStore implements AppScalePolicyStore {
         this.registry = registry;
         this.insertNewPolicyStmt = this.session.prepare(INSERT_NEW_POLICY);
         this.insertJobIdWithPolicyRefStmt = this.session.prepare(INSERT_JOB_ID_WITH_POLICY_REF_ID);
-        this.getPolicyByRefIdStmt = this.session.prepare(GET_POLICY_BY_ID);
+        this.getPolicyByRefIdStmt = this.session.prepare(getPolicyById);
         this.updateAlarmIdStmt = this.session.prepare(UPDATE_POLICY_ALARM_ID);
         this.updatePolicyConfigStmt = this.session.prepare(UPDATE_POLICY_CONFIG);
         this.updatePolicyIdStmt = this.session.prepare(UPDATE_POLICY_POLICY_ID);
         this.updatePolicyStatusStmt = this.session.prepare(UPDATE_POLICY_STATUS);
         this.updateStatusMessageStmt = this.session.prepare(UPDATE_STATUS_MESSAGE);
-        this.getAllJobIdsStmt = this.session.prepare(GET_ALL_JOB_IDS);
+        this.getAllJobIdsStmt = this.session.prepare(getAllJobIds);
 
         this.storeHelper = new CassStoreHelper(session, Schedulers.io());
         this.policies = new ConcurrentHashMap<>();
@@ -167,7 +167,7 @@ public class CassAppScalePolicyStore implements AppScalePolicyStore {
             return refId.toString();
         }).map(refId -> {
             updatePolicyRefIdsForJobMap(autoScalingPolicy.getJobId(), refId);
-            return refId.toString();
+            return refId;
         });
     }
 

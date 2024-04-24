@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Help class to write store (CRUD) transaction log.
  */
-public class StoreTransactionLogger {
+public final class StoreTransactionLogger {
 
     private static final Logger logger = LoggerFactory.getLogger("CassandraStoreTransactionLogger");
 

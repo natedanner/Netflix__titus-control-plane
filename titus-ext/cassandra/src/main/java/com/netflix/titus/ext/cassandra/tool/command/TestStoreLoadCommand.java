@@ -166,9 +166,8 @@ public class TestStoreLoadCommand implements Command {
                 none -> {
                 },
                 e -> logger.error("Error creating jobs: ", e),
-                () -> {
-                    logger.info("Created {} jobs with {} tasks in {}[ms]", jobs, tasks, System.currentTimeMillis() - jobStartTime);
-                }
+                () ->
+                    logger.info("Created {} jobs with {} tasks in {}[ms]", jobs, tasks, System.currentTimeMillis() - jobStartTime)
         );
 
         // try loading jobs and tasks for i iterations

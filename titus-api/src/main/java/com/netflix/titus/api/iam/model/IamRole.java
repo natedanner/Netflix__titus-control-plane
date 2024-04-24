@@ -67,7 +67,7 @@ public class IamRole {
         return new Builder();
     }
 
-    public static class Builder {
+    public static final class Builder {
         private String roleId;
         private String roleName;
         private String resourceName;

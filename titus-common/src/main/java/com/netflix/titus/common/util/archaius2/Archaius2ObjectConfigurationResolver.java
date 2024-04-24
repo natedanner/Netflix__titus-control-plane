@@ -152,7 +152,7 @@ class Archaius2ObjectConfigurationResolver<OBJECT, CONFIG> implements ObjectConf
         return Optional.of(new Rule<>(patternString, pattern, dynamicProxyFactory.apply(root)));
     }
 
-    private static class Rule<CONFIG> {
+    private static final class Rule<CONFIG> {
 
         private final String patternString;
         private final Pattern pattern;

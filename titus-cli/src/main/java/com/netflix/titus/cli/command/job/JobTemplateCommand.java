@@ -89,12 +89,10 @@ public class JobTemplateCommand implements CliCommand {
         File templateFile = new File(cli.getOptionValue('f'));
 
         JobDescriptor jobDescriptor;
-        switch (jobCase) {
-            case SERVICE:
-                jobDescriptor = createServiceJobDescriptor();
-                break;
-            default:
-                jobDescriptor = createBatchJobDescriptor();
+        if (jobCase == JobDescriptor.JobSpecCase.SERVICE) {
+            jobDescriptor = createServiceJobDescriptor();
+        } else {
+            jobDescriptor = createBatchJobDescriptor();
         }
         String formatted = JsonFormat.printer().print(jobDescriptor);
 

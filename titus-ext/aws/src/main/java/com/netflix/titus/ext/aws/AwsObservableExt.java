@@ -94,7 +94,7 @@ public class AwsObservableExt {
         });
     }
 
-    public static class CompletableHandlerSupplier {
+    public static final class CompletableHandlerSupplier {
         private final CompletableSubscriber subscriber;
 
         private CompletableHandlerSupplier(CompletableSubscriber subscriber) {
@@ -118,7 +118,7 @@ public class AwsObservableExt {
         }
     }
 
-    public static class SingleHandlerSupplier<RES> {
+    public static final class SingleHandlerSupplier<RES> {
         private final SingleSubscriber<? super RES> subscriber;
 
         private SingleHandlerSupplier(SingleSubscriber<? super RES> subscriber) {

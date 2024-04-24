@@ -61,7 +61,7 @@ public abstract class RetryPolicy<P extends RetryPolicy<P, B>, B extends RetryPo
 
     public abstract B toBuilder();
 
-    public static abstract class RetryPolicyBuilder<P extends RetryPolicy<P, B>, B extends RetryPolicyBuilder<P, B>> {
+    public abstract static class RetryPolicyBuilder<P extends RetryPolicy<P, B>, B extends RetryPolicyBuilder<P, B>> {
 
         protected int retries;
 

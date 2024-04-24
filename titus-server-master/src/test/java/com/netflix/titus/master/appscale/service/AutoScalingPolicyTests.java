@@ -45,7 +45,7 @@ import static org.mockito.Mockito.when;
 
 public class AutoScalingPolicyTests {
     public static class MockAlarmClient implements CloudAlarmClient {
-        int numOfAlarmsCreated = 0;
+        int numOfAlarmsCreated;
 
         @Override
         public Observable<String> createOrUpdateAlarm(String policyRefId, String jobId, AlarmConfiguration alarmConfiguration,
@@ -66,8 +66,8 @@ public class AutoScalingPolicyTests {
     }
 
     public static class MockAppAutoScalingClient implements AppAutoScalingClient {
-        int numScalableTargets = 0;
-        int numPolicies = 0;
+        int numScalableTargets;
+        int numPolicies;
 
         public int getNumScalableTargets() {
             return numScalableTargets;
@@ -127,13 +127,12 @@ public class AutoScalingPolicyTests {
                 .withPolicyType(PolicyType.TargetTrackingScaling)
                 .build();
 
-        AutoScalingPolicy autoScalingPolicy = AutoScalingPolicy.newBuilder()
+        return AutoScalingPolicy.newBuilder()
                 .withPolicyConfiguration(policyConfiguration)
                 .withStatus(PolicyStatus.Pending)
                 .withStatusMessage("ICE-ed by AWS")
                 .withJobId(jobId)
                 .build();
-        return autoScalingPolicy;
     }
 
     public static AutoScalingPolicy buildStepScalingPolicy(String jobId) {
@@ -169,13 +168,12 @@ public class AutoScalingPolicyTests {
                 .build();
 
 
-        AutoScalingPolicy autoScalingPolicy = AutoScalingPolicy.newBuilder()
+        return AutoScalingPolicy.newBuilder()
                 .withPolicyConfiguration(policyConfiguration)
                 .withStatus(PolicyStatus.Pending)
                 .withStatusMessage("ICE-ed by AWS")
                 .withJobId(jobId)
                 .build();
-        return autoScalingPolicy;
     }
 
 

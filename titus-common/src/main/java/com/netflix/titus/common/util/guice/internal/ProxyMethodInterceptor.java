@@ -163,7 +163,7 @@ public class ProxyMethodInterceptor implements MethodInterceptor {
         }
     }
 
-    private final static ProxyInvocationHandler<MethodInvocation> EXECUTING_HANDLER =
+    private static final ProxyInvocationHandler<MethodInvocation> EXECUTING_HANDLER =
             (proxy, method, args, nativeHandler, chain) -> nativeHandler.proceed();
 
     class InstanceWrapper {

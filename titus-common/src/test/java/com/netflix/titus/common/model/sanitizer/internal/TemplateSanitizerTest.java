@@ -38,7 +38,7 @@ public class TemplateSanitizerTest {
         );
 
         Optional<Object> sanitizedOpt = new TemplateSanitizer(
-                path -> path.equals("child.childName") ? Optional.of("ChildGuest") : Optional.empty(),
+                path -> "child.childName".equals(path) ? Optional.of("ChildGuest") : Optional.empty(),
                 type -> true
         ).apply(root);
         assertThat(sanitizedOpt).isPresent();
@@ -56,7 +56,7 @@ public class TemplateSanitizerTest {
         CollectionHolder root = new CollectionHolder(Collections.emptyList());
 
         Optional<Object> sanitizedOpt = new TemplateSanitizer(
-                path -> path.equals("values") ? Optional.of(asList("a", "b")) : Optional.empty(),
+                path -> "values".equals(path) ? Optional.of(asList("a", "b")) : Optional.empty(),
                 type -> true
         ).apply(root);
         assertThat(sanitizedOpt).isPresent();

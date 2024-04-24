@@ -196,7 +196,7 @@ public class SingleClusterMemberResolverTest {
     @Test
     public void testWrongMemberIsRejected() throws IOException {
         setupServerAndResolver(member -> ClusterMemberVerifierResult.invalid("wrong member"));
-        await().until(() -> resolver.getRejectedMemberError().equals("wrong member"));
+        await().until(() -> "wrong member".equals(resolver.getRejectedMemberError()));
     }
 
     private Iterator<ClusterMembershipSnapshot> subscribeAndDiscardFirstSnapshot() {

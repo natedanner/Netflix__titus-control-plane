@@ -38,7 +38,7 @@ import static okhttp3.Protocol.HTTP_1_1;
 
 class OkHttpConverters {
 
-    private static ObjectMapper objectMapper = new ObjectMapper();
+    private static final ObjectMapper objectMapper = new ObjectMapper();
 
     static okhttp3.Request toOkHttpRequest(Request request) {
         okhttp3.RequestBody requestBody = request.getBody() == null ? null : toOkHttpRequestBody(request.getBody());

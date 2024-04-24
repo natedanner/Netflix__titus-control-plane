@@ -41,7 +41,7 @@ public class ReactorSerializedInvokerTest {
 
     private static final Duration EXCESSIVE_RUNNING_TIME = Duration.ofMillis(1_000);
 
-    private ReactorSerializedInvoker<String> reactorSerializedInvoker = ReactorSerializedInvoker.<String>newBuilder()
+    private final ReactorSerializedInvoker<String> reactorSerializedInvoker = ReactorSerializedInvoker.<String>newBuilder()
             .withName("test")
             .withScheduler(Schedulers.parallel())
             .withMaxQueueSize(10)

@@ -30,7 +30,7 @@ import com.netflix.titus.common.framework.fit.FitAction;
 import com.netflix.titus.common.framework.fit.FitInjection;
 import rx.Observable;
 
-public class DefaultFitInjection implements FitInjection {
+public final class DefaultFitInjection implements FitInjection {
 
     private final String id;
     private final String description;
@@ -135,7 +135,7 @@ public class DefaultFitInjection implements FitInjection {
         return new InternalBuilder(id);
     }
 
-    private static class InternalBuilder implements Builder {
+    private static final class InternalBuilder implements Builder {
 
         private final String id;
         private Class<? extends Throwable> exceptionType = RuntimeException.class;

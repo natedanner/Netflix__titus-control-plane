@@ -58,12 +58,11 @@ public class GatewayJobServiceGatewayTest {
 
     @Test
     public void verifyDeDupTaskIds() {
-        List<String> expectedIdList = new ArrayList<String>() {{
-            add("task1");
-            add("task2");
-            add("task3");
-            add("task4");
-        }};
+        List<String> expectedIdList = new ArrayList<>();
+        expectedIdList.add("task1");
+        expectedIdList.add("task2");
+        expectedIdList.add("task3");
+        expectedIdList.add("task4");
 
         // with duplicate ids
         List<Task> activeTasks = new ArrayList<>();

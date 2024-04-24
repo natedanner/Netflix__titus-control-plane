@@ -54,7 +54,7 @@ import static com.netflix.titus.api.appscale.model.PolicyType.TargetTrackingScal
  * Collection of functions to convert policy models from internal to gRPC formats.
  */
 public final class GrpcModelConverters {
-    private static Logger log = LoggerFactory.getLogger(GrpcModelConverters.class);
+    private static final Logger log = LoggerFactory.getLogger(GrpcModelConverters.class);
 
     public static ScalingPolicyID toScalingPolicyId(String policyId) {
         return ScalingPolicyID.newBuilder().setId(policyId).build();
@@ -210,9 +210,8 @@ public final class GrpcModelConverters {
 
     private static List<MetricDimension> toMetricDimensionList(List<com.netflix.titus.api.appscale.model.MetricDimension> metricDimensionList) {
         List<MetricDimension> metricDimensionGrpcList = new ArrayList<>();
-        metricDimensionList.forEach((metricDimension) -> {
-            metricDimensionGrpcList.add(toMetricDimension(metricDimension));
-        });
+        metricDimensionList.forEach(metricDimension ->
+            metricDimensionGrpcList.add(toMetricDimension(metricDimension)));
         return metricDimensionGrpcList;
     }
 
@@ -325,9 +324,8 @@ public final class GrpcModelConverters {
 
     private static List<StepAdjustments> toStepAdjustmentsList(List<StepAdjustment> stepAdjustmentList) {
         List<StepAdjustments> stepAdjustmentGrpcList = new ArrayList<>();
-        stepAdjustmentList.forEach((stepAdjustment) -> {
-            stepAdjustmentGrpcList.add(toStepAdjustments(stepAdjustment));
-        });
+        stepAdjustmentList.forEach(stepAdjustment ->
+            stepAdjustmentGrpcList.add(toStepAdjustments(stepAdjustment)));
         return stepAdjustmentGrpcList;
     }
 

@@ -27,7 +27,7 @@ import com.netflix.titus.common.util.tuple.Pair;
 /**
  * Based on the provided configuration generates error occurrences in a stream of actions.
  */
-public class ErrorGenerator {
+public final class ErrorGenerator {
 
     private final Supplier<Pair<Supplier<Boolean>, Long>> nextCycleFactory;
     private final Clock clock;

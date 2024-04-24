@@ -112,7 +112,7 @@ public class JobDataReplicatorProvider implements Provider<JobDataReplicator> {
         }
     }
 
-    private static class JobDataReplicatorMetrics extends DataReplicatorMetrics<JobSnapshot, JobManagerEvent<?>> {
+    private static final class JobDataReplicatorMetrics extends DataReplicatorMetrics<JobSnapshot, JobManagerEvent<?>> {
 
         private JobDataReplicatorMetrics(String source, JobConnectorConfiguration configuration, TitusRuntime titusRuntime) {
             super(source, configuration.isKeepAliveReplicatedStreamEnabled(), titusRuntime);

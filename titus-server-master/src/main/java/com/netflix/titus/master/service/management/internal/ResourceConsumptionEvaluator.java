@@ -69,8 +69,8 @@ class ResourceConsumptionEvaluator {
     private final Set<String> definedCapacityGroups;
     private final Map<String, ApplicationSLA> applicationSlaMap;
 
-    private CompositeResourceConsumption systemConsumption;
-    private Set<String> undefinedCapacityGroups;
+    private final CompositeResourceConsumption systemConsumption;
+    private final Set<String> undefinedCapacityGroups;
 
     ResourceConsumptionEvaluator(ApplicationSlaManagementService applicationSlaManagementService,
                                  V3JobOperations v3JobOperations) {

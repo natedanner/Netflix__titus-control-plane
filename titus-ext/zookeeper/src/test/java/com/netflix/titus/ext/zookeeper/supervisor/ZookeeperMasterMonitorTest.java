@@ -177,8 +177,7 @@ public class ZookeeperMasterMonitorTest {
     }
 
     private void removeMasterInstanceFromZookeeper(String instanceId) throws Exception {
-        curator.delete().inBackground((client, event) -> {
-            System.out.printf("Received Curator notification after the instance node %s was removed: %s", instanceId, event);
-        }).forPath(buildInstancePath(instanceId));
+        curator.delete().inBackground((client, event) ->
+            System.out.printf("Received Curator notification after the instance node %s was removed: %s", instanceId, event)).forPath(buildInstancePath(instanceId));
     }
 }

@@ -48,15 +48,15 @@ import static java.util.Arrays.asList;
  */
 public final class StringExt {
 
-    public final static Pattern COMMA_SPLIT_RE = Pattern.compile("\\s*,\\s*");
-    public final static Pattern DOT_SPLIT_RE = Pattern.compile("\\s*\\.\\s*");
-    public final static Pattern SEMICOLON_SPLIT_RE = Pattern.compile("\\s*;\\s*");
-    public final static Pattern COLON_SPLIT_RE = Pattern.compile("\\s*:\\s*");
-    public final static Pattern EQUAL_SPLIT_RE = Pattern.compile("\\s*=\\s*");
+    public static final Pattern COMMA_SPLIT_RE = Pattern.compile("\\s*,\\s*");
+    public static final Pattern DOT_SPLIT_RE = Pattern.compile("\\s*\\.\\s*");
+    public static final Pattern SEMICOLON_SPLIT_RE = Pattern.compile("\\s*;\\s*");
+    public static final Pattern COLON_SPLIT_RE = Pattern.compile("\\s*:\\s*");
+    public static final Pattern EQUAL_SPLIT_RE = Pattern.compile("\\s*=\\s*");
 
     // For each enum type, contains a map with keys being enum names in lower case, and the values are their
     // corresponding enum values.
-    private static ConcurrentMap<Class<? extends Enum>, Map<String, Object>> ENUM_NAMES_MAP = new ConcurrentHashMap<>();
+    private static final ConcurrentMap<Class<? extends Enum>, Map<String, Object>> ENUM_NAMES_MAP = new ConcurrentHashMap<>();
 
     private StringExt() {
     }
@@ -570,7 +570,7 @@ public final class StringExt {
         }
         try (
                 ByteArrayOutputStream out = new ByteArrayOutputStream();
-                GZIPOutputStream gzip = new GZIPOutputStream(out);
+                GZIPOutputStream gzip = new GZIPOutputStream(out)
         ) {
             gzip.write(s.getBytes());
             gzip.finish();

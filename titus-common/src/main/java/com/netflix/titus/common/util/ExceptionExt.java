@@ -132,7 +132,7 @@ public class ExceptionExt {
         return current;
     }
 
-    public static class UncheckedExceptionWrapper extends RuntimeException {
+    public static final class UncheckedExceptionWrapper extends RuntimeException {
         private UncheckedExceptionWrapper(Throwable cause) {
             super(cause);
         }

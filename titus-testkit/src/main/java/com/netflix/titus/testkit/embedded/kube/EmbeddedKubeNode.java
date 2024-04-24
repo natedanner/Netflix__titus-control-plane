@@ -131,8 +131,12 @@ public class EmbeddedKubeNode {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         EmbeddedKubeNode that = (EmbeddedKubeNode) o;
         return deployed == that.deployed && Objects.equals(name, that.name) && Objects.equals(resourcePool, that.resourcePool) && Objects.equals(serverGroup, that.serverGroup) && Objects.equals(ipAddress, that.ipAddress) && Objects.equals(nodeResources, that.nodeResources) && Objects.equals(nodeUnassignedResources, that.nodeUnassignedResources) && Objects.equals(assignedPods, that.assignedPods) && Objects.equals(v1Node, that.v1Node);
     }

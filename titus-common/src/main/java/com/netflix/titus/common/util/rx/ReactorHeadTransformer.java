@@ -124,7 +124,7 @@ class ReactorHeadTransformer<T> implements Function<Flux<T>, Publisher<T>> {
         return true;
     }
 
-    private static class ErrorWrapper {
+    private static final class ErrorWrapper {
 
         private final Throwable cause;
 

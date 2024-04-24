@@ -30,7 +30,7 @@ import org.springframework.web.context.request.WebRequest;
 /**
  * Error representation returned as JSON document for failed REST requests.
  */
-public class ErrorResponse {
+public final class ErrorResponse {
 
     /**
      * If 'debug' parameter is included in query, include error context.

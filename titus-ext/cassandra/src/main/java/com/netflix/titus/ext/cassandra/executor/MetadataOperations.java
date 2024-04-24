@@ -29,8 +29,8 @@ class MetadataOperations {
 
     private static final Logger logger = LoggerFactory.getLogger(MetadataOperations.class);
 
-    private Session session;
-    private int split;
+    private final Session session;
+    private final int split;
     private final List<TokenRange> ranges;
 
     public MetadataOperations(ExecutionContext context) {

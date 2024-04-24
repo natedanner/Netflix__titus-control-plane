@@ -73,8 +73,12 @@ public class EmbeddedServerGroup {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         EmbeddedServerGroup that = (EmbeddedServerGroup) o;
         return size == that.size && Objects.equals(name, that.name) && Objects.equals(instanceType, that.instanceType) && Objects.equals(nodeResources, that.nodeResources) && Objects.equals(resourcePool, that.resourcePool);
     }

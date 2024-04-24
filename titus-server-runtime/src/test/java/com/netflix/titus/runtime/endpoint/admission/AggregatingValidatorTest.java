@@ -206,7 +206,7 @@ public class AggregatingValidatorTest {
         Mono<Set<ValidationError>> mono = validator.validate(MOCK_JOB);
 
         StepVerifier.create(mono)
-                .expectNextMatches(errors -> errors.size() == 0)
+                .expectNextMatches(Collection::isEmpty)
                 .verifyComplete();
     }
 
@@ -250,7 +250,7 @@ public class AggregatingValidatorTest {
         Mono<Set<ValidationError>> mono = validator.validate(MOCK_JOB);
 
         StepVerifier.create(mono)
-                .expectNextMatches(errors -> errors.size() == 0)
+                .expectNextMatches(Collection::isEmpty)
                 .verifyComplete();
     }
 
@@ -289,14 +289,14 @@ public class AggregatingValidatorTest {
     }
 
     private void validateFailErrors(Collection<ValidationError> failErrors) {
-        assertThat(failErrors.size() > 0).isTrue();
+        assertThat(!failErrors.isEmpty()).isTrue();
         assertThat(failErrors)
                 .allMatch(error -> error.getField().equals(FailJobValidator.ERR_FIELD))
                 .allMatch(error -> error.getDescription().contains(FailJobValidator.ERR_DESCRIPTION));
     }
 
     private void validateTimeoutErrors(Collection<ValidationError> timeoutErrors) {
-        assertThat(timeoutErrors.size() > 0).isTrue();
+        assertThat(!timeoutErrors.isEmpty()).isTrue();
         assertThat(timeoutErrors)
                 .allMatch(error -> error.getField().equals(NeverJobValidator.class.getSimpleName()))
                 .allMatch(error -> error.getDescription().equals(AggregatingValidator.getTimeoutMsg(Duration.ofMillis(configuration.getTimeoutMs()))));

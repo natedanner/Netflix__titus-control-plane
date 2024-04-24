@@ -458,8 +458,7 @@ public class JobDescriptor<E extends JobDescriptor.JobDescriptorExt> {
         }
 
         public JobDescriptor<E> build() {
-            JobDescriptor<E> jobDescriptor = new JobDescriptor<>(owner, applicationName, capacityGroup, jobGroupInfo, attributes, container, disruptionBudget, networkConfiguration, extraContainers, volumes, platformSidecars, extensions);
-            return jobDescriptor;
+            return new JobDescriptor<>(owner, applicationName, capacityGroup, jobGroupInfo, attributes, container, disruptionBudget, networkConfiguration, extraContainers, volumes, platformSidecars, extensions);
         }
     }
 }
